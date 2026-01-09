@@ -1,13 +1,57 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Card } from "@/components/ui/card";
-import { getAllProducts } from "@/lib/products";
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  category: string;
+}
 
 export default function CollectionsPage() {
-  const products = getAllProducts(12);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/products?limit=12');
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-stone-50">
+        <Header />
+        <main className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   
   return (
     <div className="min-h-screen bg-stone-50">

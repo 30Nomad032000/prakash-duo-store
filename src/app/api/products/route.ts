@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
-import productsData from '@/data/products.json';
-import { Product } from '@/data/products.d';
+import { getAllProducts, getProductById } from '@/lib/products';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   
   if (searchParams.get('id')) {
-    const product = productsData.products.find(
-      (p: Product) => p.id === searchParams.get('id')
-    );
+    const product = getProductById(searchParams.get('id')!);
     
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -16,6 +13,7 @@ export async function GET(request: Request) {
     return NextResponse.json(product);
   }
   
-  const products = productsData.products;
+  const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
+  const products = getAllProducts(limit);
   return NextResponse.json(products);
 }

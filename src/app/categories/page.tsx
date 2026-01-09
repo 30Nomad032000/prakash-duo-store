@@ -1,17 +1,57 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
-import { getAllCategories, getCategoryWithImages } from "@/lib/products";
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  path: string;
+  images: string[];
+  productCount: number;
+}
 
 export default function CategoriesPage() {
-  const categories = getAllCategories();
-  
-  const categoriesWithImages = categories.map(cat => {
-    const catWithImages = getCategoryWithImages(cat.slug);
-    return catWithImages ? catWithImages : { ...cat, images: [], productCount: 0 };
-  }).filter(cat => cat.images.length > 0);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/categories?withImages=true');
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-stone-50">
+        <Header />
+        <main className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -38,7 +78,7 @@ export default function CategoriesPage() {
             </p>
             
             <div className="flex items-center gap-6 text-sm text-gray-500 pb-6 border-b border-stone-200">
-              <span>{categoriesWithImages.length} Categories</span>
+              <span>{categories.length} Categories</span>
               <span className="w-px h-4 bg-stone-300"></span>
               <span>Showing all</span>
             </div>
@@ -48,7 +88,7 @@ export default function CategoriesPage() {
         <section className="py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-              {categoriesWithImages.map((category) => (
+              {categories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/category/${category.slug}`}

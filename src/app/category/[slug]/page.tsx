@@ -1,26 +1,75 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { getCategoryProducts, getAllCategories } from "@/lib/products";
-import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  category: string;
 }
 
-export default function CategoryPage({ params }: PageProps) {
-  const products = getCategoryProducts(params.slug);
-  const categories = getAllCategories();
-  const currentCategory = categories.find(c => c.slug === params.slug);
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  path: string;
+}
 
-  if (!currentCategory) {
-    notFound();
+export default function CategoryPage() {
+  const params = useParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [category, setCategory] = useState<Category | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/categories?slug=${params.slug}`);
+        const data = await res.json();
+        
+        if (data.error) {
+          setError(true);
+        } else {
+          setCategory(data.category);
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error('Error fetching category:', error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, [params.slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-stone-50">
+        <Header />
+        <main className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
-  if (products.length === 0) {
+  if (error || !category) {
     return (
       <div className="min-h-screen bg-stone-50">
         <Header />
@@ -62,14 +111,14 @@ export default function CategoryPage({ params }: PageProps) {
                   <Link href="/categories" className="hover:text-gray-900">Categories</Link>
                 </li>
                 <li>/</li>
-                <li className="text-gray-900 font-medium">{currentCategory.name}</li>
+                <li className="text-gray-900 font-medium">{category.name}</li>
               </ol>
             </nav>
             
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6">
               <div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-gray-900">
-                  {currentCategory.name}
+                  {category.name}
                 </h1>
                 <p className="text-gray-600 mt-2">
                   {products.length} beautiful designs to choose from
@@ -118,10 +167,10 @@ export default function CategoryPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h2 className="text-xl font-medium text-gray-900 mb-4">
-                  About {currentCategory.name}
+                  About {category.name}
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Discover our exquisite collection of {currentCategory.name.toLowerCase()}. 
+                  Discover our exquisite collection of {category.name.toLowerCase()}. 
                   Each piece is handcrafted with love and precision by skilled artisans, 
                   bringing you the finest quality bangles for every special occasion.
                 </p>
@@ -166,11 +215,4 @@ export default function CategoryPage({ params }: PageProps) {
       <Footer />
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const categories = getAllCategories();
-  return categories.map(category => ({
-    slug: category.slug
-  }));
 }

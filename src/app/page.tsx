@@ -1,20 +1,73 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Card } from "@/components/ui/card";
-import { getAllCategories, getAllProducts, getCategoryWithImages } from "@/lib/products";
 import HeroCarousel from "@/components/HeroCarousel";
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  category: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  path: string;
+  images: string[];
+  productCount: number;
+}
+
 export default function Home() {
-  const categories = getAllCategories();
-  const featuredProducts = getAllProducts(8);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [categoriesRes, productsRes] = await Promise.all([
+          fetch('/api/categories?withImages=true').then(r => r.json()),
+          fetch('/api/products?limit=8').then(r => r.json())
+        ]);
+        setCategories(categoriesRes);
+        setProducts(productsRes);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-stone-50">
+        <Header />
+        <main className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   const featuredCategories = categories.slice(0, 6);
-  
-  const categoriesWithImages = featuredCategories.map(cat => 
-    getCategoryWithImages(cat.slug)
-  ).filter((cat): cat is NonNullable<typeof cat> => cat !== null);
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -77,7 +130,7 @@ export default function Home() {
               </div>
               
               <div className="relative bg-gradient-to-br from-stone-100 to-amber-50 p-8 rounded-sm">
-                <HeroCarousel products={featuredProducts} />
+                <HeroCarousel products={products} />
               </div>
             </div>
           </div>
@@ -95,7 +148,7 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-              {categoriesWithImages.map((category) => (
+              {featuredCategories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/category/${category.slug}`}
@@ -185,7 +238,7 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {featuredProducts.map((product) => (
+              {products.map((product) => (
                 <ProductCard
                   key={product.id}
                   id={product.id}
