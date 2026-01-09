@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import productsData from '@/data/products.json';
+import { Product } from '@/data/products.d';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   
   if (searchParams.get('id')) {
     const product = productsData.products.find(
-      (p: any) => p.id === searchParams.get('id')
+      (p: Product) => p.id === searchParams.get('id')
     );
     
     if (!product) {
