@@ -1,21 +1,71 @@
-import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
-import ProductDetails from "@/components/ProductDetails";
-import { getProductById, getAllProducts } from "@/lib/products";
-import ProductImageGallery from "@/components/ProductImageGallery";
+'use client';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import ProductCard from '@/components/ProductCard';
+import ProductDetails from '@/components/ProductDetails';
+import ProductImageGallery from '@/components/ProductImageGallery';
+import { motion } from 'framer-motion';
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  category: string;
 }
 
-export default async function ProductPage({ params }: PageProps) {
-  const product = await getProductById(params.id);
-  const allProducts = getAllProducts();
-  
+export default function ProductPage() {
+  const params = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [productRes, allProductsRes] = await Promise.all([
+          fetch(`/api/products?id=${params.id}`).then(r => r.json()),
+          fetch('/api/products').then(r => r.json())
+        ]);
+        
+        if (productRes.error) {
+          setProduct(null);
+        } else {
+          setProduct(productRes);
+          
+          const filteredProducts = allProductsRes.filter((p: Product) => p.id !== params.id);
+          setSimilarProducts(filteredProducts.slice(0, 4));
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchData();
+  }, [params.id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-stone-50">
+        <Header />
+        <main className="py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div className="min-h-screen bg-stone-50">
@@ -28,12 +78,12 @@ export default async function ProductPage({ params }: PageProps) {
             <p className="text-gray-600 mb-8 text-lg">
               The product you&apos;re looking for doesn&apos;t exist.
             </p>
-            <Link
+            <a
               href="/categories"
               className="inline-flex items-center bg-gray-900 text-white px-8 py-3 font-medium hover:bg-gray-800 transition-colors"
             >
               Browse All Products
-            </Link>
+            </a>
           </div>
         </main>
         <Footer />
@@ -46,23 +96,32 @@ export default async function ProductPage({ params }: PageProps) {
       <Header />
       
       <main>
-        <section className="py-3 md:py-4 bg-white border-b border-stone-200">
+        <motion.section 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="py-3 md:py-4 bg-white border-b border-stone-200"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="text-sm flex items-center">
-              <Link href="/" className="text-gray-500 hover:text-gray-900 transition-colors">
+              <a href="/" className="text-gray-500 hover:text-gray-900 transition-colors">
                 Home
-              </Link>
+              </a>
               <span className="mx-2 text-gray-300">/</span>
-              <Link href="/categories" className="text-gray-500 hover:text-gray-900 transition-colors">
+              <a href="/categories" className="text-gray-500 hover:text-gray-900 transition-colors">
                 Categories
-              </Link>
+              </a>
               <span className="mx-2 text-gray-300">/</span>
               <span className="text-gray-900 font-medium">{product.name}</span>
             </nav>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="py-12 md:py-16">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="py-12 md:py-16"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <ProductImageGallery images={product.images} name={product.name} />
@@ -74,9 +133,14 @@ export default async function ProductPage({ params }: PageProps) {
               />
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="py-16 md:py-20 bg-white border-t border-stone-200">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="py-16 md:py-20 bg-white border-t border-stone-200"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3">
@@ -88,7 +152,7 @@ export default async function ProductPage({ params }: PageProps) {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {allProducts.slice(0, 4).map((prod) => (
+              {similarProducts.map((prod) => (
                 <ProductCard
                   key={prod.id}
                   id={prod.id}
@@ -100,9 +164,14 @@ export default async function ProductPage({ params }: PageProps) {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="py-16 md:py-20 bg-amber-50 border-y border-amber-200">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="py-16 md:py-20 bg-amber-50 border-y border-amber-200"
+        >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3">
@@ -136,7 +205,7 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </main>
 
       <Footer />
