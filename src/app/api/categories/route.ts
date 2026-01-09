@@ -1,5 +1,35 @@
 import { NextResponse } from 'next/server';
-import { getCategoryProducts, getAllCategories, getCategoryWithImages } from '@/lib/products';
+import categoriesData from '@/data/categories.json';
+import categoryProductsData from '@/data/category-products.json';
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  path: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  category: string;
+}
+
+interface CategoryData {
+  category: Category;
+  products: Product[];
+}
+
+interface CategoriesData {
+  categories: Category[];
+  categoriesWithImages: (Category & { images: string[]; productCount: number })[];
+}
+
+interface CategoryProductsData {
+  [key: string]: CategoryData;
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,29 +37,21 @@ export async function GET(request: Request) {
   const withImages = searchParams.get('withImages') === 'true';
   
   if (slug) {
-    const products = getCategoryProducts(slug);
-    const categories = getAllCategories();
-    const category = categories.find(c => c.slug === slug);
+    const categoryData = (categoryProductsData as CategoryProductsData)[slug];
     
-    if (!category) {
+    if (!categoryData) {
       return NextResponse.json({ error: 'Category not found' }, { status: 404 });
     }
     
     return NextResponse.json({
-      category,
-      products
+      category: categoryData.category,
+      products: categoryData.products
     });
   }
   
-  const categories = getAllCategories();
-  
   if (withImages) {
-    const categoriesWithImages = categories.map(cat => {
-      const catWithImages = getCategoryWithImages(cat.slug);
-      return catWithImages ? catWithImages : { ...cat, images: [], productCount: 0 };
-    }).filter(cat => cat.images.length > 0);
-    return NextResponse.json(categoriesWithImages);
+    return NextResponse.json((categoriesData as CategoriesData).categoriesWithImages);
   }
   
-  return NextResponse.json(categories);
+  return NextResponse.json((categoriesData as CategoriesData).categories);
 }

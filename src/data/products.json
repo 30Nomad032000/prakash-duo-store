@@ -1,56 +1,9 @@
 {
-  "categories": [
-    {
-      "id": "ad-stone-bangles",
-      "name": "AD Stone bangles",
-      "slug": "ad-stone-bangles"
-    },
-    {
-      "id": "antique-golden-bangles",
-      "name": "antique golden Bangles",
-      "slug": "antique-golden-bangles"
-    },
-    {
-      "id": "bracelet-bangle",
-      "name": "bracelet bangle",
-      "slug": "bracelet-bangle"
-    },
-    {
-      "id": "design-mix-bangles",
-      "name": "design mix bangles",
-      "slug": "design-mix-bangles"
-    },
-    {
-      "id": "glass-bangles",
-      "name": "Glass Bangles",
-      "slug": "glass-bangles"
-    },
-    {
-      "id": "pearl-bangles",
-      "name": "pearl bangles",
-      "slug": "pearl-bangles"
-    },
-    {
-      "id": "sample-bridal-sets",
-      "name": "sample bridal sets",
-      "slug": "sample-bridal-sets"
-    },
-    {
-      "id": "thread-bangles",
-      "name": "thread bangles",
-      "slug": "thread-bangles"
-    },
-    {
-      "id": "victorian-bangles",
-      "name": "victorian bangles",
-      "slug": "victorian-bangles"
-    }
-  ],
   "products": [
     {
       "id": "ad-stone-brick-ruby-stone",
       "name": "AD stone brick ruby stone",
-      "price": 3471,
+      "price": 3810,
       "images": [
         "/assets/AD Stone bangles/AD stone brick ruby stone/1.jpg",
         "/assets/AD Stone bangles/AD stone brick ruby stone/2.jpg",
@@ -62,7 +15,7 @@
     {
       "id": "ad-stone-cubic-mauve-stone-bangle",
       "name": "AD stone cubic mauve stone bangle",
-      "price": 3915,
+      "price": 2948,
       "images": [
         "/assets/AD Stone bangles/AD stone cubic mauve stone bangle/1.jpg",
         "/assets/AD Stone bangles/AD stone cubic mauve stone bangle/2.jpg",
@@ -73,7 +26,7 @@
     {
       "id": "ad-stone-cubic-pastel-green-bangle",
       "name": "AD stone cubic pastel green bangle",
-      "price": 2805,
+      "price": 1817,
       "images": [
         "/assets/AD Stone bangles/AD stone cubic pastel green bangle/1.jpg",
         "/assets/AD Stone bangles/AD stone cubic pastel green bangle/2.jpg",
@@ -84,7 +37,7 @@
     {
       "id": "ad-stone-cubic-white-stone",
       "name": "AD stone cubic white stone",
-      "price": 2759,
+      "price": 2712,
       "images": [
         "/assets/AD Stone bangles/AD stone cubic white stone/1.jpg",
         "/assets/AD Stone bangles/AD stone cubic white stone/2.jpg",
@@ -95,7 +48,7 @@
     {
       "id": "ad-stone-small-brick-red-bangle",
       "name": "AD stone small brick  red bangle",
-      "price": 4497,
+      "price": 2350,
       "images": [
         "/assets/AD Stone bangles/AD stone small brick  red bangle/1.jpg",
         "/assets/AD Stone bangles/AD stone small brick  red bangle/2.jpg",
@@ -106,7 +59,7 @@
     {
       "id": "ad-stone-small-brick-blue-bangle",
       "name": "AD stone small brick blue bangle",
-      "price": 2919,
+      "price": 4991,
       "images": [
         "/assets/AD Stone bangles/AD stone small brick blue bangle/1.jpg",
         "/assets/AD Stone bangles/AD stone small brick blue bangle/2.jpg",
@@ -117,7 +70,7 @@
     {
       "id": "ad-stone-small-cubic-mauve",
       "name": "AD stone small cubic mauve",
-      "price": 2958,
+      "price": 2962,
       "images": [
         "/assets/AD Stone bangles/AD stone small cubic mauve/1.jpg",
         "/assets/AD Stone bangles/AD stone small cubic mauve/2.jpg",
@@ -128,7 +81,7 @@
     {
       "id": "ad-stone-small-pastel-green-bangle",
       "name": "AD stone small pastel green bangle",
-      "price": 3174,
+      "price": 2581,
       "images": [
         "/assets/AD Stone bangles/AD stone small pastel green bangle/1.jpg",
         "/assets/AD Stone bangles/AD stone small pastel green bangle/2.jpg",
@@ -139,7 +92,7 @@
     {
       "id": "ad-stone-small-pink-cubic",
       "name": "AD Stone small pink cubic",
-      "price": 3124,
+      "price": 1920,
       "images": [
         "/assets/AD Stone bangles/AD Stone small pink cubic/1.jpg",
         "/assets/AD Stone bangles/AD Stone small pink cubic/2.jpg",
@@ -150,7 +103,7 @@
     {
       "id": "ad-stone-small-purple-cubic-stone",
       "name": "AD stone small purple cubic stone",
-      "price": 3325,
+      "price": 3890,
       "images": [
         "/assets/AD Stone bangles/AD stone small purple cubic stone/1.jpg",
         "/assets/AD Stone bangles/AD stone small purple cubic stone/2.jpg",
@@ -161,7 +114,7 @@
     {
       "id": "adstone-small-white-cubic-stone",
       "name": "Adstone Small white cubic Stone",
-      "price": 4462,
+      "price": 1315,
       "images": [
         "/assets/AD Stone bangles/Adstone Small white cubic Stone/1.jpg",
         "/assets/AD Stone bangles/Adstone Small white cubic Stone/2.jpg",
@@ -172,7 +125,7 @@
     {
       "id": "antique-flower-rode",
       "name": "antique  flower rode",
-      "price": 2631,
+      "price": 1682,
       "images": [
         "/assets/antique golden Bangles/antique  flower rode/1.jpg",
         "/assets/antique golden Bangles/antique  flower rode/2.jpg",
@@ -184,7 +137,7 @@
     {
       "id": "antique-lakshmi-flower",
       "name": "antique  lakshmi flower",
-      "price": 1463,
+      "price": 1284,
       "images": [
         "/assets/antique golden Bangles/antique  lakshmi flower/1.jpg",
         "/assets/antique golden Bangles/antique  lakshmi flower/2.jpg",
@@ -196,7 +149,7 @@
     {
       "id": "antique-dimon-green-enamel",
       "name": "antique dimon green enamel",
-      "price": 847,
+      "price": 2401,
       "images": [
         "/assets/antique golden Bangles/antique dimon green enamel/1.jpg",
         "/assets/antique golden Bangles/antique dimon green enamel/2.jpg",
@@ -208,7 +161,7 @@
     {
       "id": "antique-heart-shaped-red-enamel-bangle",
       "name": "antique heart shaped red enamel bangle",
-      "price": 3425,
+      "price": 3184,
       "images": [
         "/assets/antique golden Bangles/antique heart shaped red enamel bangle/1.jpg",
         "/assets/antique golden Bangles/antique heart shaped red enamel bangle/2.jpg",
@@ -220,7 +173,7 @@
     {
       "id": "antique-kada-lakshmi-bangle",
       "name": "antique kada lakshmi bangle",
-      "price": 670,
+      "price": 1972,
       "images": [
         "/assets/antique golden Bangles/antique kada lakshmi bangle/1.jpg",
         "/assets/antique golden Bangles/antique kada lakshmi bangle/2.jpg",
@@ -232,7 +185,7 @@
     {
       "id": "antique-kada-ruby-bangles",
       "name": "antique kada ruby bangles",
-      "price": 672,
+      "price": 1983,
       "images": [
         "/assets/antique golden Bangles/antique kada ruby bangles/1.jpg",
         "/assets/antique golden Bangles/antique kada ruby bangles/2.jpg",
@@ -244,7 +197,7 @@
     {
       "id": "antique-lakshmi-fullstone-bangle",
       "name": "antique lakshmi fullstone bangle",
-      "price": 1279,
+      "price": 2410,
       "images": [
         "/assets/antique golden Bangles/antique lakshmi fullstone bangle/1.jpg",
         "/assets/antique golden Bangles/antique lakshmi fullstone bangle/2.jpg",
@@ -256,7 +209,7 @@
     {
       "id": "antique-leaf-red-enamel",
       "name": "antique leaf red enamel",
-      "price": 1660,
+      "price": 2872,
       "images": [
         "/assets/antique golden Bangles/antique leaf red enamel/1.jpg",
         "/assets/antique golden Bangles/antique leaf red enamel/2.jpg",
@@ -268,7 +221,7 @@
     {
       "id": "antique-lekshmi-elephant",
       "name": "ANTIQUE LEKSHMI ELEPHANT",
-      "price": 2883,
+      "price": 2471,
       "images": [
         "/assets/antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/1.jpg",
         "/assets/antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/2.jpg",
@@ -280,7 +233,7 @@
     {
       "id": "antique-lotus-kada",
       "name": "antique lotus kada",
-      "price": 4115,
+      "price": 2057,
       "images": [
         "/assets/antique golden Bangles/antique lotus kada/1.jpg",
         "/assets/antique golden Bangles/antique lotus kada/2.jpg",
@@ -292,7 +245,7 @@
     {
       "id": "antique-lotus-small",
       "name": "antique lotus small",
-      "price": 3989,
+      "price": 1946,
       "images": [
         "/assets/antique golden Bangles/antique lotus small/1.jpg",
         "/assets/antique golden Bangles/antique lotus small/2.jpg",
@@ -304,7 +257,7 @@
     {
       "id": "antique-multi-ruby-stone-lakshmi",
       "name": "antique multi ruby stone lakshmi",
-      "price": 2585,
+      "price": 675,
       "images": [
         "/assets/antique golden Bangles/antique multi ruby stone lakshmi/1.jpg",
         "/assets/antique golden Bangles/antique multi ruby stone lakshmi/2.jpg",
@@ -316,7 +269,7 @@
     {
       "id": "antique-multicolor-full-stone",
       "name": "antique multicolor full stone",
-      "price": 4150,
+      "price": 3148,
       "images": [
         "/assets/antique golden Bangles/antique multicolor full stone/1.jpg",
         "/assets/antique golden Bangles/antique multicolor full stone/2.jpg",
@@ -328,7 +281,7 @@
     {
       "id": "antique-multicolor-stone-lakshmi-bangle",
       "name": "antique multicolor stone lakshmi  bangle",
-      "price": 1199,
+      "price": 4095,
       "images": [
         "/assets/antique golden Bangles/antique multicolor stone lakshmi  bangle/1.jpg",
         "/assets/antique golden Bangles/antique multicolor stone lakshmi  bangle/2.jpg",
@@ -340,7 +293,7 @@
     {
       "id": "antique-simple-flower",
       "name": "antique simple flower",
-      "price": 4197,
+      "price": 3630,
       "images": [
         "/assets/antique golden Bangles/antique simple flower/1.jpg",
         "/assets/antique golden Bangles/antique simple flower/2.jpg",
@@ -352,7 +305,7 @@
     {
       "id": "antique-small-lakshmi-lotus-flower-set",
       "name": "antique small lakshmi lotus flower set",
-      "price": 4357,
+      "price": 683,
       "images": [
         "/assets/antique golden Bangles/antique small lakshmi lotus flower set/1.jpg",
         "/assets/antique golden Bangles/antique small lakshmi lotus flower set/2.jpg",
@@ -364,7 +317,7 @@
     {
       "id": "ruby-zig-zag-bangles",
       "name": "ruby zig-zag bangles",
-      "price": 1397,
+      "price": 2506,
       "images": [
         "/assets/antique golden Bangles/ruby zig-zag bangles/1.jpg",
         "/assets/antique golden Bangles/ruby zig-zag bangles/2.jpg",
@@ -376,7 +329,7 @@
     {
       "id": "drop-shaped-bangle",
       "name": "drop shaped bangle",
-      "price": 4294,
+      "price": 2294,
       "images": [
         "/assets/bracelet bangle/drop shaped bangle/1.jpg",
         "/assets/bracelet bangle/drop shaped bangle/2.jpg",
@@ -387,7 +340,7 @@
     {
       "id": "heart-shaped-bracelet-bangle",
       "name": "heart shaped bracelet bangle",
-      "price": 1574,
+      "price": 1988,
       "images": [
         "/assets/bracelet bangle/heart shaped bracelet bangle/1.jpg",
         "/assets/bracelet bangle/heart shaped bracelet bangle/2.jpg",
@@ -398,7 +351,7 @@
     {
       "id": "multilayer-design-bracelet",
       "name": "multilayer design bracelet",
-      "price": 1287,
+      "price": 1117,
       "images": [
         "/assets/bracelet bangle/multilayer design bracelet/1.jpg",
         "/assets/bracelet bangle/multilayer design bracelet/2.jpg",
@@ -409,7 +362,7 @@
     {
       "id": "multilayer-dotted-bracelet-bangle",
       "name": "multilayer dotted bracelet bangle",
-      "price": 3507,
+      "price": 776,
       "images": [
         "/assets/bracelet bangle/multilayer dotted bracelet bangle/1.jpg",
         "/assets/bracelet bangle/multilayer dotted bracelet bangle/2.jpg",
@@ -420,7 +373,7 @@
     {
       "id": "multilayer-plain-rode-bangle",
       "name": "multilayer plain rode bangle",
-      "price": 3633,
+      "price": 738,
       "images": [
         "/assets/bracelet bangle/multilayer plain rode bangle/1.jpg",
         "/assets/bracelet bangle/multilayer plain rode bangle/2.jpg",
@@ -431,7 +384,7 @@
     {
       "id": "rose-gold-bracelet-bangle",
       "name": "Rose Gold bracelet bangle",
-      "price": 2371,
+      "price": 1023,
       "images": [
         "/assets/bracelet bangle/Rose Gold bracelet bangle/1.jpg",
         "/assets/bracelet bangle/Rose Gold bracelet bangle/2.jpg"
@@ -441,7 +394,7 @@
     {
       "id": "ruby-stone-flower-bracelet",
       "name": "ruby stone flower bracelet",
-      "price": 1044,
+      "price": 4215,
       "images": [
         "/assets/bracelet bangle/ruby stone flower bracelet/1.jpg",
         "/assets/bracelet bangle/ruby stone flower bracelet/2.jpg",
@@ -452,7 +405,7 @@
     {
       "id": "silk-thread-water-bangle-set",
       "name": "silk thread & water bangle set",
-      "price": 2495,
+      "price": 4029,
       "images": [
         "/assets/design mix bangles/silk thread & water bangle set/1.jpg",
         "/assets/design mix bangles/silk thread & water bangle set/2.jpg"
@@ -462,7 +415,7 @@
     {
       "id": "kundan-glass-bangle",
       "name": "kundan Glass bangle",
-      "price": 2913,
+      "price": 1457,
       "images": [
         "/assets/Glass Bangles/kundan Glass bangle/1.jpg",
         "/assets/Glass Bangles/kundan Glass bangle/2.jpg"
@@ -472,7 +425,7 @@
     {
       "id": "gold-pearl-beaded-bangle",
       "name": "gold pearl beaded bangle",
-      "price": 1948,
+      "price": 2850,
       "images": [
         "/assets/pearl bangles/gold pearl beaded bangle/1.jpg",
         "/assets/pearl bangles/gold pearl beaded bangle/2.jpg",
@@ -483,7 +436,7 @@
     {
       "id": "oval-pearl-bangles",
       "name": "Oval pearl Bangles",
-      "price": 1923,
+      "price": 4589,
       "images": [
         "/assets/pearl bangles/Oval pearl Bangles/1.jpg",
         "/assets/pearl bangles/Oval pearl Bangles/2.jpg",
@@ -494,7 +447,7 @@
     {
       "id": "pink-bridal-set",
       "name": "pink bridal set",
-      "price": 845,
+      "price": 1568,
       "images": [
         "/assets/sample bridal sets/pink bridal set/1.jpg",
         "/assets/sample bridal sets/pink bridal set/IMG_20260102_194815690 (1) (1) (1).jpg"
@@ -504,7 +457,7 @@
     {
       "id": "red-bridal-set",
       "name": "red bridal set",
-      "price": 1004,
+      "price": 4548,
       "images": [
         "/assets/sample bridal sets/red bridal set/1.jpg",
         "/assets/sample bridal sets/red bridal set/2.jpg"
@@ -514,7 +467,7 @@
     {
       "id": "red-small-bridal-set",
       "name": "red small bridal set",
-      "price": 4779,
+      "price": 1034,
       "images": [
         "/assets/sample bridal sets/red small bridal set/IMG_20260102_180440754 (1) (1) (1).jpg"
       ],
@@ -523,7 +476,7 @@
     {
       "id": "premium-victorian-green-stone-bangle",
       "name": "premium victorian green stone bangle",
-      "price": 2002,
+      "price": 4726,
       "images": [
         "/assets/victorian bangles/premium victorian green stone bangle/1.jpg",
         "/assets/victorian bangles/premium victorian green stone bangle/2.jpg",
@@ -534,7 +487,7 @@
     {
       "id": "victorian-golden-bangle",
       "name": "victorian golden bangle",
-      "price": 1656,
+      "price": 1122,
       "images": [
         "/assets/victorian bangles/victorian golden bangle/1.jpg",
         "/assets/victorian bangles/victorian golden bangle/2.jpg",
