@@ -1,31 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Mail, MapPin, Phone, Clock, Send, Instagram, Facebook, Twitter } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-};
+function AnimatedSection({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5
-    }
-  }
-};
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -39,120 +41,154 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      lines: ["123 Jewelry Lane", "Traditional Market", "Mumbai, Maharashtra 400001"],
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      lines: ["hello@prakashduo.com", "support@prakashduo.com"],
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      lines: ["+91 22 1234 5678", "+91 98765 43210"],
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      lines: ["Mon - Sat: 9:00 AM - 7:00 PM", "Sunday: Closed"],
+    },
+  ];
+
+  const socialLinks = [
+    { icon: Instagram, label: "Instagram", href: "#" },
+    { icon: Facebook, label: "Facebook", href: "#" },
+    { icon: Twitter, label: "Twitter", href: "#" },
+  ];
+
   return (
-    <div className="min-h-screen bg-stone-50">
-      <Header />
-      
-      <main>
-        <motion.section 
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="py-16 md:py-24 bg-white"
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div variants={itemVariants} className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
+    <div className="bg-ivory noise-overlay">
+      {/* Hero Section */}
+      <section className="relative py-20 md:py-28 bg-charcoal overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-gold/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-gold/20 mb-6">
+              <Mail className="w-4 h-4 text-gold" />
+              <span className="text-gold text-sm font-medium tracking-widest uppercase">
                 Get in Touch
-              </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We would love to hear from you. Whether you have a question about our bangles, need assistance with an order, or just want to say hello, we are here to help.
-              </p>
-            </motion.div>
+              </span>
+            </span>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              <motion.div variants={itemVariants}>
-                <div className="bg-amber-50 rounded-lg p-8">
-                  <h2 className="text-2xl font-serif font-bold text-gray-900 mb-6">
-                    Contact Information
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">📍</span>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+              Contact <span className="gradient-text">Us</span>
+            </h1>
+
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              Have a question or need assistance? We&apos;re here to help you find the perfect piece
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Content */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Contact Info */}
+            <div>
+              <AnimatedSection>
+                <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-8">
+                  Let&apos;s Start a Conversation
+                </h2>
+                <p className="text-charcoal/70 mb-10 leading-relaxed">
+                  Whether you have a question about our bangles, need help with an order,
+                  or just want to share your feedback, we&apos;d love to hear from you.
+                </p>
+              </AnimatedSection>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                {contactInfo.map((item, i) => (
+                  <AnimatedSection key={i} delay={i * 0.1}>
+                    <div className="group p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <item.icon className="w-5 h-5 text-gold" />
                       </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Address</h3>
-                        <p className="text-gray-600">
-                          123 Jewelry Lane<br />
-                          Traditional Market<br />
-                          Mumbai, Maharashtra 400001<br />
-                          India
-                        </p>
-                      </div>
+                      <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
+                      {item.lines.map((line, j) => (
+                        <p key={j} className="text-charcoal/60 text-sm">{line}</p>
+                      ))}
                     </div>
+                  </AnimatedSection>
+                ))}
+              </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">📧</span>
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Email</h3>
-                        <p className="text-gray-600">
-                          hello@prakashduo.com<br />
-                          support@prakashduo.com
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">📞</span>
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Phone</h3>
-                        <p className="text-gray-600">
-                          +91 22 1234 5678<br />
-                          Mon-Sat, 9am-7pm IST
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">⏰</span>
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Business Hours</h3>
-                        <p className="text-gray-600">
-                          Monday - Saturday: 9:00 AM - 7:00 PM<br />
-                          Sunday: Closed
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <div className="bg-white border border-stone-200 rounded-lg p-8">
-                  <h2 className="text-2xl font-serif font-bold text-gray-900 mb-6">
-                    Send us a Message
-                  </h2>
-                  
-                  {submitted ? (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="bg-green-50 border border-green-200 rounded-lg p-6 text-center"
+              {/* Social Links */}
+              <AnimatedSection delay={0.4} className="mt-10">
+                <h3 className="font-display text-xl text-charcoal mb-4">Follow Us</h3>
+                <div className="flex gap-3">
+                  {socialLinks.map((social, i) => (
+                    <motion.a
+                      key={i}
+                      href={social.href}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-12 h-12 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-gold transition-colors"
+                      aria-label={social.label}
                     >
-                      <div className="text-4xl mb-3">✅</div>
-                      <h3 className="text-lg font-medium text-green-800 mb-2">
-                        Message Sent!
-                      </h3>
-                      <p className="text-green-700">
-                        Thank you for reaching out. We will get back to you within 24 hours.
-                      </p>
-                    </motion.div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <social.icon className="w-5 h-5" />
+                    </motion.a>
+                  ))}
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* Contact Form */}
+            <AnimatedSection delay={0.2}>
+              <div className="bg-white p-8 md:p-10 rounded-lg border border-gold/10 shadow-lg relative overflow-hidden">
+                {/* Decorative corner */}
+                <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-gold/20" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-gold/20" />
+
+                <h2 className="font-display text-2xl text-charcoal mb-6">Send a Message</h2>
+
+                {submitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-gradient-to-br from-gold/10 to-rose-gold/10 border border-gold/30 rounded-lg p-8 text-center"
+                  >
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                      <Mail className="w-7 h-7 text-gold" />
+                    </div>
+                    <h3 className="font-display text-xl text-charcoal mb-2">
+                      Message Sent!
+                    </h3>
+                    <p className="text-charcoal/70">
+                      Thank you for reaching out. We&apos;ll get back to you within 24 hours.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
-                          Name
+                        <label htmlFor="name" className="block text-sm font-medium text-charcoal mb-2">
+                          Your Name
                         </label>
                         <input
                           type="text"
@@ -160,14 +196,13 @@ export default function ContactPage() {
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
-                          placeholder="Your name"
+                          className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                          placeholder="John Doe"
                         />
                       </div>
-
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
-                          Email
+                        <label htmlFor="email" className="block text-sm font-medium text-charcoal mb-2">
+                          Email Address
                         </label>
                         <input
                           type="email"
@@ -175,88 +210,74 @@ export default function ContactPage() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
-                          placeholder="your.email@example.com"
+                          className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                          placeholder="you@example.com"
                         />
                       </div>
+                    </div>
 
-                      <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-2">
-                          Subject
-                        </label>
-                        <input
-                          type="text"
-                          id="subject"
-                          required
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
-                          placeholder="How can we help?"
-                        />
-                      </div>
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-charcoal mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        required
+                        value={formData.subject}
+                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                        placeholder="How can we help?"
+                      />
+                    </div>
 
-                      <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
-                          Message
-                        </label>
-                        <textarea
-                          id="message"
-                          required
-                          rows={5}
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none"
-                          placeholder="Your message..."
-                        />
-                      </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-charcoal mb-2">
+                        Message
+                      </label>
+                      <textarea
+                        id="message"
+                        required
+                        rows={5}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all resize-none"
+                        placeholder="Your message..."
+                      />
+                    </div>
 
-                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        <Button 
-                          type="submit" 
-                          className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 font-medium rounded-lg transition-colors"
-                        >
-                          Send Message
-                        </Button>
-                      </motion.div>
-                    </form>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-
-            <motion.div variants={itemVariants} className="mt-16">
-              <div className="bg-gradient-to-br from-stone-100 to-amber-50 rounded-lg p-8 text-center">
-                <h2 className="text-2xl font-serif font-bold text-gray-900 mb-4">
-                  Follow Us
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  Stay updated with our latest collections and offers by following us on social media.
-                </p>
-                <div className="flex justify-center gap-4">
-                  {[
-                    { name: "Instagram", icon: "📸" },
-                    { name: "Facebook", icon: "👍" },
-                    { name: "Pinterest", icon: "📌" },
-                    { name: "Twitter", icon: "🐦" }
-                  ].map((social, i) => (
                     <motion.button
-                      key={i}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 bg-white border border-stone-300 rounded-full flex items-center justify-center hover:border-amber-400 hover:shadow-md transition-all"
-                      aria-label={social.name}
+                      type="submit"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-charcoal text-white py-4 font-semibold rounded-lg hover:bg-burgundy transition-colors flex items-center justify-center gap-2"
                     >
-                      <span className="text-xl">{social.icon}</span>
+                      <Send className="w-5 h-5" />
+                      Send Message
                     </motion.button>
-                  ))}
-                </div>
+                  </form>
+                )}
               </div>
-            </motion.div>
+            </AnimatedSection>
           </div>
-        </motion.section>
-      </main>
+        </div>
+      </section>
 
-      <Footer />
+      {/* Map Placeholder */}
+      <section className="py-16 bg-white border-t border-gold/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center">
+            <div className="bg-gradient-to-br from-champagne to-ivory rounded-lg p-12 border border-gold/20">
+              <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
+              <h3 className="font-display text-2xl text-charcoal mb-2">Visit Our Store</h3>
+              <p className="text-charcoal/60 max-w-md mx-auto">
+                Experience our collection in person at our Mumbai showroom.
+                We&apos;d love to help you find your perfect piece.
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
     </div>
   );
 }
