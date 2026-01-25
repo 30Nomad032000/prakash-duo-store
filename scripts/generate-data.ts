@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const ASSETS_DIR = path.join(process.cwd(), 'public/assets');
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
+const PRODUCT_DATA_PATH = path.join(PUBLIC_DIR, 'product-data', 'products_data.json');
 const OUTPUT_DIR = path.join(process.cwd(), 'src/data');
 
 function slugify(text: string) {
@@ -13,12 +14,30 @@ function slugify(text: string) {
     .replace(/-+$/, '');
 }
 
+interface InventoryItem {
+  size: string;
+  quantity: string;
+}
+
+interface RawProduct {
+  name: string;
+  price: number;
+  sizes_available: string[];
+  inventory: InventoryItem[];
+  category: string;
+  subcategory: string;
+  folder_path: string;
+}
+
 interface Product {
   id: string;
   name: string;
   price: number;
   images: string[];
   category: string;
+  subcategory: string;
+  sizes: string[];
+  inventory: InventoryItem[];
 }
 
 interface Category {
@@ -28,141 +47,141 @@ interface Category {
   path: string;
 }
 
-function getAllCategories() {
-  const items = fs.readdirSync(ASSETS_DIR, { withFileTypes: true });
-  const categories = items
-    .filter(item => item.isDirectory() && item.name !== 'logo')
-    .map(item => ({
-      id: slugify(item.name),
-      name: item.name,
-      slug: slugify(item.name),
-      path: item.name
-    }))
-    .filter(cat => {
-      const catPath = path.join(ASSETS_DIR, cat.path);
-      const products = fs.readdirSync(catPath, { withFileTypes: true });
-      return products.some(p => p.isDirectory());
-    });
-
-  return categories;
+interface CategoryWithImages extends Category {
+  images: string[];
+  productCount: number;
 }
 
-function getCategoryProducts(categorySlug: string, categories: Category[]) {
-  const category = categories.find(c => c.slug === categorySlug);
-  
-  if (!category) return [];
-  
-  const categoryPath = path.join(ASSETS_DIR, category.path);
-  const products = fs.readdirSync(categoryPath, { withFileTypes: true });
-  
-  return products
-    .filter(prod => prod.isDirectory())
-    .map(prod => {
-      const productPath = path.join(categoryPath, prod.name);
-      const files = fs.readdirSync(productPath);
-      const images = files
-        .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
-        .sort((a, b) => {
-          const aNum = parseInt(a.match(/\d+/)?.[0] || '0');
-          const bNum = parseInt(b.match(/\d+/)?.[0] || '0');
-          return aNum - bNum;
-        })
-        .map(f => `/assets/${category.path}/${prod.name}/${f}`);
+function getProductImages(folderPath: string): string[] {
+  // Convert Windows path separators to forward slashes for URL
+  // Images are in public/assets/, so prefix the folder path
+  const normalizedPath = 'assets/' + folderPath.replace(/\\/g, '/');
+  const fullPath = path.join(PUBLIC_DIR, 'assets', folderPath);
 
-      return {
-        id: slugify(prod.name),
-        name: prod.name,
-        price: Math.floor(Math.random() * (5000 - 500 + 1) + 500),
-        images: images.slice(0, 4),
-        category: category.name
-      };
-    })
-    .filter(p => p.images.length > 0);
-}
-
-function getCategoryWithImages(categorySlug: string, categories: Category[]) {
-  const category = categories.find(c => c.slug === categorySlug);
-  
-  if (!category) return null;
-  
-  const categoryPath = path.join(ASSETS_DIR, category.path);
-  const products = fs.readdirSync(categoryPath, { withFileTypes: true });
-  
-  const allImages: string[] = [];
-  
-  products.forEach(prod => {
-    if (prod.isDirectory()) {
-      const productPath = path.join(categoryPath, prod.name);
-      const files = fs.readdirSync(productPath);
-      const images = files
-        .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
-        .map(f => `/assets/${category.path}/${prod.name}/${f}`);
-      allImages.push(...images);
+  try {
+    if (!fs.existsSync(fullPath)) {
+      console.warn(`Warning: Folder not found: ${fullPath}`);
+      return [];
     }
-  });
-  
-  return {
-    id: category.id,
-    name: category.name,
-    slug: category.slug,
-    path: category.path,
-    images: allImages.slice(0, 5),
-    productCount: allImages.length
-  };
+
+    const files = fs.readdirSync(fullPath);
+    return files
+      .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
+      .sort((a, b) => {
+        const aNum = parseInt(a.match(/\d+/)?.[0] || '0');
+        const bNum = parseInt(b.match(/\d+/)?.[0] || '0');
+        return aNum - bNum;
+      })
+      .map(f => `/${normalizedPath}/${f}`);
+  } catch (error) {
+    console.warn(`Warning: Could not read folder: ${fullPath}`);
+    return [];
+  }
 }
 
 function main() {
-  console.log('Generating static data files...');
-  
-  const categories = getAllCategories();
-  
-  let allProducts: Product[] = [];
-  categories.forEach(category => {
-    const products = getCategoryProducts(category.slug, categories);
-    allProducts = [...allProducts, ...products];
+  console.log('Generating static data files from products_data.json...');
+
+  // Read the product data JSON
+  const rawData = fs.readFileSync(PRODUCT_DATA_PATH, 'utf-8');
+  const rawProducts: RawProduct[] = JSON.parse(rawData);
+
+  console.log(`Found ${rawProducts.length} products in products_data.json`);
+
+  // Process products and extract categories
+  const categoryMap = new Map<string, Category>();
+  const allProducts: Product[] = [];
+
+  rawProducts.forEach(raw => {
+    const images = getProductImages(raw.folder_path);
+
+    if (images.length === 0) {
+      console.warn(`Skipping product with no images: ${raw.name}`);
+      return;
+    }
+
+    // Create category if not exists
+    const categorySlug = slugify(raw.category);
+    if (!categoryMap.has(categorySlug)) {
+      categoryMap.set(categorySlug, {
+        id: categorySlug,
+        name: raw.category,
+        slug: categorySlug,
+        path: raw.category
+      });
+    }
+
+    const product: Product = {
+      id: slugify(raw.name),
+      name: raw.name,
+      price: raw.price,
+      images: images.slice(0, 4),
+      category: raw.category,
+      subcategory: raw.subcategory,
+      sizes: raw.sizes_available,
+      inventory: raw.inventory
+    };
+
+    allProducts.push(product);
   });
-  
-  const categoriesWithImages = categories.map(cat => {
-    const catWithImages = getCategoryWithImages(cat.slug, categories);
-    return catWithImages || { ...cat, images: [], productCount: 0 };
-  }).filter(cat => cat.images.length > 0);
-  
-  const productsData = {
-    products: allProducts
-  };
-  
-  const categoriesData = {
-    categories,
-    categoriesWithImages
-  };
-  
+
+  const categories = Array.from(categoryMap.values());
+
+  // Build categories with images
+  const categoriesWithImages: CategoryWithImages[] = categories.map(cat => {
+    const categoryProducts = allProducts.filter(p => p.category === cat.name);
+    const allImages = categoryProducts.flatMap(p => p.images);
+
+    return {
+      ...cat,
+      images: allImages.slice(0, 5),
+      productCount: categoryProducts.length
+    };
+  }).filter(cat => cat.productCount > 0);
+
+  // Build category products map
   const categoryProductsData: Record<string, { category: Category; products: Product[] }> = {};
   categories.forEach(cat => {
-    const products = getCategoryProducts(cat.slug, categories);
-    categoryProductsData[cat.slug] = {
-      category: cat,
-      products
-    };
+    const products = allProducts.filter(p => p.category === cat.name);
+    if (products.length > 0) {
+      categoryProductsData[cat.slug] = {
+        category: cat,
+        products
+      };
+    }
   });
-  
+
+  // Ensure output directory exists
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  }
+
+  // Write output files
   fs.writeFileSync(
     path.join(OUTPUT_DIR, 'products.json'),
-    JSON.stringify(productsData, null, 2)
+    JSON.stringify({ products: allProducts }, null, 2)
   );
-  
+
   fs.writeFileSync(
     path.join(OUTPUT_DIR, 'categories.json'),
-    JSON.stringify(categoriesData, null, 2)
+    JSON.stringify({ categories, categoriesWithImages }, null, 2)
   );
-  
+
   fs.writeFileSync(
     path.join(OUTPUT_DIR, 'category-products.json'),
     JSON.stringify(categoryProductsData, null, 2)
   );
-  
-  console.log(`✓ Generated products.json with ${allProducts.length} products`);
+
+  console.log(`\n✓ Generated products.json with ${allProducts.length} products`);
   console.log(`✓ Generated categories.json with ${categories.length} categories`);
   console.log(`✓ Generated category-products.json with ${Object.keys(categoryProductsData).length} categories`);
+
+  // Print category breakdown
+  console.log('\nProducts per category:');
+  categories.forEach(cat => {
+    const count = allProducts.filter(p => p.category === cat.name).length;
+    console.log(`  - ${cat.name}: ${count} products`);
+  });
 }
 
 main();
