@@ -1,0 +1,2256 @@
+{
+  "store": {
+    "name": "Bangles by Prakash Duo",
+    "description": "Premium handcrafted bangles collection"
+  },
+  "categories": [
+    {
+      "name": "AD Stone bangles",
+      "slug": "ad-stone-bangles",
+      "productCount": 11,
+      "subcategories": null
+    },
+    {
+      "name": "antique golden Bangles",
+      "slug": "antique-golden-bangles",
+      "productCount": 17,
+      "subcategories": null
+    },
+    {
+      "name": "bracelet bangle",
+      "slug": "bracelet-bangle",
+      "productCount": 7,
+      "subcategories": null
+    },
+    {
+      "name": "design mix bangles",
+      "slug": "design-mix-bangles",
+      "productCount": 15,
+      "subcategories": null
+    },
+    {
+      "name": "Glass Bangles",
+      "slug": "glass-bangles",
+      "productCount": 54,
+      "subcategories": [
+        "diamond design glass bangles",
+        "leaf glass bangle",
+        "full stone glass",
+        "pearl drop bangles",
+        "plain water bangle",
+        "heart beat bangles",
+        "glass glitter bangles",
+        "heart drop bangle"
+      ]
+    },
+    {
+      "name": "pearl bangles",
+      "slug": "pearl-bangles",
+      "productCount": 2,
+      "subcategories": null
+    },
+    {
+      "name": "sample bridal sets",
+      "slug": "sample-bridal-sets",
+      "productCount": 3,
+      "subcategories": null
+    },
+    {
+      "name": "thread bangles",
+      "slug": "thread-bangles",
+      "productCount": 15,
+      "subcategories": [
+        "thread kada",
+        "thread full stone",
+        "thread diamond design"
+      ]
+    },
+    {
+      "name": "victorian bangles",
+      "slug": "victorian-bangles",
+      "productCount": 2,
+      "subcategories": null
+    }
+  ],
+  "products": [
+    {
+      "id": "ad_stone_bangles_ad_stone_brick_ruby_stone",
+      "name": "Premium AD stone brick ruby stone bangle (1 pc)",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone brick ruby stone",
+      "images": [
+        "AD Stone bangles/AD stone brick ruby stone/1.jpg",
+        "AD Stone bangles/AD stone brick ruby stone/2.jpg",
+        "AD Stone bangles/AD stone brick ruby stone/3.jpg",
+        "AD Stone bangles/AD stone brick ruby stone/4.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_cubic_mauve_stone_bangle",
+      "name": "Premium AD stone mauve cubic stone bangle (1 pc)",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone cubic mauve stone bangle",
+      "images": [
+        "AD Stone bangles/AD stone cubic mauve stone bangle/1.jpg",
+        "AD Stone bangles/AD stone cubic mauve stone bangle/2.jpg",
+        "AD Stone bangles/AD stone cubic mauve stone bangle/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_cubic_pastel_green_bangle",
+      "name": "Premium AD stone Aqua green cubic stone bangle(1 pc)",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone cubic pastel green bangle",
+      "images": [
+        "AD Stone bangles/AD stone cubic pastel green bangle/1.jpg",
+        "AD Stone bangles/AD stone cubic pastel green bangle/2.jpg",
+        "AD Stone bangles/AD stone cubic pastel green bangle/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_cubic_white_stone",
+      "name": "Premium AD stone white cubic stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone cubic white stone",
+      "images": [
+        "AD Stone bangles/AD stone cubic white stone/1.jpg",
+        "AD Stone bangles/AD stone cubic white stone/2.jpg",
+        "AD Stone bangles/AD stone cubic white stone/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_brick_red_bangle",
+      "name": "Premium AD stone small red brick stone bangle (1pc)",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone small brick  red bangle",
+      "images": [
+        "AD Stone bangles/AD stone small brick  red bangle/1.jpg",
+        "AD Stone bangles/AD stone small brick  red bangle/2.jpg",
+        "AD Stone bangles/AD stone small brick  red bangle/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_brick_blue_bangle",
+      "name": "Premium AD stone small blue brick stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone small brick blue bangle",
+      "images": [
+        "AD Stone bangles/AD stone small brick blue bangle/1.jpg",
+        "AD Stone bangles/AD stone small brick blue bangle/2.jpg",
+        "AD Stone bangles/AD stone small brick blue bangle/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_cubic_mauve",
+      "name": "Premium AD stone small Mauve cubic stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone small cubic mauve",
+      "images": [
+        "AD Stone bangles/AD stone small cubic mauve/1.jpg",
+        "AD Stone bangles/AD stone small cubic mauve/2.jpg",
+        "AD Stone bangles/AD stone small cubic mauve/3.jpg"
+      ],
+      "price": 379,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_pastel_green_bangle",
+      "name": "Premium AD stone small aqua green cubic stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone small pastel green bangle",
+      "images": [
+        "AD Stone bangles/AD stone small pastel green bangle/1.jpg",
+        "AD Stone bangles/AD stone small pastel green bangle/2.jpg",
+        "AD Stone bangles/AD stone small pastel green bangle/3.jpg"
+      ],
+      "price": 379,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_pink_cubic",
+      "name": "Premium AD stone small pink cubic stone bangle (1pc)",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD Stone small pink cubic",
+      "images": [
+        "AD Stone bangles/AD Stone small pink cubic/1.jpg",
+        "AD Stone bangles/AD Stone small pink cubic/2.jpg",
+        "AD Stone bangles/AD Stone small pink cubic/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_ad_stone_small_purple_cubic_stone",
+      "name": "Premium AD stone small purple cubic stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/AD stone small purple cubic stone",
+      "images": [
+        "AD Stone bangles/AD stone small purple cubic stone/1.jpg",
+        "AD Stone bangles/AD stone small purple cubic stone/2.jpg",
+        "AD Stone bangles/AD stone small purple cubic stone/3.jpg"
+      ],
+      "price": 379,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "ad_stone_bangles_adstone_small_white_cubic_stone",
+      "name": "Premium AD stone small white cubic stone bangle",
+      "category": "AD Stone bangles",
+      "folder": "AD Stone bangles/Adstone Small white cubic Stone",
+      "images": [
+        "AD Stone bangles/Adstone Small white cubic Stone/1.jpg",
+        "AD Stone bangles/Adstone Small white cubic Stone/2.jpg",
+        "AD Stone bangles/Adstone Small white cubic Stone/3.jpg"
+      ],
+      "price": 379,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_flower_rode",
+      "name": "Premium Antique flower rode bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique  flower rode",
+      "images": [
+        "antique golden Bangles/antique  flower rode/1.jpg",
+        "antique golden Bangles/antique  flower rode/2.jpg",
+        "antique golden Bangles/antique  flower rode/3.jpg",
+        "antique golden Bangles/antique  flower rode/4.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_lakshmi_flower",
+      "name": "Premium Antique lakshmi flower bangle set",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique  lakshmi flower",
+      "images": [
+        "antique golden Bangles/antique  lakshmi flower/1.jpg",
+        "antique golden Bangles/antique  lakshmi flower/2.jpg",
+        "antique golden Bangles/antique  lakshmi flower/3.jpg",
+        "antique golden Bangles/antique  lakshmi flower/4.jpg"
+      ],
+      "price": 699,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_dimon_green_enamel",
+      "name": "Premium Antique Dimon green enamel design bangle set",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique dimon green enamel",
+      "images": [
+        "antique golden Bangles/antique dimon green enamel/1.jpg",
+        "antique golden Bangles/antique dimon green enamel/2.jpg",
+        "antique golden Bangles/antique dimon green enamel/3.jpg",
+        "antique golden Bangles/antique dimon green enamel/4.jpg"
+      ],
+      "price": 699,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_heart_shaped_red_enamel_bangle",
+      "name": "Premium antique heart shaped red enamel bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique heart shaped red enamel bangle",
+      "images": [
+        "antique golden Bangles/antique heart shaped red enamel bangle/1.jpg",
+        "antique golden Bangles/antique heart shaped red enamel bangle/2.jpg",
+        "antique golden Bangles/antique heart shaped red enamel bangle/3.jpg",
+        "antique golden Bangles/antique heart shaped red enamel bangle/4.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.6",
+        "2.8",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_kada_lakshmi_bangle",
+      "name": "Premium Antique kada lakshmi bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique kada lakshmi bangle",
+      "images": [
+        "antique golden Bangles/antique kada lakshmi bangle/1.jpg",
+        "antique golden Bangles/antique kada lakshmi bangle/2.jpg",
+        "antique golden Bangles/antique kada lakshmi bangle/3.jpg",
+        "antique golden Bangles/antique kada lakshmi bangle/4.jpg"
+      ],
+      "price": 999,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_kada_ruby_bangles",
+      "name": "Premium Antique kada ruby stone bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique kada ruby bangles",
+      "images": [
+        "antique golden Bangles/antique kada ruby bangles/1.jpg",
+        "antique golden Bangles/antique kada ruby bangles/2.jpg",
+        "antique golden Bangles/antique kada ruby bangles/3.jpg",
+        "antique golden Bangles/antique kada ruby bangles/4.jpg"
+      ],
+      "price": 999,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_lakshmi_fullstone_bangle",
+      "name": "Premium Antique lakshmi full stone bangle set",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique lakshmi fullstone bangle",
+      "images": [
+        "antique golden Bangles/antique lakshmi fullstone bangle/1.jpg",
+        "antique golden Bangles/antique lakshmi fullstone bangle/2.jpg",
+        "antique golden Bangles/antique lakshmi fullstone bangle/3.jpg",
+        "antique golden Bangles/antique lakshmi fullstone bangle/4.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_leaf_red_enamel",
+      "name": "Premium Antique leaf red enamel bangle set(2 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique leaf red enamel",
+      "images": [
+        "antique golden Bangles/antique leaf red enamel/1.jpg",
+        "antique golden Bangles/antique leaf red enamel/2.jpg",
+        "antique golden Bangles/antique leaf red enamel/3.jpg",
+        "antique golden Bangles/antique leaf red enamel/4.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_lekshmi_elephant",
+      "name": "Premium Antique Lakshmi Elephant design bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT",
+      "images": [
+        "antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/1.jpg",
+        "antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/2.jpg",
+        "antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/3.jpg",
+        "antique golden Bangles/ANTIQUE LEKSHMI ELEPHANT/4.jpg"
+      ],
+      "price": 899,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_lotus_kada",
+      "name": "Premium Antique lotus kada bangle (1 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique lotus kada",
+      "images": [
+        "antique golden Bangles/antique lotus kada/1.jpg",
+        "antique golden Bangles/antique lotus kada/2.jpg",
+        "antique golden Bangles/antique lotus kada/3.jpg",
+        "antique golden Bangles/antique lotus kada/4.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_lotus_small",
+      "name": "Premium Antique lotus single bangle set",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique lotus small",
+      "images": [
+        "antique golden Bangles/antique lotus small/1.jpg",
+        "antique golden Bangles/antique lotus small/2.jpg",
+        "antique golden Bangles/antique lotus small/3.jpg",
+        "antique golden Bangles/antique lotus small/4.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_multi_ruby_stone_lakshmi",
+      "name": "Premium Antique ruby multi stone lakshmi bangle (1 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique multi ruby stone lakshmi",
+      "images": [
+        "antique golden Bangles/antique multi ruby stone lakshmi/1.jpg",
+        "antique golden Bangles/antique multi ruby stone lakshmi/2.jpg",
+        "antique golden Bangles/antique multi ruby stone lakshmi/3.jpg",
+        "antique golden Bangles/antique multi ruby stone lakshmi/4.jpg"
+      ],
+      "price": 550,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_multicolor_full_stone",
+      "name": "Premium Antique multicolor fullstone bangle set(2 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique multicolor full stone",
+      "images": [
+        "antique golden Bangles/antique multicolor full stone/1.jpg",
+        "antique golden Bangles/antique multicolor full stone/2.jpg",
+        "antique golden Bangles/antique multicolor full stone/3.jpg",
+        "antique golden Bangles/antique multicolor full stone/4.jpg"
+      ],
+      "price": 750,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_multicolor_stone_lakshmi_bangle",
+      "name": "Premium Antique ruby multi color stone lakshmi bangle",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique multicolor stone lakshmi  bangle",
+      "images": [
+        "antique golden Bangles/antique multicolor stone lakshmi  bangle/1.jpg",
+        "antique golden Bangles/antique multicolor stone lakshmi  bangle/2.jpg",
+        "antique golden Bangles/antique multicolor stone lakshmi  bangle/3.jpg",
+        "antique golden Bangles/antique multicolor stone lakshmi  bangle/4.jpg"
+      ],
+      "price": 550,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_simple_flower",
+      "name": "Premium Antique simple flower bangle set(2 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique simple flower",
+      "images": [
+        "antique golden Bangles/antique simple flower/1.jpg",
+        "antique golden Bangles/antique simple flower/2.jpg",
+        "antique golden Bangles/antique simple flower/3.jpg",
+        "antique golden Bangles/antique simple flower/4.jpg"
+      ],
+      "price": 499,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_antique_small_lakshmi_lotus_flower_set",
+      "name": "Premium Antique small lakshmi lotus flower bangle set",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/antique small lakshmi lotus flower set",
+      "images": [
+        "antique golden Bangles/antique small lakshmi lotus flower set/1.jpg",
+        "antique golden Bangles/antique small lakshmi lotus flower set/2.jpg",
+        "antique golden Bangles/antique small lakshmi lotus flower set/3.jpg",
+        "antique golden Bangles/antique small lakshmi lotus flower set/4.jpg"
+      ],
+      "price": 899,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "antique_golden_bangles_ruby_zig_zag_bangles",
+      "name": "Premium Ruby Zig-Zag bangles(1 pc)",
+      "category": "antique golden Bangles",
+      "folder": "antique golden Bangles/ruby zig-zag bangles",
+      "images": [
+        "antique golden Bangles/ruby zig-zag bangles/1.jpg",
+        "antique golden Bangles/ruby zig-zag bangles/2.jpg",
+        "antique golden Bangles/ruby zig-zag bangles/3.jpg",
+        "antique golden Bangles/ruby zig-zag bangles/4.jpg"
+      ],
+      "price": 999,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "bracelet_bangle_drop_shaped_bangle",
+      "name": "Premium pink drop shaped design Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/drop shaped bangle",
+      "images": [
+        "bracelet bangle/drop shaped bangle/1.jpg",
+        "bracelet bangle/drop shaped bangle/2.jpg",
+        "bracelet bangle/drop shaped bangle/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 4
+    },
+    {
+      "id": "bracelet_bangle_heart_shaped_bracelet_bangle",
+      "name": "Premium pink heart shaped design Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/heart shaped bracelet bangle",
+      "images": [
+        "bracelet bangle/heart shaped bracelet bangle/1.jpg",
+        "bracelet bangle/heart shaped bracelet bangle/2.jpg",
+        "bracelet bangle/heart shaped bracelet bangle/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 4
+    },
+    {
+      "id": "bracelet_bangle_multilayer_design_bracelet",
+      "name": "Premium multilayer design Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/multilayer design bracelet",
+      "images": [
+        "bracelet bangle/multilayer design bracelet/1.jpg",
+        "bracelet bangle/multilayer design bracelet/2.jpg",
+        "bracelet bangle/multilayer design bracelet/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 1
+    },
+    {
+      "id": "bracelet_bangle_multilayer_dotted_bracelet_bangle",
+      "name": "Premium multilayer silver and gold dotted design Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/multilayer dotted bracelet bangle",
+      "images": [
+        "bracelet bangle/multilayer dotted bracelet bangle/1.jpg",
+        "bracelet bangle/multilayer dotted bracelet bangle/2.jpg",
+        "bracelet bangle/multilayer dotted bracelet bangle/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 1
+    },
+    {
+      "id": "bracelet_bangle_multilayer_plain_rode_bangle",
+      "name": "Premium multilayer silver and gold plain rod Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/multilayer plain rode bangle",
+      "images": [
+        "bracelet bangle/multilayer plain rode bangle/1.jpg",
+        "bracelet bangle/multilayer plain rode bangle/2.jpg",
+        "bracelet bangle/multilayer plain rode bangle/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 1
+    },
+    {
+      "id": "bracelet_bangle_rose_gold_bracelet_bangle",
+      "name": "Premium Rose Gold Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/Rose Gold bracelet bangle",
+      "images": [
+        "bracelet bangle/Rose Gold bracelet bangle/1.jpg",
+        "bracelet bangle/Rose Gold bracelet bangle/2.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 4
+    },
+    {
+      "id": "bracelet_bangle_ruby_stone_flower_bracelet",
+      "name": "Premium ruby stone flower design Bracelet bangle",
+      "category": "bracelet bangle",
+      "folder": "bracelet bangle/ruby stone flower bracelet",
+      "images": [
+        "bracelet bangle/ruby stone flower bracelet/1.jpg",
+        "bracelet bangle/ruby stone flower bracelet/2.jpg",
+        "bracelet bangle/ruby stone flower bracelet/3.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "free",
+        "size"
+      ],
+      "quantity": 4
+    },
+    {
+      "id": "design_mix_bangles_dark_blue_heart_drop_and_red_water_bangle_set",
+      "name": "Premium dark blue heart drop and red water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/dark blue heart drop and red water bangle set",
+      "images": [
+        "design mix bangles/dark blue heart drop and red water bangle set/1.jpg",
+        "design mix bangles/dark blue heart drop and red water bangle set/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_green_and_purple_heart_drop_bangle_set",
+      "name": "Premium purple and parrot green heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/green and purple heart drop bangle set",
+      "images": [
+        "design mix bangles/green and purple heart drop bangle set/1.jpg",
+        "design mix bangles/green and purple heart drop bangle set/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_heart_drop_bangle_mix",
+      "name": "Premium purple mix rainbow heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/Heart drop bangle mix",
+      "images": [
+        "design mix bangles/Heart drop bangle mix/1.jpg",
+        "design mix bangles/Heart drop bangle mix/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_kundan_stone_pink_heart_drop_bangle_set",
+      "name": "Premium kundan stone and pink heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/Kundan stone & pink heart drop bangle set",
+      "images": [
+        "design mix bangles/Kundan stone & pink heart drop bangle set/1.jpg",
+        "design mix bangles/Kundan stone & pink heart drop bangle set/2.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_kundan_stone_and_heart_drop_bangle_set",
+      "name": "Premium kundan stone and pink heart drop red bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/Kundan Stone and Heart drop Bangle set",
+      "images": [
+        "design mix bangles/Kundan Stone and Heart drop Bangle set/1.jpg",
+        "design mix bangles/Kundan Stone and Heart drop Bangle set/2.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_maroon_orange_heartdrop_bangle_set",
+      "name": "Premium maroon and orange heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/maroon & orange heartdrop bangle set",
+      "images": [
+        "design mix bangles/maroon & orange heartdrop bangle set/1.jpg",
+        "design mix bangles/maroon & orange heartdrop bangle set/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_orange_heart_drop_and_green_water_bangle_mix",
+      "name": "Premium orange heart drop and green water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/orange heart drop and green water bangle mix",
+      "images": [
+        "design mix bangles/orange heart drop and green water bangle mix/1.jpg",
+        "design mix bangles/orange heart drop and green water bangle mix/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_orange_heart_drop_and_red_water_bangle_mix",
+      "name": "Premium orange heart drop and red water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/Orange heart drop and red water bangle mix",
+      "images": [
+        "design mix bangles/Orange heart drop and red water bangle mix/1.jpg",
+        "design mix bangles/Orange heart drop and red water bangle mix/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_parrot_green_heart_drop_and_green_water_bangle_set",
+      "name": "Premium parrot green heart drop and green water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/parrot green heart drop and green water bangle set",
+      "images": [
+        "design mix bangles/parrot green heart drop and green water bangle set/1.jpg",
+        "design mix bangles/parrot green heart drop and green water bangle set/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_peacock_blue_and_rainbow_heart_drop_bangle_set",
+      "name": "Premium dark blue and rain bow heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/peacock blue and rainbow heart drop bangle set",
+      "images": [
+        "design mix bangles/peacock blue and rainbow heart drop bangle set/1.jpg",
+        "design mix bangles/peacock blue and rainbow heart drop bangle set/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_pink_red_heart_drop_bangle_mix",
+      "name": "Premium ruby red and pink heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/pink &red Heart drop bangle mix",
+      "images": [
+        "design mix bangles/pink &red Heart drop bangle mix/1.jpg",
+        "design mix bangles/pink &red Heart drop bangle mix/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_pink_thread_and_blue_water_bangle_set",
+      "name": "Premium full stone thread pink and blue water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/pink thread and blue water bangle set",
+      "images": [
+        "design mix bangles/pink thread and blue water bangle set/1.jpg",
+        "design mix bangles/pink thread and blue water bangle set/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_purple_pink_heart_drop_bangle_set",
+      "name": "Premium purple and pink heart drop pink bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/Purple & pink heart drop bangle set",
+      "images": [
+        "design mix bangles/Purple & pink heart drop bangle set/1.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_red_heartdrop_water_bangle_set",
+      "name": "Premium red heart drop and red water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/red heartdrop &water bangle set",
+      "images": [
+        "design mix bangles/red heartdrop &water bangle set/1.jpg",
+        "design mix bangles/red heartdrop &water bangle set/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "design_mix_bangles_silk_thread_water_bangle_set",
+      "name": "Premium thread diamond stone and blue water bangle set (12pc)",
+      "category": "design mix bangles",
+      "folder": "design mix bangles/silk thread & water bangle set",
+      "images": [
+        "design mix bangles/silk thread & water bangle set/1.jpg",
+        "design mix bangles/silk thread & water bangle set/2.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8",
+        "2.10"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_magenta",
+      "name": "Premium Diamond design magenta bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/Diamon design  magenta",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/Diamon design  magenta/1.jpg",
+        "Glass Bangles/diamond design glass bangles/Diamon design  magenta/2.jpg",
+        "Glass Bangles/diamond design glass bangles/Diamon design  magenta/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_blue",
+      "name": "Premium Diamond design blue bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/diamon design blue",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/diamon design blue/1.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design blue/2.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design blue/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_green",
+      "name": "Premium Diamond design green bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/diamon design green",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/diamon design green/1.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design green/2.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design green/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_lilac",
+      "name": "Premium Diamond design lilac bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/diamon design lilac",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/diamon design lilac/1.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design lilac/2.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design lilac/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_red",
+      "name": "Premium Diamond design magenta bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/diamon design red",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/diamon design red/1.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design red/2.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design red/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_diamond_design_glass_bangles_diamon_design_royalblue",
+      "name": "Premium Diamond design Royal blue bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "diamond design glass bangles",
+      "folder": "Glass Bangles/diamond design glass bangles/diamon design royalblue",
+      "images": [
+        "Glass Bangles/diamond design glass bangles/diamon design royalblue/1.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design royalblue/2.jpg",
+        "Glass Bangles/diamond design glass bangles/diamon design royalblue/3.jpg"
+      ],
+      "price": 250,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_full_stone_glass_full_stone_golden",
+      "name": "Premium full stone golden bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "full stone glass",
+      "folder": "Glass Bangles/full stone glass/full stone golden",
+      "images": [
+        "Glass Bangles/full stone glass/full stone golden/1.jpg",
+        "Glass Bangles/full stone glass/full stone golden/2.jpg",
+        "Glass Bangles/full stone glass/full stone golden/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_full_stone_glass_full_stone_green",
+      "name": "Premium full stone dark green bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "full stone glass",
+      "folder": "Glass Bangles/full stone glass/full stone green",
+      "images": [
+        "Glass Bangles/full stone glass/full stone green/1.jpg",
+        "Glass Bangles/full stone glass/full stone green/2.jpg",
+        "Glass Bangles/full stone glass/full stone green/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_full_stone_glass_full_stone_pista_green",
+      "name": "Premium full stone pista green bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "full stone glass",
+      "folder": "Glass Bangles/full stone glass/full stone pista  green",
+      "images": [
+        "Glass Bangles/full stone glass/full stone pista  green/1.jpg",
+        "Glass Bangles/full stone glass/full stone pista  green/2.jpg",
+        "Glass Bangles/full stone glass/full stone pista  green/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_full_stone_glass_full_stone_white",
+      "name": "Premium full stone white bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "full stone glass",
+      "folder": "Glass Bangles/full stone glass/full stone white",
+      "images": [
+        "Glass Bangles/full stone glass/full stone white/1.jpg",
+        "Glass Bangles/full stone glass/full stone white/2.jpg",
+        "Glass Bangles/full stone glass/full stone white/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_full_stone_glass_fullstone_magenta",
+      "name": "Premium full stone magenta bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "full stone glass",
+      "folder": "Glass Bangles/full stone glass/fullstone magenta",
+      "images": [
+        "Glass Bangles/full stone glass/fullstone magenta/1.jpg",
+        "Glass Bangles/full stone glass/fullstone magenta/2.jpg",
+        "Glass Bangles/full stone glass/fullstone magenta/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_rani_bangle_set_pink",
+      "name": "Rani Glass bangle set pink(10 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/Rani bangle set pink",
+      "images": [
+        "Glass Bangles/glass glitter bangles/Rani bangle set pink/1.jpg",
+        "Glass Bangles/glass glitter bangles/Rani bangle set pink/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_rani_glass_bangle_set_blue",
+      "name": "Rani blue Glass bangle set (10 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/Rani glass bangle set blue",
+      "images": [
+        "Glass Bangles/glass glitter bangles/Rani glass bangle set blue/1.jpg",
+        "Glass Bangles/glass glitter bangles/Rani glass bangle set blue/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_rani_glass_bangles_set_peach",
+      "name": "Rani Glass bangle set peach(10 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/Rani glass bangles set peach",
+      "images": [
+        "Glass Bangles/glass glitter bangles/Rani glass bangles set peach/1.jpg",
+        "Glass Bangles/glass glitter bangles/Rani glass bangles set peach/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_spot_glitter_fluorescent_green",
+      "name": "Spot Glitter fluorescent green bangle set (10 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/spot glitter fluorescent green",
+      "images": [
+        "Glass Bangles/glass glitter bangles/spot glitter fluorescent green/1.jpg",
+        "Glass Bangles/glass glitter bangles/spot glitter fluorescent green/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_spot_glitter_pink_bangles",
+      "name": "Spot Glitter pink Glass bangle set (10 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/spot glitter pink bangles",
+      "images": [
+        "Glass Bangles/glass glitter bangles/spot glitter pink bangles/1.jpg",
+        "Glass Bangles/glass glitter bangles/spot glitter pink bangles/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_glass_glitter_bangles_spot_glitter_violet_bangles",
+      "name": "Spot Glitter violet Glass bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "glass glitter bangles",
+      "folder": "Glass Bangles/glass glitter bangles/spot glitter violet bangles",
+      "images": [
+        "Glass Bangles/glass glitter bangles/spot glitter violet bangles/1.jpg",
+        "Glass Bangles/glass glitter bangles/spot glitter violet bangles/2.jpg"
+      ],
+      "price": 99,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_blue",
+      "name": "Premium heart beat blue bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat blue",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat blue/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat blue/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat blue/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_green",
+      "name": "Premium heart beat green bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat green",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat green/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat green/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat green/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_magenta",
+      "name": "Premium heart beat magenta bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat magenta",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat magenta/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat magenta/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat magenta/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_olive_green",
+      "name": "Premium heart beat olive green bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat olive green",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat olive green/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat olive green/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat olive green/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_pink",
+      "name": "Premium heart beat baby pink bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat pink",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat pink/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat pink/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat pink/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_beat_bangles_heart_beat_red",
+      "name": "Premium heart beat red bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart beat bangles",
+      "folder": "Glass Bangles/heart beat bangles/heart beat red",
+      "images": [
+        "Glass Bangles/heart beat bangles/heart beat red/1.jpg",
+        "Glass Bangles/heart beat bangles/heart beat red/2.jpg",
+        "Glass Bangles/heart beat bangles/heart beat red/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_pink",
+      "name": "Premium heart drop pink bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop  pink",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop  pink/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop  pink/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_bangle_blood_red",
+      "name": "Premium heart drop blood red bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop bangle blood red",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop bangle blood red/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop bangle blood red/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_blue",
+      "name": "Premium heart drop coral pink bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop blue",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop blue/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop blue/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_coral_pink_bangle",
+      "name": "Premium heart drop coral pink bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop coral pink bangle",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop coral pink bangle/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop coral pink bangle/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_golden",
+      "name": "Premium heart drop golden bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop golden",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop golden/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop golden/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_orange_bangle",
+      "name": "Premium heart drop orange blue bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop orange bangle",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop orange bangle/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop orange bangle/2.jpg",
+        "Glass Bangles/heart drop bangle/heart drop orange bangle/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_parrot_green",
+      "name": "Premium heart drop parrot green bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop parrot green",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop parrot green/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop parrot green/2.jpg",
+        "Glass Bangles/heart drop bangle/heart drop parrot green/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_peacock_blue_bangle",
+      "name": "Premium heart drop peacock blue bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop peacock blue bangle",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop peacock blue bangle/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop peacock blue bangle/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_purple",
+      "name": "Premium heart drop purple bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop purple",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop purple/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop purple/2.jpg",
+        "Glass Bangles/heart drop bangle/heart drop purple/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_rainbow_bangles",
+      "name": "Premium heart drop rainbow bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop rainbow bangles",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop rainbow bangles/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop rainbow bangles/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_heart_drop_bangle_heart_drop_ruby_red_bangles",
+      "name": "Premium heart drop ruby red bangle set (10pc)",
+      "category": "Glass Bangles",
+      "subcategory": "heart drop bangle",
+      "folder": "Glass Bangles/heart drop bangle/heart drop ruby red bangles",
+      "images": [
+        "Glass Bangles/heart drop bangle/heart drop ruby red bangles/1.jpg",
+        "Glass Bangles/heart drop bangle/heart drop ruby red bangles/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_kundan_glass_bangle",
+      "name": "Kundan Stone Golden Glass bangle set( 6 pc per set)",
+      "category": "Glass Bangles",
+      "folder": "Glass Bangles/kundan Glass bangle",
+      "images": [
+        "Glass Bangles/kundan Glass bangle/1.jpg",
+        "Glass Bangles/kundan Glass bangle/2.jpg"
+      ],
+      "price": 299,
+      "sizes": [
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_blue_bangles",
+      "name": "Premium leaf cut powder blue bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf blue bangles",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf blue bangles/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf blue bangles/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf blue bangles/3.jpg"
+      ],
+      "price": 366,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_magenta",
+      "name": "Premium leaf cut magenta bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf magenta",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf magenta/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf magenta/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf magenta/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_purple",
+      "name": "Premium leaf cut purple bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf purple",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf purple/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf purple/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf purple/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_rainbow_bangles",
+      "name": "Premium leaf cut rainbow bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf rainbow bangles",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf rainbow bangles/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf rainbow bangles/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf rainbow bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_red",
+      "name": "Premium leaf cut red bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf red",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf red/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf red/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf red/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_leaf_glass_bangle_leaf_ruby_red",
+      "name": "Premium leaf cut ruby red bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "leaf glass bangle",
+      "folder": "Glass Bangles/leaf glass bangle/leaf ruby red",
+      "images": [
+        "Glass Bangles/leaf glass bangle/leaf ruby red/1.jpg",
+        "Glass Bangles/leaf glass bangle/leaf ruby red/2.jpg",
+        "Glass Bangles/leaf glass bangle/leaf ruby red/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_golden",
+      "name": "Premium pearl drop golden bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop golden",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop golden/1.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop golden/2.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop golden/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_green",
+      "name": "Premium pearl drop green bangle set (1 2 pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop green",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop green/IMG_20251228_201303062 (1) (1).jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop green/IMG_20251228_201839255 (1).jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop green/IMG_20251228_202725136.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_pink",
+      "name": "Premium pearl drop baby pink bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop pink",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop pink/1.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop pink/2.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop pink/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_purple",
+      "name": "Premium pearl drop purple set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop purple",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop purple/1.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop purple/2.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop purple/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_red",
+      "name": "Premium pearl drop red bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop red",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop red/1.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop red/2.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop red/IMG_20251228_220346947 (1).jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_pearl_drop_bangles_pearl_drop_ruby_red",
+      "name": "Premium pearl drop ruby red bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "pearl drop bangles",
+      "folder": "Glass Bangles/pearl drop bangles/pearl drop ruby red",
+      "images": [
+        "Glass Bangles/pearl drop bangles/pearl drop ruby red/1.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop ruby red/2.jpg",
+        "Glass Bangles/pearl drop bangles/pearl drop ruby red/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_coffee_water_bangles",
+      "name": "Premium coffee brown plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/coffee water bangles",
+      "images": [
+        "Glass Bangles/plain water bangle/coffee water bangles/1.jpg",
+        "Glass Bangles/plain water bangle/coffee water bangles/2.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_green_water_bangles",
+      "name": "Premium green plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/green water bangles",
+      "images": [
+        "Glass Bangles/plain water bangle/green water bangles/1.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_mehendi_water_bangle_set",
+      "name": "Premium mehendi plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/mehendi water bangle set",
+      "images": [
+        "Glass Bangles/plain water bangle/mehendi water bangle set/1.jpg",
+        "Glass Bangles/plain water bangle/mehendi water bangle set/2.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_peacock_blue_water_bangle",
+      "name": "Premium peacock blue water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/peacock blue water bangle",
+      "images": [
+        "Glass Bangles/plain water bangle/peacock blue water bangle/1.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_red_water_bangles",
+      "name": "Premium red plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/red water bangles",
+      "images": [
+        "Glass Bangles/plain water bangle/red water bangles/1.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_royal_blue_water_bangle",
+      "name": "Premium royal blue plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/royal blue water bangle",
+      "images": [
+        "Glass Bangles/plain water bangle/royal blue water bangle/1.jpg",
+        "Glass Bangles/plain water bangle/royal blue water bangle/2.jpg"
+      ],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "glass_bangles_plain_water_bangle_ruby_red_water_bangle",
+      "name": "Premium ruby red plain water bangle set (12pc)",
+      "category": "Glass Bangles",
+      "subcategory": "plain water bangle",
+      "folder": "Glass Bangles/plain water bangle/ruby red water bangle",
+      "images": [],
+      "price": 89,
+      "sizes": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "pearl_bangles_gold_pearl_beaded_bangle",
+      "name": "Premium pearl beaded bangle set (2pc)",
+      "category": "pearl bangles",
+      "folder": "pearl bangles/gold pearl beaded bangle",
+      "images": [
+        "pearl bangles/gold pearl beaded bangle/1.jpg",
+        "pearl bangles/gold pearl beaded bangle/2.jpg",
+        "pearl bangles/gold pearl beaded bangle/3.jpg"
+      ],
+      "price": 499,
+      "sizes": [
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "pearl_bangles_oval_pearl_bangles",
+      "name": "Premium Oval pearl bangle (1 pc)",
+      "category": "pearl bangles",
+      "folder": "pearl bangles/Oval pearl Bangles",
+      "images": [
+        "pearl bangles/Oval pearl Bangles/1.jpg",
+        "pearl bangles/Oval pearl Bangles/2.jpg",
+        "pearl bangles/Oval pearl Bangles/3.jpg"
+      ],
+      "price": 550,
+      "sizes": [
+        "2.4",
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "sample_bridal_sets_pink_bridal_set",
+      "name": "Premium Antique and heartdrop bangle combo set",
+      "category": "sample bridal sets",
+      "folder": "sample bridal sets/pink bridal set",
+      "images": [
+        "sample bridal sets/pink bridal set/1.jpg",
+        "sample bridal sets/pink bridal set/2.jpg"
+      ],
+      "price": 2999,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "sample_bridal_sets_red_bridal_set",
+      "name": "Premium Antique and heart drop bridal bangle combo set",
+      "category": "sample bridal sets",
+      "folder": "sample bridal sets/red bridal set",
+      "images": [
+        "sample bridal sets/red bridal set/1.jpg",
+        "sample bridal sets/red bridal set/2.jpg"
+      ],
+      "price": 2999,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "sample_bridal_sets_red_small_bridal_set",
+      "name": "Premium bridal set",
+      "category": "sample bridal sets",
+      "folder": "sample bridal sets/red small bridal set",
+      "images": [
+        "sample bridal sets/red small bridal set/IMG_20260102_180440754 (1) (1) (1).jpg"
+      ],
+      "price": 2999,
+      "sizes": [
+        "2.4",
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_green_stone_thread_bangles",
+      "name": "Premium silk green thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/green stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/green stone thread bangles/1.jpg",
+        "thread bangles/thread diamond design/green stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/green stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_multicolour_stone_thread_bangles",
+      "name": "Premium silk black thread diamond stone multicolor bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/multicolour  stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/multicolour  stone thread bangles/1.jpg",
+        "thread bangles/thread diamond design/multicolour  stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/multicolour  stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_pink_stone_thread_bangles",
+      "name": "Premium silk pink thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/pink stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/pink stone thread bangles/1.jpg",
+        "thread bangles/thread diamond design/pink stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/pink stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_purple_stone_thread_bangles",
+      "name": "Premium silk purple thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/purple stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/purple stone thread bangles/1.jpg",
+        "thread bangles/thread diamond design/purple stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/purple stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_red_stone_thread_bangles",
+      "name": "Premium silk red thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/red stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/red stone thread bangles/1.jpg",
+        "thread bangles/thread diamond design/red stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/red stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_white_stone_thread_bangles",
+      "name": "Premium silk white thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/white stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/white stone thread bangles/IMG_20260101_093442179 (1).jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_diamond_design_yellow_stone_thread_bangles",
+      "name": "Premium silk yellow thread diamond stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread diamond design",
+      "folder": "thread bangles/thread diamond design/yellow stone thread bangles",
+      "images": [
+        "thread bangles/thread diamond design/yellow stone thread bangles/2.jpg",
+        "thread bangles/thread diamond design/yellow stone thread bangles/3.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_green_fullstone",
+      "name": "Premium silk green thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/green fullstone",
+      "images": [
+        "thread bangles/thread full stone/green fullstone/1.jpg",
+        "thread bangles/thread full stone/green fullstone/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_pink_fullstone_thread_bangles",
+      "name": "Premium silk pink thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/pink fullstone thread bangles",
+      "images": [
+        "thread bangles/thread full stone/pink fullstone thread bangles/1.jpg",
+        "thread bangles/thread full stone/pink fullstone thread bangles/2.jpg",
+        "thread bangles/thread full stone/pink fullstone thread bangles/3.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_purple_full_stone",
+      "name": "Premium silk purple thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/purple full stone",
+      "images": [
+        "thread bangles/thread full stone/purple full stone/1.jpg",
+        "thread bangles/thread full stone/purple full stone/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_red_full_stone_thread",
+      "name": "Premium silk red thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/red full stone thread",
+      "images": [
+        "thread bangles/thread full stone/red full stone thread/1.jpg",
+        "thread bangles/thread full stone/red full stone thread/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_white_fullstone",
+      "name": "Premium silk white thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/white fullstone",
+      "images": [
+        "thread bangles/thread full stone/white fullstone/1.jpg",
+        "thread bangles/thread full stone/white fullstone/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_full_stone_yellow_fullstone",
+      "name": "Premium silk mehendi thread full stone bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread full stone",
+      "folder": "thread bangles/thread full stone/yellow fullstone",
+      "images": [
+        "thread bangles/thread full stone/yellow fullstone/1.jpg",
+        "thread bangles/thread full stone/yellow fullstone/2.jpg"
+      ],
+      "price": 199,
+      "sizes": [
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_kada_black_kada",
+      "name": "Premium silk thread black kada bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread kada",
+      "folder": "thread bangles/thread kada/black kada",
+      "images": [
+        "thread bangles/thread kada/black kada/1.jpg",
+        "thread bangles/thread kada/black kada/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "thread_bangles_thread_kada_white_kada",
+      "name": "Premium silk thread white kada bangle set (2 pc)",
+      "category": "thread bangles",
+      "subcategory": "thread kada",
+      "folder": "thread bangles/thread kada/white kada",
+      "images": [
+        "thread bangles/thread kada/white kada/1.jpg",
+        "thread bangles/thread kada/white kada/2.jpg"
+      ],
+      "price": 399,
+      "sizes": [
+        "2.2",
+        "2.4"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "victorian_bangles_premium_victorian_green_stone_bangle",
+      "name": "Premium Victorian green stone bangle (1 pc)",
+      "category": "victorian bangles",
+      "folder": "victorian bangles/premium victorian green stone bangle",
+      "images": [
+        "victorian bangles/premium victorian green stone bangle/1.jpg",
+        "victorian bangles/premium victorian green stone bangle/2.jpg",
+        "victorian bangles/premium victorian green stone bangle/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.6"
+      ],
+      "quantity": 2
+    },
+    {
+      "id": "victorian_bangles_victorian_golden_bangle",
+      "name": "Premium Victorian warm white stone bangle",
+      "category": "victorian bangles",
+      "folder": "victorian bangles/victorian golden bangle",
+      "images": [
+        "victorian bangles/victorian golden bangle/1.jpg",
+        "victorian bangles/victorian golden bangle/2.jpg",
+        "victorian bangles/victorian golden bangle/3.jpg"
+      ],
+      "price": 599,
+      "sizes": [
+        "2.6",
+        "2.8"
+      ],
+      "quantity": 2
+    }
+  ],
+  "metadata": {
+    "totalProducts": 126,
+    "totalCategories": 9,
+    "generatedAt": "2026-01-25T16:27:38.691602"
+  }
+}

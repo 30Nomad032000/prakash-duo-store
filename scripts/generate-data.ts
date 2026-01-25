@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
-const PRODUCT_DATA_PATH = path.join(PUBLIC_DIR, 'product-data', 'products_data.json');
+const PRODUCT_DATA_PATH = path.join(process.cwd(), 'src/data', 'products copy.json');
 const OUTPUT_DIR = path.join(process.cwd(), 'src/data');
 
 function slugify(text: string) {
@@ -19,14 +19,36 @@ interface InventoryItem {
   quantity: string;
 }
 
+// New format from products copy.json
 interface RawProduct {
+  id: string;
   name: string;
   price: number;
-  sizes_available: string[];
-  inventory: InventoryItem[];
   category: string;
-  subcategory: string;
-  folder_path: string;
+  subcategory?: string;
+  folder: string;
+  images: string[];
+  sizes: string[];
+  quantity: number;
+}
+
+interface RawDataFile {
+  store: {
+    name: string;
+    description: string;
+  };
+  categories: Array<{
+    name: string;
+    slug: string;
+    productCount: number;
+    subcategories: string[] | null;
+  }>;
+  products: RawProduct[];
+  metadata: {
+    totalProducts: number;
+    totalCategories: number;
+    generatedAt: string;
+  };
 }
 
 interface Product {
@@ -87,20 +109,22 @@ function getProductImages(folderPath: string): string[] {
 }
 
 function main() {
-  console.log('Generating static data files from products_data.json...');
+  console.log('Generating static data files from products copy.json...');
 
-  // Read the product data JSON
+  // Read the product data JSON (new format)
   const rawData = fs.readFileSync(PRODUCT_DATA_PATH, 'utf-8');
-  const rawProducts: RawProduct[] = JSON.parse(rawData);
+  const dataFile: RawDataFile = JSON.parse(rawData);
+  const rawProducts = dataFile.products;
 
-  console.log(`Found ${rawProducts.length} products in products_data.json`);
+  console.log(`Found ${rawProducts.length} products in products copy.json`);
 
   // Process products and extract categories
   const categoryMap = new Map<string, Category>();
   const allProducts: Product[] = [];
 
   rawProducts.forEach(raw => {
-    const images = getProductImages(raw.folder_path);
+    // Use folder field to scan for actual images on disk
+    const images = getProductImages(raw.folder);
 
     if (images.length === 0) {
       console.warn(`Skipping product with no images: ${raw.name}`);
@@ -118,15 +142,21 @@ function main() {
       });
     }
 
+    // Convert quantity to inventory format
+    const inventory: InventoryItem[] = raw.sizes.map(size => ({
+      size,
+      quantity: String(raw.quantity)
+    }));
+
     const product: Product = {
-      id: slugify(raw.name),
+      id: raw.id || slugify(raw.name),
       name: raw.name,
       price: raw.price,
       images: images.slice(0, 4),
       category: raw.category,
-      subcategory: raw.subcategory,
-      sizes: raw.sizes_available,
-      inventory: raw.inventory
+      subcategory: raw.subcategory || '',
+      sizes: raw.sizes,
+      inventory
     };
 
     allProducts.push(product);

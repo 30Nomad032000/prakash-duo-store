@@ -7,12 +7,6 @@
       "path": "AD Stone bangles"
     },
     {
-      "id": "glass-bangles",
-      "name": "Glass Bangles",
-      "slug": "glass-bangles",
-      "path": "Glass Bangles"
-    },
-    {
       "id": "antique-golden-bangles",
       "name": "antique golden Bangles",
       "slug": "antique-golden-bangles",
@@ -25,10 +19,34 @@
       "path": "bracelet bangle"
     },
     {
+      "id": "design-mix-bangles",
+      "name": "design mix bangles",
+      "slug": "design-mix-bangles",
+      "path": "design mix bangles"
+    },
+    {
+      "id": "glass-bangles",
+      "name": "Glass Bangles",
+      "slug": "glass-bangles",
+      "path": "Glass Bangles"
+    },
+    {
       "id": "pearl-bangles",
       "name": "pearl bangles",
       "slug": "pearl-bangles",
       "path": "pearl bangles"
+    },
+    {
+      "id": "sample-bridal-sets",
+      "name": "sample bridal sets",
+      "slug": "sample-bridal-sets",
+      "path": "sample bridal sets"
+    },
+    {
+      "id": "thread-bangles",
+      "name": "thread bangles",
+      "slug": "thread-bangles",
+      "path": "thread bangles"
     },
     {
       "id": "victorian-bangles",
@@ -44,27 +62,13 @@
       "slug": "ad-stone-bangles",
       "path": "AD Stone bangles",
       "images": [
-        "/assets/AD%20Stone%20bangles/AD%20Stone%20small%20pink%20cubic/1.webp",
-        "/assets/AD%20Stone%20bangles/AD%20Stone%20small%20pink%20cubic/2.webp",
-        "/assets/AD%20Stone%20bangles/AD%20Stone%20small%20pink%20cubic/3.webp",
         "/assets/AD%20Stone%20bangles/AD%20stone%20brick%20ruby%20stone/1.webp",
-        "/assets/AD%20Stone%20bangles/AD%20stone%20brick%20ruby%20stone/2.webp"
+        "/assets/AD%20Stone%20bangles/AD%20stone%20brick%20ruby%20stone/2.webp",
+        "/assets/AD%20Stone%20bangles/AD%20stone%20brick%20ruby%20stone/3.webp",
+        "/assets/AD%20Stone%20bangles/AD%20stone%20brick%20ruby%20stone/4.webp",
+        "/assets/AD%20Stone%20bangles/AD%20stone%20cubic%20mauve%20stone%20bangle/1.webp"
       ],
       "productCount": 11
-    },
-    {
-      "id": "glass-bangles",
-      "name": "Glass Bangles",
-      "slug": "glass-bangles",
-      "path": "Glass Bangles",
-      "images": [
-        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/1.webp",
-        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/2.webp",
-        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/3.webp",
-        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20royalblue/1.webp",
-        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20royalblue/2.webp"
-      ],
-      "productCount": 45
     },
     {
       "id": "antique-golden-bangles",
@@ -72,11 +76,11 @@
       "slug": "antique-golden-bangles",
       "path": "antique golden Bangles",
       "images": [
-        "/assets/antique%20golden%20Bangles/ANTIQUE%20LEKSHMI%20ELEPHANT/1.webp",
-        "/assets/antique%20golden%20Bangles/ANTIQUE%20LEKSHMI%20ELEPHANT/2.webp",
-        "/assets/antique%20golden%20Bangles/ANTIQUE%20LEKSHMI%20ELEPHANT/3.webp",
-        "/assets/antique%20golden%20Bangles/ANTIQUE%20LEKSHMI%20ELEPHANT/4.webp",
-        "/assets/antique%20golden%20Bangles/antique%20%20flower%20rode/1.webp"
+        "/assets/antique%20golden%20Bangles/antique%20%20flower%20rode/1.webp",
+        "/assets/antique%20golden%20Bangles/antique%20%20flower%20rode/2.webp",
+        "/assets/antique%20golden%20Bangles/antique%20%20flower%20rode/3.webp",
+        "/assets/antique%20golden%20Bangles/antique%20%20flower%20rode/4.webp",
+        "/assets/antique%20golden%20Bangles/antique%20%20lakshmi%20flower/1.webp"
       ],
       "productCount": 17
     },
@@ -86,13 +90,38 @@
       "slug": "bracelet-bangle",
       "path": "bracelet bangle",
       "images": [
-        "/assets/bracelet%20bangle/Rose%20Gold%20bracelet%20bangle/1.webp",
-        "/assets/bracelet%20bangle/Rose%20Gold%20bracelet%20bangle/2.webp",
         "/assets/bracelet%20bangle/drop%20shaped%20bangle/1.webp",
         "/assets/bracelet%20bangle/drop%20shaped%20bangle/2.webp",
-        "/assets/bracelet%20bangle/drop%20shaped%20bangle/3.webp"
+        "/assets/bracelet%20bangle/drop%20shaped%20bangle/3.webp",
+        "/assets/bracelet%20bangle/heart%20shaped%20bracelet%20bangle/1.webp",
+        "/assets/bracelet%20bangle/heart%20shaped%20bracelet%20bangle/2.webp"
       ],
       "productCount": 7
+    },
+    {
+      "id": "design-mix-bangles",
+      "name": "design mix bangles",
+      "slug": "design-mix-bangles",
+      "path": "design mix bangles",
+      "images": [
+        "/assets/design%20mix%20bangles/silk%20thread%20%26%20water%20bangle%20set/1.webp",
+        "/assets/design%20mix%20bangles/silk%20thread%20%26%20water%20bangle%20set/2.webp"
+      ],
+      "productCount": 1
+    },
+    {
+      "id": "glass-bangles",
+      "name": "Glass Bangles",
+      "slug": "glass-bangles",
+      "path": "Glass Bangles",
+      "images": [
+        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/Diamon%20design%20%20magenta/1.webp",
+        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/Diamon%20design%20%20magenta/2.webp",
+        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/Diamon%20design%20%20magenta/3.webp",
+        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/1.webp",
+        "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/2.webp"
+      ],
+      "productCount": 47
     },
     {
       "id": "pearl-bangles",
@@ -100,11 +129,41 @@
       "slug": "pearl-bangles",
       "path": "pearl bangles",
       "images": [
+        "/assets/pearl%20bangles/gold%20pearl%20beaded%20bangle/1.webp",
+        "/assets/pearl%20bangles/gold%20pearl%20beaded%20bangle/2.webp",
+        "/assets/pearl%20bangles/gold%20pearl%20beaded%20bangle/3.webp",
         "/assets/pearl%20bangles/Oval%20pearl%20Bangles/1.webp",
-        "/assets/pearl%20bangles/Oval%20pearl%20Bangles/2.webp",
-        "/assets/pearl%20bangles/Oval%20pearl%20Bangles/3.webp"
+        "/assets/pearl%20bangles/Oval%20pearl%20Bangles/2.webp"
       ],
-      "productCount": 1
+      "productCount": 2
+    },
+    {
+      "id": "sample-bridal-sets",
+      "name": "sample bridal sets",
+      "slug": "sample-bridal-sets",
+      "path": "sample bridal sets",
+      "images": [
+        "/assets/sample%20bridal%20sets/pink%20bridal%20set/1.webp",
+        "/assets/sample%20bridal%20sets/pink%20bridal%20set/IMG_20260102_194815690%20(1)%20(1)%20(1).webp",
+        "/assets/sample%20bridal%20sets/red%20bridal%20set/1.webp",
+        "/assets/sample%20bridal%20sets/red%20bridal%20set/2.webp",
+        "/assets/sample%20bridal%20sets/red%20small%20bridal%20set/IMG_20260102_180440754%20(1)%20(1)%20(1).webp"
+      ],
+      "productCount": 3
+    },
+    {
+      "id": "thread-bangles",
+      "name": "thread bangles",
+      "slug": "thread-bangles",
+      "path": "thread bangles",
+      "images": [
+        "/assets/thread%20bangles/thread%20diamond%20design/green%20stone%20thread%20bangles/1.webp",
+        "/assets/thread%20bangles/thread%20diamond%20design/green%20stone%20thread%20bangles/2.webp",
+        "/assets/thread%20bangles/thread%20diamond%20design/green%20stone%20thread%20bangles/3.webp",
+        "/assets/thread%20bangles/thread%20diamond%20design/multicolour%20%20stone%20thread%20bangles/1.webp",
+        "/assets/thread%20bangles/thread%20diamond%20design/multicolour%20%20stone%20thread%20bangles/2.webp"
+      ],
+      "productCount": 15
     },
     {
       "id": "victorian-bangles",
