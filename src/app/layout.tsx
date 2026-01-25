@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Bangles by Prakash Duo - Elegant Bangles for Every Occasion",
+  title: "Prakash Duo - Elegant Bangles for Every Occasion",
   description: "Discover our exquisite collection of handcrafted bangles. From traditional designs to modern elegance, find the perfect piece for you.",
+  icons: {
+    icon: "/assets/logo/Logo.png",
+    apple: "/assets/logo/Logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +36,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${playfair.variable} ${inter.variable} antialiased min-h-screen flex flex-col`}
       >
-        {children}
+        <CartProvider>
+          <WishlistProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CartDrawer />
+          </WishlistProvider>
+        </CartProvider>
       </body>
     </html>
   );
