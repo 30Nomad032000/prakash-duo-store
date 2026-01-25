@@ -284,3 +284,129 @@ html {
 .animate-reveal {
   animation: reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
+/* Hero section enhancements */
+@keyframes floralPattern {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Subtle grain overlay for cinematic feel */
+.hero-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Animated gradient border for accent elements */
+.animated-border {
+  position: relative;
+  background: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--rose-gold)), hsl(var(--gold)));
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Hero text shadow for depth */
+.hero-text-shadow {
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.3),
+    0 4px 8px rgba(0,0,0,0.2),
+    0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Elegant button press effect */
+.press-effect:active {
+  transform: scale(0.98);
+}
+
+/* Scroll snap for hero sections */
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+}
+
+/* Image ken burns effect on hover */
+.ken-burns {
+  transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ken-burns:hover {
+  transform: scale(1.08);
+}
+
+/* Frosted glass effect with better blur */
+.glass-premium {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Elegant focus ring for accessibility */
+.focus-gold:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px hsl(var(--ivory)),
+    0 0 0 4px hsl(var(--gold));
+}
+
+/* Magnetic hover effect base */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Perspective container for 3D effects */
+.perspective-container {
+  perspective: 1000px;
+  perspective-origin: center;
+}
+
+/* Tilt card effect */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tilt-card:hover {
+  transform: rotateY(-5deg) rotateX(5deg);
+}
+
+/* Smooth image reveal */
+@keyframes imageReveal {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.image-reveal {
+  animation: imageReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Decorative line animation */
+@keyframes lineGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.line-grow {
+  animation: lineGrow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: left;
+}

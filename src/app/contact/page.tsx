@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MapPin, Phone, Clock, Send, Instagram, Facebook, Twitter } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, Send, Instagram } from "lucide-react";
 
 function AnimatedSection({
   children,
@@ -46,31 +46,33 @@ export default function ContactPage() {
 
   const contactInfo = [
     {
-      icon: MapPin,
-      title: "Visit Us",
-      lines: ["123 Jewelry Lane", "Traditional Market", "Mumbai, Maharashtra 400001"],
-    },
-    {
       icon: Mail,
       title: "Email Us",
-      lines: ["hello@prakashduo.com", "support@prakashduo.com"],
+      lines: ["Prakashduo19@gmail.com"],
+      href: "mailto:Prakashduo19@gmail.com",
     },
     {
       icon: Phone,
       title: "Call Us",
-      lines: ["+91 22 1234 5678", "+91 98765 43210"],
+      lines: ["+91 79092 02091"],
+      href: "tel:+917909202091",
+    },
+    {
+      icon: MapPin,
+      title: "Location",
+      lines: ["Thrissur, Kerala, India"],
+      href: null,
     },
     {
       icon: Clock,
       title: "Business Hours",
       lines: ["Mon - Sat: 9:00 AM - 7:00 PM", "Sunday: Closed"],
+      href: null,
     },
   ];
 
   const socialLinks = [
     { icon: Instagram, label: "Instagram", href: "#" },
-    { icon: Facebook, label: "Facebook", href: "#" },
-    { icon: Twitter, label: "Twitter", href: "#" },
   ];
 
   return (
@@ -125,15 +127,30 @@ export default function ContactPage() {
               <div className="grid sm:grid-cols-2 gap-6">
                 {contactInfo.map((item, i) => (
                   <AnimatedSection key={i} delay={i * 0.1}>
-                    <div className="group p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <item.icon className="w-5 h-5 text-gold" />
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="group block p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <item.icon className="w-5 h-5 text-gold" />
+                        </div>
+                        <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
+                        {item.lines.map((line, j) => (
+                          <p key={j} className="text-charcoal/60 text-sm group-hover:text-gold transition-colors">{line}</p>
+                        ))}
+                      </a>
+                    ) : (
+                      <div className="group p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <item.icon className="w-5 h-5 text-gold" />
+                        </div>
+                        <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
+                        {item.lines.map((line, j) => (
+                          <p key={j} className="text-charcoal/60 text-sm">{line}</p>
+                        ))}
                       </div>
-                      <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
-                      {item.lines.map((line, j) => (
-                        <p key={j} className="text-charcoal/60 text-sm">{line}</p>
-                      ))}
-                    </div>
+                    )}
                   </AnimatedSection>
                 ))}
               </div>
@@ -263,21 +280,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Placeholder */}
-      <section className="py-16 bg-white border-t border-gold/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center">
-            <div className="bg-gradient-to-br from-champagne to-ivory rounded-lg p-12 border border-gold/20">
-              <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
-              <h3 className="font-display text-2xl text-charcoal mb-2">Visit Our Store</h3>
-              <p className="text-charcoal/60 max-w-md mx-auto">
-                Experience our collection in person at our Mumbai showroom.
-                We&apos;d love to help you find your perfect piece.
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
     </div>
   );
 }

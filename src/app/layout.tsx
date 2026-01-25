@@ -21,10 +21,31 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Prakash Duo - Elegant Bangles for Every Occasion",
-  description: "Discover our exquisite collection of handcrafted bangles. From traditional designs to modern elegance, find the perfect piece for you.",
+  description: "Discover our exquisite collection of handcrafted bangles. From traditional designs to modern elegance, find the perfect piece for you. Handmade in Thrissur, Kerala.",
+  keywords: ["bangles", "indian jewelry", "bridal bangles", "traditional bangles", "handcrafted jewelry", "kerala bangles", "thrissur", "prakash duo"],
+  authors: [{ name: "Prakash Duo" }],
+  creator: "Prakash Duo",
   icons: {
     icon: "/assets/logo/Logo.png",
     apple: "/assets/logo/Logo.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://prakashduo.com",
+    siteName: "Prakash Duo",
+    title: "Prakash Duo - Elegant Handcrafted Bangles",
+    description: "Discover our exquisite collection of handcrafted bangles. Traditional designs with modern elegance, handmade in Kerala, India.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prakash Duo - Elegant Handcrafted Bangles",
+    description: "Discover our exquisite collection of handcrafted bangles. Traditional designs with modern elegance.",
+    creator: "@prakashduo",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

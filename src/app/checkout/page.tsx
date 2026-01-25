@@ -1,180 +1,166 @@
 'use client';
 
-import { useEffect } from 'react';
 import Link from 'next/link';
-import Script from 'next/script';
 import { motion } from 'framer-motion';
-import { ShoppingBag, ArrowLeft, Shield, Truck, RotateCcw } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
-import CheckoutForm from '@/components/checkout/CheckoutForm';
-import CartItem from '@/components/cart/CartItem';
-import { useRouter } from 'next/navigation';
+import { ShoppingBag, ArrowLeft, Bell, Sparkles, Instagram } from 'lucide-react';
 
 export default function CheckoutPage() {
-  const router = useRouter();
-  const { state, itemCount } = useCart();
-
-  // Redirect to cart if empty
-  useEffect(() => {
-    if (state.isLoaded && state.items.length === 0) {
-      router.push('/cart');
-    }
-  }, [state.isLoaded, state.items.length, router]);
-
-  if (!state.isLoaded || state.items.length === 0) {
-    return (
-      <div className="min-h-screen bg-ivory flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 mx-auto rounded-full bg-stone-100 flex items-center justify-center mb-4">
-            <ShoppingBag className="w-8 h-8 text-stone-400" />
-          </div>
-          <p className="text-charcoal/60">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <>
-      {/* Cashfree SDK */}
-      <Script
-        src="https://sdk.cashfree.com/js/v3/cashfree.js"
-        strategy="lazyOnload"
-      />
+    <div className="min-h-screen bg-ivory noise-overlay">
+      {/* Header */}
+      <section className="py-4 bg-white border-b border-gold/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center space-x-2 text-sm">
+            <Link href="/" className="text-charcoal/50 hover:text-gold transition-colors">Home</Link>
+            <span className="text-charcoal/30">/</span>
+            <Link href="/cart" className="text-charcoal/50 hover:text-gold transition-colors">Cart</Link>
+            <span className="text-charcoal/30">/</span>
+            <span className="text-charcoal font-medium">Checkout</span>
+          </nav>
+        </div>
+      </section>
 
-      <div className="min-h-screen bg-ivory noise-overlay">
-        {/* Header */}
-        <section className="py-4 bg-white border-b border-gold/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center space-x-2 text-sm">
-              <Link href="/" className="text-charcoal/50 hover:text-gold transition-colors">Home</Link>
-              <span className="text-charcoal/30">/</span>
-              <Link href="/cart" className="text-charcoal/50 hover:text-gold transition-colors">Cart</Link>
-              <span className="text-charcoal/30">/</span>
-              <span className="text-charcoal font-medium">Checkout</span>
-            </nav>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 md:mb-12"
+      {/* Coming Soon Content */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            {/* Back link */}
+            <Link
+              href="/cart"
+              className="inline-flex items-center gap-2 text-charcoal/60 hover:text-gold transition-colors mb-8"
             >
-              <Link
-                href="/cart"
-                className="inline-flex items-center gap-2 text-charcoal/60 hover:text-gold transition-colors mb-4"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Cart
-              </Link>
-              <h1 className="font-serif text-3xl md:text-4xl text-charcoal">
-                Checkout
-              </h1>
-              <div className="mt-4 w-24 h-[1px] bg-gradient-to-r from-gold to-transparent" />
-            </motion.div>
+              <ArrowLeft className="w-4 h-4" />
+              Back to Cart
+            </Link>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-              {/* Checkout Form */}
-              <div className="lg:col-span-2">
-                <CheckoutForm />
-              </div>
+            {/* Main Card */}
+            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gold/10 relative overflow-hidden">
+              {/* Decorative corners */}
+              <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-gold/30" />
+              <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-gold/30" />
+              <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-gold/30" />
+              <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-gold/30" />
 
-              {/* Order Items & Trust Badges */}
-              <div className="lg:col-span-1 space-y-6">
-                {/* Order Items */}
+              {/* Background pattern */}
+              <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+              }} />
+
+              <div className="relative">
+                {/* Icon */}
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="bg-white rounded-2xl p-6 shadow-sm"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-gold/20 to-rose-gold/20 flex items-center justify-center"
                 >
-                  <h3 className="text-lg font-medium text-charcoal mb-4 flex items-center justify-between">
-                    Your Items
-                    <span className="text-sm font-normal text-charcoal/50">
-                      {itemCount} {itemCount === 1 ? 'item' : 'items'}
-                    </span>
-                  </h3>
-                  <div className="max-h-80 overflow-y-auto">
-                    {state.items.map((item) => (
-                      <CartItem
-                        key={`${item.productId}-${item.size}`}
-                        item={item}
-                        compact
-                      />
-                    ))}
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                  >
+                    <ShoppingBag className="w-12 h-12 text-gold" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-burgundy/10 rounded-full mb-6"
+                >
+                  <Sparkles className="w-4 h-4 text-burgundy" />
+                  <span className="text-burgundy text-sm font-medium">Coming Soon</span>
+                </motion.div>
+
+                {/* Title */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="font-display text-3xl md:text-4xl text-charcoal mb-4"
+                >
+                  Online Ordering
+                  <br />
+                  <span className="gradient-text">Opens Soon!</span>
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="text-charcoal/60 max-w-md mx-auto mb-8 leading-relaxed"
+                >
+                  We&apos;re putting the finishing touches on our online store.
+                  Soon you&apos;ll be able to order our beautiful handcrafted bangles
+                  from the comfort of your home.
+                </motion.p>
+
+                {/* Divider */}
+                <div className="flex items-center justify-center gap-4 mb-8">
+                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-gold/30" />
+                  <div className="w-2 h-2 rotate-45 bg-gold/30" />
+                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-gold/30" />
+                </div>
+
+                {/* Contact Info */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="bg-ivory rounded-xl p-6 mb-8"
+                >
+                  <p className="text-charcoal font-medium mb-3">
+                    Want to place an order now?
+                  </p>
+                  <p className="text-charcoal/60 text-sm mb-4">
+                    Contact us directly and we&apos;ll help you with your purchase!
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a
+                      href="tel:+917909202091"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-charcoal text-white rounded-full hover:bg-burgundy transition-colors"
+                    >
+                      <Bell className="w-4 h-4" />
+                      Call: +91 79092 02091
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-charcoal/20 text-charcoal rounded-full hover:border-gold hover:text-gold transition-colors"
+                    >
+                      <Instagram className="w-4 h-4" />
+                      DM on Instagram
+                    </a>
                   </div>
                 </motion.div>
 
-                {/* Trust Badges */}
+                {/* CTA */}
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-white rounded-2xl p-6 shadow-sm"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
                 >
-                  <h3 className="text-lg font-medium text-charcoal mb-4">
-                    Why Shop With Us
-                  </h3>
-                  <div className="space-y-4">
-                    {[
-                      {
-                        icon: Shield,
-                        title: 'Secure Payment',
-                        desc: '100% secure payment with SSL encryption',
-                      },
-                      {
-                        icon: Truck,
-                        title: 'Free Shipping',
-                        desc: 'Free delivery on orders above ₹999',
-                      },
-                      {
-                        icon: RotateCcw,
-                        title: 'Easy Returns',
-                        desc: '7-day hassle-free return policy',
-                      },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center shrink-0">
-                          <item.icon className="w-5 h-5 text-gold" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-charcoal">{item.title}</p>
-                          <p className="text-xs text-charcoal/50">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Payment Methods */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-white rounded-2xl p-6 shadow-sm"
-                >
-                  <h3 className="text-sm font-medium text-charcoal mb-3">
-                    We Accept
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {['UPI', 'Cards', 'Net Banking', 'Wallets'].map((method) => (
-                      <span
-                        key={method}
-                        className="px-3 py-1 text-xs bg-stone-100 text-charcoal/70 rounded-full"
-                      >
-                        {method}
-                      </span>
-                    ))}
-                  </div>
+                  <Link
+                    href="/categories"
+                    className="inline-flex items-center gap-2 text-gold hover:text-burgundy transition-colors font-medium"
+                  >
+                    Continue Browsing Our Collection
+                    <Sparkles className="w-4 h-4" />
+                  </Link>
                 </motion.div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </>
+          </motion.div>
+        </div>
+      </section>
+    </div>
   );
 }

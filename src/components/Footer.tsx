@@ -4,10 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Facebook,
   Instagram,
-  Twitter,
-  Youtube,
   Mail,
   MapPin,
   Phone,
@@ -27,10 +24,7 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Youtube, href: "#", label: "YouTube" },
   ];
 
   const footerLinks = {
@@ -39,12 +33,6 @@ export default function Footer() {
       { label: "Best Sellers", href: "/best-sellers" },
       { label: "Collections", href: "/collections" },
       { label: "All Bangles", href: "/categories" },
-    ],
-    company: [
-      { label: "About Us", href: "/about" },
-      { label: "Our Story", href: "/about" },
-      { label: "Contact", href: "/contact" },
-      { label: "Careers", href: "#" },
     ],
     support: [
       { label: "Shipping Policy", href: "/shipping" },
@@ -81,16 +69,16 @@ export default function Footer() {
             <div className="space-y-3 pt-4">
               <div className="flex items-center gap-3 text-white/60 hover:text-gold transition-colors">
                 <MapPin className="w-4 h-4 text-gold" />
-                <span className="text-sm">Mumbai, Maharashtra, India</span>
+                <span className="text-sm">Thrissur, Kerala, India</span>
               </div>
-              <div className="flex items-center gap-3 text-white/60 hover:text-gold transition-colors">
+              <a href="tel:+917909202091" className="flex items-center gap-3 text-white/60 hover:text-gold transition-colors">
                 <Phone className="w-4 h-4 text-gold" />
-                <span className="text-sm">+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/60 hover:text-gold transition-colors">
+                <span className="text-sm">+91 79092 02091</span>
+              </a>
+              <a href="mailto:Prakashduo19@gmail.com" className="flex items-center gap-3 text-white/60 hover:text-gold transition-colors">
                 <Mail className="w-4 h-4 text-gold" />
-                <span className="text-sm">hello@prakashduo.com</span>
-              </div>
+                <span className="text-sm">Prakashduo19@gmail.com</span>
+              </a>
             </div>
 
             {/* Social Links */}
@@ -111,27 +99,11 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-5 grid grid-cols-3 gap-8">
+          <div className="lg:col-span-5 grid grid-cols-2 gap-8">
             <div>
               <h4 className="font-display text-lg text-gold mb-6">Shop</h4>
               <ul className="space-y-3">
                 {footerLinks.shop.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-white/60 hover:text-gold transition-colors text-sm inline-flex items-center gap-1 group"
-                    >
-                      {link.label}
-                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display text-lg text-gold mb-6">Company</h4>
-              <ul className="space-y-3">
-                {footerLinks.company.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}

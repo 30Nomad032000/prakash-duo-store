@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Award, Heart, Shield, Users, Star, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -145,34 +146,57 @@ export default function AboutPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <AnimatedSection>
                 <div className="relative">
-                  <div className="aspect-[4/5] bg-gradient-to-br from-champagne to-ivory overflow-hidden">
-                    {/* Placeholder for image - decorative frame */}
-                    <div className="absolute inset-0 border border-gold/20" />
-                    <div className="absolute -inset-4 border border-gold/10" />
-                    <div className="absolute inset-8 border border-gold/30" />
+                  {/* Decorative outer frames */}
+                  <div className="absolute -inset-4 border border-gold/20 pointer-events-none" />
+                  <div className="absolute -inset-8 border border-gold/10 pointer-events-none hidden md:block" />
 
-                    {/* Decorative content */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <Sparkles className="w-16 h-16 text-gold/40 mx-auto mb-4" />
-                        <p className="font-display text-3xl text-charcoal/30">
-                          Artisan Craft
-                        </p>
-                      </div>
-                    </div>
+                  {/* Main image container */}
+                  <div className="relative aspect-[4/5] overflow-hidden group">
+                    <Image
+                      src="/assets/cover page images website/Bangles.png"
+                      alt="Artisan crafted bangles by Prakash Duo"
+                      fill
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      priority
+                    />
+
+                    {/* Gradient overlay for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
+
+                    {/* Corner accents */}
+                    <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-gold/50" />
+                    <div className="absolute top-4 right-4 w-12 h-12 border-r-2 border-t-2 border-gold/50" />
+                    <div className="absolute bottom-4 left-4 w-12 h-12 border-l-2 border-b-2 border-gold/50" />
+                    <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-gold/50" />
                   </div>
 
-                  {/* Floating element */}
+                  {/* Floating badge */}
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    className="absolute -bottom-8 -right-8 bg-charcoal text-white p-6 max-w-xs"
+                    className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-charcoal text-white p-5 md:p-6 shadow-xl"
                   >
-                    <p className="font-display text-4xl text-gold mb-2">25+</p>
-                    <p className="text-white/70 text-sm">
-                      Years of crafting timeless pieces
-                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                        <Sparkles className="w-5 h-5 text-gold" />
+                      </div>
+                      <div>
+                        <p className="font-display text-2xl md:text-3xl text-gold">100%</p>
+                        <p className="text-white/70 text-xs md:text-sm">Handcrafted with Love</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Secondary floating element */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="absolute -top-4 -left-4 md:-top-6 md:-left-6 bg-white px-4 py-3 shadow-lg border border-gold/20"
+                  >
+                    <p className="text-xs text-charcoal/60 uppercase tracking-wider">Made in</p>
+                    <p className="font-display text-lg text-charcoal">Kerala, India</p>
                   </motion.div>
                 </div>
               </AnimatedSection>

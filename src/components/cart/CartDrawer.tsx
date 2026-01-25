@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingBag, ArrowRight } from 'lucide-react';
+import { X, ShoppingBag, ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
@@ -110,20 +110,25 @@ export default function CartDrawer() {
                 <div className="border-t border-stone-200 px-6 py-4 bg-white">
                   <CartSummary showShipping={true} />
 
-                  <div className="mt-4 space-y-3">
-                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <Button
-                        onClick={closeCart}
-                        asChild
-                        className="w-full bg-gold hover:bg-rose-gold text-white py-3 rounded-full font-medium"
-                      >
-                        <Link href="/checkout" className="flex items-center justify-center gap-2">
-                          Checkout
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </Button>
-                    </motion.div>
+                  {/* Coming Soon Notice */}
+                  <div className="mt-4 bg-gradient-to-br from-gold/10 to-rose-gold/10 border border-gold/20 rounded-xl p-4 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <Sparkles className="w-4 h-4 text-burgundy" />
+                      <span className="text-burgundy text-sm font-medium">Online Ordering Opens Soon!</span>
+                    </div>
+                    <p className="text-charcoal/60 text-xs mb-3">
+                      Contact us directly to place your order
+                    </p>
+                    <a
+                      href="tel:+917909202091"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-charcoal text-white text-sm rounded-full hover:bg-burgundy transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      Call: +91 79092 02091
+                    </a>
+                  </div>
 
+                  <div className="mt-3 space-y-2">
                     <Button
                       onClick={closeCart}
                       asChild
@@ -131,6 +136,15 @@ export default function CartDrawer() {
                       className="w-full py-3 rounded-full border-charcoal/20 hover:border-gold hover:bg-gold/5"
                     >
                       <Link href="/cart">View Full Cart</Link>
+                    </Button>
+
+                    <Button
+                      onClick={closeCart}
+                      asChild
+                      variant="ghost"
+                      className="w-full py-2 text-charcoal/60 hover:text-gold"
+                    >
+                      <Link href="/categories">Continue Shopping</Link>
                     </Button>
                   </div>
                 </div>
