@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingBag, ArrowRight, Sparkles, Phone } from 'lucide-react';
+import { X, ShoppingBag, Sparkles, Phone } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
