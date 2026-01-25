@@ -104,10 +104,13 @@
       "slug": "design-mix-bangles",
       "path": "design mix bangles",
       "images": [
-        "/assets/design%20mix%20bangles/silk%20thread%20%26%20water%20bangle%20set/1.webp",
-        "/assets/design%20mix%20bangles/silk%20thread%20%26%20water%20bangle%20set/2.webp"
+        "/assets/design%20mix%20bangles/dark%20blue%20heart%20drop%20and%20red%20water%20bangle%20set/1.webp",
+        "/assets/design%20mix%20bangles/dark%20blue%20heart%20drop%20and%20red%20water%20bangle%20set/2.webp",
+        "/assets/design%20mix%20bangles/green%20and%20purple%20heart%20drop%20bangle%20set/1.webp",
+        "/assets/design%20mix%20bangles/green%20and%20purple%20heart%20drop%20bangle%20set/2.webp",
+        "/assets/design%20mix%20bangles/Heart%20drop%20bangle%20mix/1.webp"
       ],
-      "productCount": 1
+      "productCount": 15
     },
     {
       "id": "glass-bangles",
@@ -121,7 +124,7 @@
         "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/1.webp",
         "/assets/Glass%20Bangles/diamond%20design%20glass%20bangles/diamon%20design%20blue/2.webp"
       ],
-      "productCount": 47
+      "productCount": 53
     },
     {
       "id": "pearl-bangles",

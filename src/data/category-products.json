@@ -915,6 +915,350 @@
     },
     "products": [
       {
+        "id": "design_mix_bangles_dark_blue_heart_drop_and_red_water_bangle_set",
+        "name": "Premium dark blue heart drop and red water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/dark%20blue%20heart%20drop%20and%20red%20water%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/dark%20blue%20heart%20drop%20and%20red%20water%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_green_and_purple_heart_drop_bangle_set",
+        "name": "Premium purple and parrot green heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/green%20and%20purple%20heart%20drop%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/green%20and%20purple%20heart%20drop%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_heart_drop_bangle_mix",
+        "name": "Premium purple mix rainbow heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/Heart%20drop%20bangle%20mix/1.webp",
+          "/assets/design%20mix%20bangles/Heart%20drop%20bangle%20mix/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_kundan_stone_pink_heart_drop_bangle_set",
+        "name": "Premium kundan stone and pink heart drop pink bangle set (12pc)",
+        "price": 599,
+        "images": [
+          "/assets/design%20mix%20bangles/Kundan%20stone%20%26%20pink%20heart%20drop%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/Kundan%20stone%20%26%20pink%20heart%20drop%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.4",
+          "2.6"
+        ],
+        "inventory": [
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_kundan_stone_and_heart_drop_bangle_set",
+        "name": "Premium kundan stone and pink heart drop red bangle set (12pc)",
+        "price": 599,
+        "images": [
+          "/assets/design%20mix%20bangles/Kundan%20Stone%20and%20Heart%20drop%20Bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/Kundan%20Stone%20and%20Heart%20drop%20Bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.4",
+          "2.6"
+        ],
+        "inventory": [
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_maroon_orange_heartdrop_bangle_set",
+        "name": "Premium maroon and orange heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/maroon%20%26%20orange%20heartdrop%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/maroon%20%26%20orange%20heartdrop%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_orange_heart_drop_and_green_water_bangle_mix",
+        "name": "Premium orange heart drop and green water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/orange%20heart%20drop%20and%20green%20water%20bangle%20mix/1.webp",
+          "/assets/design%20mix%20bangles/orange%20heart%20drop%20and%20green%20water%20bangle%20mix/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_orange_heart_drop_and_red_water_bangle_mix",
+        "name": "Premium orange heart drop and red water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/Orange%20heart%20drop%20and%20red%20water%20bangle%20mix/1.webp",
+          "/assets/design%20mix%20bangles/Orange%20heart%20drop%20and%20red%20water%20bangle%20mix/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_parrot_green_heart_drop_and_green_water_bangle_set",
+        "name": "Premium parrot green heart drop and green water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/parrot%20green%20heart%20drop%20and%20green%20water%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/parrot%20green%20heart%20drop%20and%20green%20water%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_peacock_blue_and_rainbow_heart_drop_bangle_set",
+        "name": "Premium dark blue and rain bow heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/peacock%20blue%20and%20rainbow%20heart%20drop%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/peacock%20blue%20and%20rainbow%20heart%20drop%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_pink_red_heart_drop_bangle_mix",
+        "name": "Premium ruby red and pink heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/pink%20%26red%20Heart%20drop%20bangle%20mix/1.webp",
+          "/assets/design%20mix%20bangles/pink%20%26red%20Heart%20drop%20bangle%20mix/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_pink_thread_and_blue_water_bangle_set",
+        "name": "Premium full stone thread pink and blue water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/pink%20thread%20and%20blue%20water%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/pink%20thread%20and%20blue%20water%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.6"
+        ],
+        "inventory": [
+          {
+            "size": "2.6",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_purple_pink_heart_drop_bangle_set",
+        "name": "Premium purple and pink heart drop pink bangle set (12pc)",
+        "price": 399,
+        "images": [
+          "/assets/design%20mix%20bangles/Purple%20%26%20pink%20heart%20drop%20bangle%20set/1.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "design_mix_bangles_red_heartdrop_water_bangle_set",
+        "name": "Premium red heart drop and red water bangle set (12pc)",
+        "price": 199,
+        "images": [
+          "/assets/design%20mix%20bangles/red%20heartdrop%20%26water%20bangle%20set/1.webp",
+          "/assets/design%20mix%20bangles/red%20heartdrop%20%26water%20bangle%20set/2.webp"
+        ],
+        "category": "design mix bangles",
+        "subcategory": "",
+        "sizes": [
+          "2.2",
+          "2.4"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
         "id": "design_mix_bangles_silk_thread_water_bangle_set",
         "name": "Premium thread diamond stone and blue water bangle set (12pc)",
         "price": 299,
@@ -2222,6 +2566,213 @@
           },
           {
             "size": "2.6",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_coffee_water_bangles",
+        "name": "Premium coffee brown plain water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/coffee%20water%20bangles/1.webp",
+          "/assets/Glass%20Bangles/plain%20water%20bangle/coffee%20water%20bangles/2.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_green_water_bangles",
+        "name": "Premium green plain water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/green%20water%20bangles/1.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_mehendi_water_bangle_set",
+        "name": "Premium mehendi plain water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/mehendi%20water%20bangle%20set/1.webp",
+          "/assets/Glass%20Bangles/plain%20water%20bangle/mehendi%20water%20bangle%20set/2.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_peacock_blue_water_bangle",
+        "name": "Premium peacock blue water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/peacock%20blue%20water%20bangle/1.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_red_water_bangles",
+        "name": "Premium red plain water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/red%20water%20bangles/1.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
+            "quantity": "2"
+          }
+        ]
+      },
+      {
+        "id": "glass_bangles_plain_water_bangle_royal_blue_water_bangle",
+        "name": "Premium royal blue plain water bangle set (12pc)",
+        "price": 89,
+        "images": [
+          "/assets/Glass%20Bangles/plain%20water%20bangle/royal%20blue%20water%20bangle/1.webp",
+          "/assets/Glass%20Bangles/plain%20water%20bangle/royal%20blue%20water%20bangle/2.webp"
+        ],
+        "category": "Glass Bangles",
+        "subcategory": "plain water bangle",
+        "sizes": [
+          "2.2",
+          "2.4",
+          "2.6",
+          "2.8"
+        ],
+        "inventory": [
+          {
+            "size": "2.2",
+            "quantity": "2"
+          },
+          {
+            "size": "2.4",
+            "quantity": "2"
+          },
+          {
+            "size": "2.6",
+            "quantity": "2"
+          },
+          {
+            "size": "2.8",
             "quantity": "2"
           }
         ]

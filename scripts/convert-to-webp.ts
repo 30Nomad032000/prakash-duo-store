@@ -1,80 +1,108 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
 import sharp from 'sharp';
+import fs from 'fs';
+import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const PUBLIC_DIR = path.join(__dirname, '..', 'public');
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif'];
+const ASSETS_DIR = path.join(process.cwd(), 'public', 'assets');
 
-async function findImages(dir: string): Promise<string[]> {
-  const images: string[] = [];
+const foldersToConvert = [
+  'design mix bangles',
+  'Glass Bangles/plain water bangle'
+];
 
-  const items = fs.readdirSync(dir, { withFileTypes: true });
+async function convertImagesInFolder(folderPath: string): Promise<number> {
+  let convertedCount = 0;
+
+  if (!fs.existsSync(folderPath)) {
+    console.log(`Folder not found: ${folderPath}`);
+    return 0;
+  }
+
+  const items = fs.readdirSync(folderPath, { withFileTypes: true });
 
   for (const item of items) {
-    const fullPath = path.join(dir, item.name);
+    const itemPath = path.join(folderPath, item.name);
 
     if (item.isDirectory()) {
-      images.push(...await findImages(fullPath));
+      convertedCount += await convertImagesInFolder(itemPath);
     } else if (item.isFile()) {
       const ext = path.extname(item.name).toLowerCase();
-      if (IMAGE_EXTENSIONS.includes(ext)) {
-        images.push(fullPath);
+
+      if (!['.jpg', '.jpeg', '.png'].includes(ext)) {
+        continue;
+      }
+
+      const baseName = path.basename(item.name, ext);
+      const webpPath = path.join(folderPath, `${baseName}.webp`);
+
+      if (fs.existsSync(webpPath)) {
+        console.log(`  Skipping (webp exists): ${item.name}`);
+        continue;
+      }
+
+      try {
+        await sharp(itemPath)
+          .webp({ quality: 85 })
+          .toFile(webpPath);
+
+        console.log(`  Converted: ${item.name} -> ${baseName}.webp`);
+        convertedCount++;
+
+        fs.unlinkSync(itemPath);
+        console.log(`  Deleted original: ${item.name}`);
+      } catch (error) {
+        console.error(`  Error converting ${item.name}:`, error);
       }
     }
   }
 
-  return images;
+  return convertedCount;
 }
 
-async function convertToWebp(imagePath: string): Promise<void> {
-  const dir = path.dirname(imagePath);
-  const name = path.basename(imagePath, path.extname(imagePath));
-  const webpPath = path.join(dir, `${name}.webp`);
+async function deleteDocxFiles(folderPath: string): Promise<number> {
+  let deletedCount = 0;
 
-  // Skip if webp already exists
-  if (fs.existsSync(webpPath)) {
-    console.log(`Skipping (already exists): ${webpPath}`);
-    return;
+  if (!fs.existsSync(folderPath)) {
+    return 0;
   }
 
-  try {
-    await sharp(imagePath)
-      .webp({ quality: 80 })
-      .toFile(webpPath);
+  const items = fs.readdirSync(folderPath, { withFileTypes: true });
 
-    console.log(`Converted: ${imagePath} -> ${webpPath}`);
+  for (const item of items) {
+    const itemPath = path.join(folderPath, item.name);
 
-    // Delete original file after successful conversion
-    fs.unlinkSync(imagePath);
-    console.log(`Deleted original: ${imagePath}`);
-  } catch (error) {
-    console.error(`Failed to convert ${imagePath}:`, error);
-  }
-}
-
-async function main() {
-  console.log('Finding images in public directory...');
-  const images = await findImages(PUBLIC_DIR);
-  console.log(`Found ${images.length} images to convert\n`);
-
-  let converted = 0;
-  let failed = 0;
-
-  for (const image of images) {
-    try {
-      await convertToWebp(image);
-      converted++;
-    } catch {
-      failed++;
+    if (item.isDirectory()) {
+      deletedCount += await deleteDocxFiles(itemPath);
+    } else if (item.isFile() && item.name.endsWith('.docx')) {
+      fs.unlinkSync(itemPath);
+      console.log(`  Deleted docx: ${item.name}`);
+      deletedCount++;
     }
   }
 
-  console.log(`\nConversion complete!`);
-  console.log(`Converted: ${converted}`);
-  console.log(`Failed: ${failed}`);
+  return deletedCount;
+}
+
+async function main() {
+  console.log('Converting images to WebP format...\n');
+
+  let totalConverted = 0;
+  let totalDocxDeleted = 0;
+
+  for (const folder of foldersToConvert) {
+    const fullPath = path.join(ASSETS_DIR, folder);
+    console.log(`\nProcessing: ${folder}`);
+    console.log('='.repeat(50));
+
+    const converted = await convertImagesInFolder(fullPath);
+    totalConverted += converted;
+
+    const docxDeleted = await deleteDocxFiles(fullPath);
+    totalDocxDeleted += docxDeleted;
+  }
+
+  console.log('\n' + '='.repeat(50));
+  console.log(`Done! Converted ${totalConverted} images to WebP`);
+  console.log(`Deleted ${totalDocxDeleted} .docx files`);
 }
 
 main().catch(console.error);
