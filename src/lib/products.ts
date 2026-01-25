@@ -33,7 +33,7 @@ export interface CategoryWithImages extends Category {
 const products = productsData.products as Product[];
 const categories = categoriesData.categories as Category[];
 const categoriesWithImages = categoriesData.categoriesWithImages as CategoryWithImages[];
-const categoryProducts = categoryProductsData as Record<string, { category: Category; products: Product[] }>;
+const categoryProducts = categoryProductsData as unknown as Record<string, { category: Category; products: Product[] }>;
 
 export function getAllCategories(): Category[] {
   return categories;
