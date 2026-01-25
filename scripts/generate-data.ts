@@ -72,7 +72,14 @@ function getProductImages(folderPath: string): string[] {
         const bNum = parseInt(b.match(/\d+/)?.[0] || '0');
         return aNum - bNum;
       })
-      .map(f => `/${normalizedPath}/${f}`);
+      .map(f => {
+        // URL-encode each path segment to handle spaces and special characters
+        const encodedPath = normalizedPath
+          .split('/')
+          .map(segment => encodeURIComponent(segment))
+          .join('/');
+        return `/${encodedPath}/${encodeURIComponent(f)}`;
+      });
   } catch (error) {
     console.warn(`Warning: Could not read folder: ${fullPath}`);
     return [];
