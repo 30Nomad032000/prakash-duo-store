@@ -24,7 +24,7 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/bangles_byprakashduo?utm_source=qr&igsh=ZGhwZTkwdDlocTZ0", label: "Instagram" },
   ];
 
   const footerLinks = {
