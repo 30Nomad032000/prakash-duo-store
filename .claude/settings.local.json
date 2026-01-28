@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run generate-data:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(where:*)",
+      "Bash(npm install:*)",
+      "Bash(npx ts-node:*)"
+    ]
+  }
+}

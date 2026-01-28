@@ -8,6 +8,19 @@ import Image from 'next/image';
 import { Search, Package, Clock, MapPin, Truck, Sparkles, CheckCircle, ArrowRight, XCircle, Loader2 } from 'lucide-react';
 import type { Order } from '@/lib/types';
 
+interface TrackingInfo {
+  carrier: string;
+  trackingId: string | null;
+  shippedAt: string | null;
+  deliveredAt: string | null;
+  estimatedDelivery: string | null;
+  notes: string | null;
+}
+
+interface ExtendedOrder extends Order {
+  trackingInfo?: TrackingInfo;
+}
+
 function AnimatedSection({
   children,
   className = "",
@@ -38,7 +51,7 @@ function TrackOrderContent() {
   const initialOrderId = searchParams.get('order_id') || '';
 
   const [orderId, setOrderId] = useState(initialOrderId);
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<ExtendedOrder | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
@@ -61,7 +74,7 @@ function TrackOrderContent() {
     },
   ];
 
-  const getTrackingSteps = (order: Order | null) => {
+  const getTrackingSteps = (order: ExtendedOrder | null) => {
     if (!order) {
       return [
         { icon: CheckCircle, title: "Order Placed", desc: "Your order has been placed successfully", completed: false },
@@ -75,6 +88,20 @@ function TrackOrderContent() {
     const isProcessing = ['processing', 'shipped', 'delivered'].includes(order.status);
     const isShipped = ['shipped', 'delivered'].includes(order.status);
     const isDelivered = order.status === 'delivered';
+
+    // Build shipped description with tracking info
+    let shippedDesc = isShipped ? "Your order is on its way" : "Your order is being prepared";
+    if (isShipped && order.trackingInfo?.shippedAt) {
+      shippedDesc = `Shipped on ${new Date(order.trackingInfo.shippedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`;
+    }
+
+    // Build delivered description
+    let deliveredDesc = "Estimated 3-5 business days";
+    if (isDelivered && order.trackingInfo?.deliveredAt) {
+      deliveredDesc = `Delivered on ${new Date(order.trackingInfo.deliveredAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+    } else if (order.trackingInfo?.estimatedDelivery) {
+      deliveredDesc = `Expected by ${new Date(order.trackingInfo.estimatedDelivery).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`;
+    }
 
     return [
       {
@@ -92,13 +119,13 @@ function TrackOrderContent() {
       {
         icon: Truck,
         title: isShipped ? "Shipped" : "Processing",
-        desc: isShipped ? "Your order is on its way" : "Your order is being prepared",
+        desc: shippedDesc,
         completed: isProcessing
       },
       {
         icon: MapPin,
         title: "Delivered",
-        desc: isDelivered ? "Package delivered successfully" : "Estimated 3-5 business days",
+        desc: deliveredDesc,
         completed: isDelivered
       },
     ];
@@ -294,6 +321,52 @@ function TrackOrderContent() {
                             </div>
                           ))}
                         </div>
+
+                        {/* DTDC Tracking Info */}
+                        {order.trackingInfo?.trackingId && (
+                          <div className="mb-8 p-6 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-lg border border-indigo-100">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center">
+                                <Truck className="w-5 h-5 text-white" />
+                              </div>
+                              <div>
+                                <h4 className="font-display text-lg text-charcoal">Courier Tracking</h4>
+                                <p className="text-sm text-charcoal/60">Track via {order.trackingInfo.carrier}</p>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div>
+                                <p className="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Tracking ID</p>
+                                <p className="font-mono font-semibold text-charcoal">{order.trackingInfo.trackingId}</p>
+                              </div>
+                              {order.trackingInfo.estimatedDelivery && (
+                                <div>
+                                  <p className="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Expected Delivery</p>
+                                  <p className="font-semibold text-charcoal">
+                                    {new Date(order.trackingInfo.estimatedDelivery).toLocaleDateString('en-IN', {
+                                      weekday: 'short',
+                                      day: 'numeric',
+                                      month: 'short'
+                                    })}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                            {order.trackingInfo.notes && (
+                              <p className="text-sm text-charcoal/70 mb-4 p-3 bg-white/50 rounded">{order.trackingInfo.notes}</p>
+                            )}
+                            <a
+                              href={`https://www.dtdc.in/tracking/shipment-tracking.asp?strCnno=${order.trackingInfo.trackingId}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+                            >
+                              <Truck className="w-4 h-4" />
+                              Track on DTDC Website
+                              <ArrowRight className="w-4 h-4" />
+                            </a>
+                          </div>
+                        )}
 
                         {/* Order Items */}
                         <div className="mb-8 p-4 bg-ivory rounded-lg">

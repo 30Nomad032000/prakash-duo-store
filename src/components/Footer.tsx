@@ -36,7 +36,8 @@ export default function Footer() {
     ],
     support: [
       { label: "Shipping Policy", href: "/shipping" },
-      { label: "Returns & Exchanges", href: "/shipping" },
+      { label: "Refund Policy", href: "/refund" },
+      { label: "Terms & Conditions", href: "/terms" },
       { label: "FAQs", href: "/faq" },
       { label: "Track Order", href: "/track-order" },
     ],
@@ -188,22 +189,33 @@ export default function Footer() {
       <div className="relative border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">
-              &copy; {new Date().getFullYear()} Bangles by Prakash Duo. All
-              rights reserved.
-            </p>
+            <div className="text-center md:text-left">
+              <p className="text-white/40 text-sm">
+                &copy; {new Date().getFullYear()} Bangles by Prakash Duo. All
+                rights reserved.
+              </p>
+              <p className="text-white/30 text-xs mt-1">
+                Legal Business Name: <span className="text-gold/70">SHILPA PRAKASH</span>
+              </p>
+            </div>
             <div className="flex items-center gap-6">
+              <Link
+                href="/refund"
+                className="text-white/40 hover:text-gold transition-colors text-sm"
+              >
+                Refund Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-white/40 hover:text-gold transition-colors text-sm"
+              >
+                Terms & Conditions
+              </Link>
               <Link
                 href="/privacy"
                 className="text-white/40 hover:text-gold transition-colors text-sm"
               >
                 Privacy Policy
-              </Link>
-              <Link
-                href="/shipping"
-                className="text-white/40 hover:text-gold transition-colors text-sm"
-              >
-                Terms of Service
               </Link>
             </div>
           </div>

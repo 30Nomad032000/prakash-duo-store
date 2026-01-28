@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createOrderRequestSchema } from '@/lib/schemas';
 import { createCashfreeOrder, generateOrderId, calculateOrderTotals } from '@/lib/cashfree';
-import { getOrder, setOrder } from '@/lib/orders-store';
+import { createOrder, getOrderByOrderId } from '@/lib/supabase-orders';
 import type { Order, CreateOrderResponse, ApiResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -62,9 +62,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Create order record
-    const order: Order = {
-      id: orderId,
+    // Create order in Supabase
+    await createOrder({
       orderId,
       customer,
       shippingAddress,
@@ -73,15 +72,8 @@ export async function POST(request: NextRequest) {
       shipping,
       tax,
       total,
-      status: 'pending',
-      paymentStatus: 'pending',
       paymentSessionId,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    // Store order (in production, save to database)
-    setOrder(orderId, order);
+    });
 
     return NextResponse.json<ApiResponse<CreateOrderResponse>>({
       success: true,
@@ -114,7 +106,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const order = getOrder(orderId);
+    const order = await getOrderByOrderId(orderId);
 
     if (!order) {
       return NextResponse.json<ApiResponse<null>>(

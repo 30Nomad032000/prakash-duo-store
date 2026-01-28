@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyWebhookSignature } from '@/lib/cashfree';
-import { getOrder, setOrder } from '@/lib/orders-store';
+import { getOrderByOrderId, updatePaymentStatus, updateOrderStatus, commitStockSale } from '@/lib/supabase-orders';
+import { sendOrderConfirmation } from '@/lib/email/send';
 
 interface CashfreeWebhookPayload {
   type: string;
@@ -51,8 +52,8 @@ export async function POST(request: NextRequest) {
     const { order: orderData, payment } = webhookData.data;
     const orderId = orderData.order_id;
 
-    // Get order from store
-    const order = getOrder(orderId);
+    // Get order from Supabase
+    const order = await getOrderByOrderId(orderId);
 
     if (!order) {
       console.error('Order not found for webhook:', orderId);
@@ -62,33 +63,50 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Skip if already processed
+    if (order.paymentStatus === 'paid' && payment.payment_status === 'SUCCESS') {
+      console.log(`Order ${orderId} already processed, skipping`);
+      return NextResponse.json({ success: true });
+    }
+
     // Update order based on payment status
     switch (payment.payment_status) {
       case 'SUCCESS':
-        order.paymentStatus = 'paid';
-        order.status = 'confirmed';
+        await updatePaymentStatus(orderId, 'paid');
+        await updateOrderStatus(orderId, 'confirmed');
         console.log(`Order ${orderId} payment successful`);
+
+        // Commit stock sale (deduct from inventory)
+        const stockItems = order.items.map(item => ({
+          productId: item.productId,
+          size: item.size,
+          quantity: item.quantity,
+        }));
+        await commitStockSale(stockItems);
+
+        // Send order confirmation email
+        const updatedOrder = await getOrderByOrderId(orderId);
+        if (updatedOrder) {
+          await sendOrderConfirmation(updatedOrder);
+        }
         break;
 
       case 'FAILED':
-        order.paymentStatus = 'failed';
-        order.status = 'cancelled';
+        await updatePaymentStatus(orderId, 'failed');
+        await updateOrderStatus(orderId, 'cancelled');
         console.log(`Order ${orderId} payment failed: ${payment.payment_message}`);
         break;
 
       case 'USER_DROPPED':
       case 'CANCELLED':
-        order.paymentStatus = 'failed';
-        order.status = 'cancelled';
+        await updatePaymentStatus(orderId, 'failed');
+        await updateOrderStatus(orderId, 'cancelled');
         console.log(`Order ${orderId} payment cancelled/dropped`);
         break;
 
       default:
         console.log(`Order ${orderId} payment status: ${payment.payment_status}`);
     }
-
-    order.updatedAt = new Date().toISOString();
-    setOrder(orderId, order);
 
     // Return success to Cashfree
     return NextResponse.json({ success: true });

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOrderPayments } from '@/lib/cashfree';
-import { getOrder, setOrder } from '@/lib/orders-store';
+import { getOrderByOrderId, updatePaymentStatus, commitStockSale } from '@/lib/supabase-orders';
+import { sendOrderConfirmation } from '@/lib/email/send';
 import type { ApiResponse, VerifyPaymentResponse } from '@/lib/types';
 
 export async function GET(request: NextRequest) {
@@ -15,7 +16,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const order = getOrder(orderId);
+    const order = await getOrderByOrderId(orderId);
 
     if (!order) {
       return NextResponse.json<ApiResponse<null>>(
@@ -49,18 +50,27 @@ export async function GET(request: NextRequest) {
         paymentStatus = 'paid';
         message = 'Payment successful';
 
-        // Update order status
-        order.paymentStatus = 'paid';
-        order.status = 'confirmed';
-        order.updatedAt = new Date().toISOString();
-        setOrder(orderId, order);
+        // Update order status in Supabase
+        await updatePaymentStatus(orderId, 'paid');
+
+        // Commit stock sale (deduct from inventory)
+        const stockItems = order.items.map(item => ({
+          productId: item.productId,
+          size: item.size,
+          quantity: item.quantity,
+        }));
+        await commitStockSale(stockItems);
+
+        // Send order confirmation email
+        const updatedOrder = await getOrderByOrderId(orderId);
+        if (updatedOrder) {
+          await sendOrderConfirmation(updatedOrder);
+        }
       } else if (payments.some(p => p.paymentStatus === 'FAILED')) {
         paymentStatus = 'failed';
         message = 'Payment failed';
 
-        order.paymentStatus = 'failed';
-        order.updatedAt = new Date().toISOString();
-        setOrder(orderId, order);
+        await updatePaymentStatus(orderId, 'failed');
       }
     } catch (cashfreeError) {
       console.error('Cashfree verification error:', cashfreeError);
@@ -69,10 +79,13 @@ export async function GET(request: NextRequest) {
         paymentStatus = 'paid';
         message = 'Payment verified (test mode)';
 
-        order.paymentStatus = 'paid';
-        order.status = 'confirmed';
-        order.updatedAt = new Date().toISOString();
-        setOrder(orderId, order);
+        await updatePaymentStatus(orderId, 'paid');
+
+        // Send order confirmation email
+        const updatedOrder = await getOrderByOrderId(orderId);
+        if (updatedOrder) {
+          await sendOrderConfirmation(updatedOrder);
+        }
       }
     }
 
