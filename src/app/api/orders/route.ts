@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createOrderRequestSchema } from '@/lib/schemas';
-import { createCashfreeOrder, generateOrderId, calculateOrderTotals } from '@/lib/cashfree';
+import { createRazorpayOrder, generateOrderId, validateAndCalculateOrderTotals } from '@/lib/razorpay';
 import { createOrder, getOrderByOrderId } from '@/lib/supabase-orders';
 import type { Order, CreateOrderResponse, ApiResponse } from '@/lib/types';
 
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Validate request
+    // Validate request structure
     const result = createOrderRequestSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json<ApiResponse<null>>(
@@ -22,64 +22,67 @@ export async function POST(request: NextRequest) {
 
     const { customer, shippingAddress, items } = result.data;
 
-    // Calculate totals
-    const { subtotal, shipping, tax, total } = calculateOrderTotals(items);
-
-    // Generate order ID
-    const orderId = generateOrderId();
-    const customerId = `CUST-${Date.now().toString(36)}`.toUpperCase();
-
-    // Create Cashfree order session
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
-    let paymentSessionId: string;
-
+    // Server-side price validation — never trust client prices
+    let totals;
     try {
-      const cashfreeOrder = await createCashfreeOrder({
-        orderId,
-        orderAmount: total,
-        orderCurrency: 'INR',
-        customerDetails: {
-          customerId,
-          customerEmail: customer.email,
-          customerPhone: customer.phone,
-          customerName: `${customer.firstName} ${customer.lastName}`,
+      totals = validateAndCalculateOrderTotals(
+        items.map((item) => ({
+          productId: item.productId,
+          size: item.size,
+          quantity: item.quantity,
+        }))
+      );
+    } catch (validationError) {
+      return NextResponse.json<ApiResponse<null>>(
+        {
+          success: false,
+          error: validationError instanceof Error ? validationError.message : 'Invalid cart items',
         },
-        orderMeta: {
-          returnUrl: `${baseUrl}/order-confirmation?order_id=${orderId}`,
-          notifyUrl: `${baseUrl}/api/payments/webhook`,
-        },
-      });
-
-      paymentSessionId = cashfreeOrder.paymentSessionId;
-    } catch (cashfreeError) {
-      console.error('Cashfree error:', cashfreeError);
-      // For development/testing without Cashfree credentials, generate a mock session
-      if (process.env.NODE_ENV === 'development' && !process.env.CASHFREE_APP_ID) {
-        paymentSessionId = `mock_session_${Date.now()}`;
-      } else {
-        throw cashfreeError;
-      }
+        { status: 400 }
+      );
     }
+
+    const { subtotal, shipping, tax, total, validatedItems } = totals;
+
+    // Generate cryptographically random order ID
+    const orderId = generateOrderId();
+
+    // Create Razorpay order
+    const razorpayOrder = await createRazorpayOrder({
+      amount: total,
+      receipt: orderId,
+      notes: {
+        customer_email: customer.email,
+        customer_name: `${customer.firstName} ${customer.lastName}`,
+      },
+    });
 
     // Create order in Supabase
     await createOrder({
       orderId,
       customer,
       shippingAddress,
-      items,
+      items: validatedItems,
       subtotal,
       shipping,
       tax,
       total,
-      paymentSessionId,
+      paymentSessionId: razorpayOrder.id, // store razorpay_order_id
     });
 
     return NextResponse.json<ApiResponse<CreateOrderResponse>>({
       success: true,
       data: {
         orderId,
-        paymentSessionId,
+        razorpayOrderId: razorpayOrder.id,
+        keyId: process.env.RAZORPAY_KEY_ID!,
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        prefill: {
+          name: `${customer.firstName} ${customer.lastName}`,
+          email: customer.email,
+          contact: customer.phone,
+        },
       },
     });
   } catch (error) {
@@ -102,6 +105,15 @@ export async function GET(request: NextRequest) {
     if (!orderId) {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'Order ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Validate order ID format to prevent enumeration
+    // Accepts both old format (base36) and new format (hex)
+    if (!/^PD-[A-Z0-9]{5,8}-[A-Z0-9]{5,10}$/.test(orderId)) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Invalid order ID format' },
         { status: 400 }
       );
     }

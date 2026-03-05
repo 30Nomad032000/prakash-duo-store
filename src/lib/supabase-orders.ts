@@ -412,9 +412,13 @@ export async function listOrders(options: {
   }
 
   if (options.search) {
-    query = query.or(
-      `order_id.ilike.%${options.search}%,customer_email.ilike.%${options.search}%,customer_phone.ilike.%${options.search}%`
-    );
+    // Sanitize search input to prevent filter injection
+    const sanitized = options.search.replace(/[%_\\'"(),.]/g, '');
+    if (sanitized) {
+      query = query.or(
+        `order_id.ilike.%${sanitized}%,customer_email.ilike.%${sanitized}%,customer_phone.ilike.%${sanitized}%`
+      );
+    }
   }
 
   if (options.limit) {

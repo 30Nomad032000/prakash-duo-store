@@ -29,9 +29,13 @@ export async function GET(request: NextRequest) {
     }
 
     if (search) {
-      query = query.or(
-        `order_id.ilike.%${search}%,customer_email.ilike.%${search}%,customer_phone.ilike.%${search}%`
-      );
+      // Sanitize search input to prevent filter injection
+      const sanitized = search.replace(/[%_\\'"(),.]/g, '');
+      if (sanitized) {
+        query = query.or(
+          `order_id.ilike.%${sanitized}%,customer_email.ilike.%${sanitized}%,customer_phone.ilike.%${sanitized}%`
+        );
+      }
     }
 
     query = query.range(offset, offset + limit - 1);

@@ -50,7 +50,7 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        // Custom brand colors
+        // Mitti & Gold brand colors
         gold: "hsl(var(--gold))",
         "rose-gold": "hsl(var(--rose-gold))",
         burgundy: "hsl(var(--burgundy))",
@@ -58,16 +58,30 @@ const config: Config = {
         ivory: "hsl(var(--ivory))",
         charcoal: "hsl(var(--charcoal))",
         cream: "hsl(var(--cream))",
+        // Direct hex for precision
+        "warm-ivory": "#F5EFE0",
+        "deep-ochre": "#C8882A",
+        "raw-umber": "#3D2B1F",
+        "blush-dust": "#EDD9C0",
+        "crimson-thread": "#A0281A",
       },
       fontFamily: {
-        display: ["Cormorant Garamond", "Georgia", "serif"],
-        sans: ["Outfit", "system-ui", "sans-serif"],
-        serif: ["Cormorant Garamond", "Georgia", "serif"],
+        display: ["var(--font-heading)", "Cormorant Garamond", "Georgia", "serif"],
+        drama: ["var(--font-drama)", "Playfair Display", "Georgia", "serif"],
+        body: ["var(--font-body)", "DM Sans", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "Courier Prime", "Courier New", "monospace"],
+        // Legacy compatibility
+        sans: ["var(--font-body)", "DM Sans", "system-ui", "sans-serif"],
+        serif: ["var(--font-heading)", "Cormorant Garamond", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
+        "4xl": "2.5rem",
+        "5xl": "3.5rem",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-out",
@@ -75,6 +89,7 @@ const config: Config = {
         "slide-in": "slideIn 0.5s ease-out",
         shimmer: "shimmer 3s ease-in-out infinite",
         float: "floatGentle 6s ease-in-out infinite",
+        marquee: "marquee 30s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -97,20 +112,20 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gold-gradient":
-          "linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--rose-gold)) 100%)",
-        "dark-gradient":
-          "linear-gradient(135deg, hsl(var(--charcoal)) 0%, hsl(var(--burgundy)) 100%)",
+        "gold-gradient": "linear-gradient(135deg, #C8882A 0%, #D4A853 100%)",
+        "dark-gradient": "linear-gradient(135deg, #3D2B1F 0%, #5A3D2B 100%)",
       },
       boxShadow: {
-        luxury:
-          "0 20px 40px -15px rgba(139, 69, 69, 0.15), 0 0 0 1px hsl(var(--gold) / 0.1)",
-        "luxury-lg":
-          "0 30px 60px -20px rgba(139, 69, 69, 0.2), 0 0 0 1px hsl(var(--gold) / 0.2)",
-        glow: "0 0 40px -10px hsl(var(--gold) / 0.4)",
+        luxury: "0 20px 40px -15px rgba(61, 43, 31, 0.15), 0 0 0 1px rgba(200, 136, 42, 0.1)",
+        "luxury-lg": "0 30px 60px -20px rgba(61, 43, 31, 0.2), 0 0 0 1px rgba(200, 136, 42, 0.2)",
+        glow: "0 0 40px -10px rgba(200, 136, 42, 0.4)",
       },
     },
   },

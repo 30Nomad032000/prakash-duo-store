@@ -24,47 +24,38 @@ function OrderConfirmationContent() {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [paymentVerified, setPaymentVerified] = useState(false);
 
   const orderId = searchParams.get('order_id');
-  const isTestMode = searchParams.get('test') === 'true';
 
   useEffect(() => {
-    async function verifyAndFetchOrder() {
+    async function fetchOrder() {
       if (!orderId) {
-        setError('No order ID provided');
+        setError("No order ID provided");
         setLoading(false);
         return;
       }
 
       try {
-        // Verify payment
-        const verifyResponse = await fetch(`/api/payments/verify?order_id=${orderId}`);
-        const verifyData = await verifyResponse.json();
-
-        if (verifyData.success && verifyData.data.verified) {
-          setPaymentVerified(true);
-          clearCart();
-        }
-
-        // Fetch order details
         const orderResponse = await fetch(`/api/orders?order_id=${orderId}`);
         const orderData = await orderResponse.json();
 
         if (orderData.success) {
           setOrder(orderData.data);
+          if (orderData.data.paymentStatus === "paid") {
+            clearCart();
+          }
         } else {
-          setError(orderData.error || 'Order not found');
+          setError(orderData.error || "Order not found");
         }
       } catch (err) {
-        console.error('Error fetching order:', err);
-        setError('Failed to load order details');
+        console.error("Error fetching order:", err);
+        setError("Failed to load order details");
       } finally {
         setLoading(false);
       }
     }
 
-    verifyAndFetchOrder();
+    fetchOrder();
   }, [orderId, clearCart]);
 
   if (loading) {
@@ -76,7 +67,7 @@ function OrderConfirmationContent() {
           className="text-center"
         >
           <Loader2 className="w-12 h-12 text-gold mx-auto mb-4 animate-spin" />
-          <p className="text-charcoal/60 font-display text-xl">Verifying your order...</p>
+          <p className="text-charcoal/60 font-display text-xl">Loading your order...</p>
         </motion.div>
       </div>
     );
@@ -109,7 +100,7 @@ function OrderConfirmationContent() {
     );
   }
 
-  const isPaid = paymentVerified || order.paymentStatus === 'paid' || isTestMode;
+  const isPaid = order.paymentStatus === 'paid';
 
   return (
     <div className="min-h-screen bg-ivory noise-overlay">

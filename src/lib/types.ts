@@ -59,69 +59,19 @@ export interface Order {
   updatedAt: string;
 }
 
-// Cashfree Types
-export interface CashfreeOrderRequest {
+// Razorpay Types
+export interface RazorpayOrderResponse {
+  razorpayOrderId: string;
   orderId: string;
-  orderAmount: number;
-  orderCurrency: string;
-  customerDetails: {
-    customerId: string;
-    customerEmail: string;
-    customerPhone: string;
-    customerName: string;
-  };
-  orderMeta: {
-    returnUrl: string;
-    notifyUrl?: string;
-  };
+  amount: number;
+  keyId: string;
 }
 
-export interface CashfreeOrderResponse {
-  cfOrderId: string;
-  orderId: string;
-  entity: string;
-  orderCurrency: string;
-  orderAmount: number;
-  orderStatus: string;
-  paymentSessionId: string;
-  orderExpiryTime: string;
-  orderNote: string | null;
-  createdAt: string;
-  orderSplits: unknown[];
-  customerDetails: {
-    customerId: string;
-    customerName: string;
-    customerEmail: string;
-    customerPhone: string;
-  };
-  orderMeta: {
-    returnUrl: string;
-    notifyUrl: string | null;
-    paymentMethods: string | null;
-  };
-  payments: {
-    url: string;
-  };
-  settlements: {
-    url: string;
-  };
-  refunds: {
-    url: string;
-  };
-}
-
-export interface CashfreePaymentVerification {
-  cfPaymentId: string;
-  orderId: string;
-  orderAmount: number;
-  paymentStatus: 'SUCCESS' | 'FAILED' | 'PENDING' | 'USER_DROPPED' | 'VOID' | 'CANCELLED' | 'NOT_ATTEMPTED';
-  paymentMessage: string;
-  paymentTime: string;
-  bankReference: string;
-  authId: string | null;
-  paymentMethod: {
-    [key: string]: unknown;
-  };
+export interface RazorpayVerifyRequest {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+  order_id: string; // our internal order ID
 }
 
 // API Response Types
@@ -133,7 +83,15 @@ export interface ApiResponse<T> {
 
 export interface CreateOrderResponse {
   orderId: string;
-  paymentSessionId: string;
+  razorpayOrderId: string;
+  keyId: string;
+  amount: number;
+  currency: string;
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
 }
 
 export interface VerifyPaymentResponse {

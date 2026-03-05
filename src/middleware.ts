@@ -9,11 +9,12 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // Only protect /admin routes (except /admin/login)
+  // Protect /admin pages and /api/admin API routes
   const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
+  const isAdminApiRoute = request.nextUrl.pathname.startsWith('/api/admin');
   const isLoginPage = request.nextUrl.pathname === '/admin/login';
 
-  if (!isAdminRoute) {
+  if (!isAdminRoute && !isAdminApiRoute) {
     return response;
   }
 
@@ -46,6 +47,13 @@ export async function middleware(request: NextRequest) {
 
   // If not authenticated and trying to access admin (not login page)
   if (!user && !isLoginPage) {
+    // For API routes, return 401 instead of redirect
+    if (isAdminApiRoute) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
     const loginUrl = new URL('/admin/login', request.url);
     loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
@@ -61,7 +69,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all /admin routes
+    // Match all /admin routes and /api/admin routes
     '/admin/:path*',
+    '/api/admin/:path*',
   ],
 };

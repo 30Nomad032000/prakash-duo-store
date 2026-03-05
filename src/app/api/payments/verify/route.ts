@@ -1,23 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getOrderPayments } from '@/lib/cashfree';
+import { verifyPaymentSignature, fetchPayment } from '@/lib/razorpay';
 import { getOrderByOrderId, updatePaymentStatus, commitStockSale } from '@/lib/supabase-orders';
 import { sendOrderConfirmation } from '@/lib/email/send';
 import type { ApiResponse, VerifyPaymentResponse } from '@/lib/types';
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const orderId = searchParams.get('order_id');
+    const body = await request.json();
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, order_id } = body;
 
-    if (!orderId) {
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !order_id) {
       return NextResponse.json<ApiResponse<null>>(
-        { success: false, error: 'Order ID is required' },
+        { success: false, error: 'Missing required payment parameters' },
         { status: 400 }
       );
     }
 
-    const order = await getOrderByOrderId(orderId);
-
+    // Get order from database
+    const order = await getOrderByOrderId(order_id);
     if (!order) {
       return NextResponse.json<ApiResponse<null>>(
         { success: false, error: 'Order not found' },
@@ -25,77 +25,96 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // If already verified, return cached status
+    // Idempotency: already processed
     if (order.paymentStatus === 'paid') {
       return NextResponse.json<ApiResponse<VerifyPaymentResponse>>({
         success: true,
         data: {
           verified: true,
           orderId: order.orderId,
-          paymentStatus: order.paymentStatus,
-          message: 'Payment successful',
+          paymentStatus: 'paid',
+          message: 'Payment already verified',
         },
       });
     }
 
-    let paymentStatus = 'pending';
-    let message = 'Payment pending';
+    // Verify that the razorpay_order_id matches what we stored
+    if (order.paymentSessionId !== razorpay_order_id) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Order ID mismatch' },
+        { status: 400 }
+      );
+    }
 
-    try {
-      // Get payment status from Cashfree
-      const payments = await getOrderPayments(orderId);
-      const successfulPayment = payments.find(p => p.paymentStatus === 'SUCCESS');
+    // Step 1: Verify the signature from client callback
+    const isSignatureValid = verifyPaymentSignature({
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    });
 
-      if (successfulPayment) {
-        paymentStatus = 'paid';
-        message = 'Payment successful';
+    if (!isSignatureValid) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Invalid payment signature' },
+        { status: 400 }
+      );
+    }
 
-        // Update order status in Supabase
-        await updatePaymentStatus(orderId, 'paid');
+    // Step 2: Server-side verification — fetch payment from Razorpay API
+    // This ensures the payment actually exists and the amount matches
+    const payment = await fetchPayment(razorpay_payment_id);
 
-        // Commit stock sale (deduct from inventory)
-        const stockItems = order.items.map(item => ({
-          productId: item.productId,
-          size: item.size,
-          quantity: item.quantity,
-        }));
-        await commitStockSale(stockItems);
+    if (payment.status !== 'captured') {
+      return NextResponse.json<ApiResponse<VerifyPaymentResponse>>({
+        success: true,
+        data: {
+          verified: false,
+          orderId: order.orderId,
+          paymentStatus: payment.status as string,
+          message: `Payment status: ${payment.status}`,
+        },
+      });
+    }
 
-        // Send order confirmation email
-        const updatedOrder = await getOrderByOrderId(orderId);
-        if (updatedOrder) {
-          await sendOrderConfirmation(updatedOrder);
-        }
-      } else if (payments.some(p => p.paymentStatus === 'FAILED')) {
-        paymentStatus = 'failed';
-        message = 'Payment failed';
+    // Step 3: Verify amount matches (prevent amount tampering)
+    const expectedAmountInPaise = Math.round(order.total * 100);
+    if ((payment.amount as number) !== expectedAmountInPaise) {
+      console.error(
+        `Amount mismatch for order ${order_id}: expected ${expectedAmountInPaise}, got ${payment.amount}`
+      );
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: 'Payment amount mismatch' },
+        { status: 400 }
+      );
+    }
 
-        await updatePaymentStatus(orderId, 'failed');
-      }
-    } catch (cashfreeError) {
-      console.error('Cashfree verification error:', cashfreeError);
-      // In development without Cashfree, assume success for testing
-      if (process.env.NODE_ENV === 'development' && !process.env.CASHFREE_APP_ID) {
-        paymentStatus = 'paid';
-        message = 'Payment verified (test mode)';
+    // Step 4: Update order status
+    await updatePaymentStatus(order_id, 'paid');
 
-        await updatePaymentStatus(orderId, 'paid');
+    // Step 5: Commit stock sale (deduct from inventory)
+    const stockItems = order.items.map((item) => ({
+      productId: item.productId,
+      size: item.size,
+      quantity: item.quantity,
+    }));
+    await commitStockSale(stockItems);
 
-        // Send order confirmation email
-        const updatedOrder = await getOrderByOrderId(orderId);
-        if (updatedOrder) {
-          await sendOrderConfirmation(updatedOrder);
-        }
-      }
+    // Step 6: Send order confirmation email
+    const updatedOrder = await getOrderByOrderId(order_id);
+    if (updatedOrder) {
+      await sendOrderConfirmation(updatedOrder).catch((emailErr) => {
+        console.error('Failed to send confirmation email:', emailErr);
+        // Don't fail the payment verification if email fails
+      });
     }
 
     return NextResponse.json<ApiResponse<VerifyPaymentResponse>>({
       success: true,
       data: {
-        verified: paymentStatus === 'paid',
+        verified: true,
         orderId: order.orderId,
-        paymentStatus,
-        message,
+        paymentStatus: 'paid',
+        message: 'Payment verified successfully',
       },
     });
   } catch (error) {

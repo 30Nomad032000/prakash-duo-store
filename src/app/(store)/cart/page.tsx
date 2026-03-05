@@ -146,7 +146,7 @@ export default function CartPage() {
                     </motion.div>
 
                     <p className="text-xs text-center text-charcoal/50">
-                      Secure checkout powered by Cashfree
+                      Secure checkout powered by Razorpay
                     </p>
                   </div>
 
