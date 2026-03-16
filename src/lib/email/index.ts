@@ -1,8 +1,9 @@
 // Email service exports
-export { createTransporter, emailConfig, verifyTransporter } from './nodemailer';
+export { getResend, emailConfig } from './nodemailer';
 export {
   sendOrderConfirmation,
   sendShippingNotification,
   sendDeliveryConfirmation,
+  sendNewOrderNotification,
   resendEmail,
 } from './send';

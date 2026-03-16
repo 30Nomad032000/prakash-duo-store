@@ -26,24 +26,18 @@ export async function PATCH(
 
     const supabase = getUntypedClient();
 
-    // Get current inventory
-    const { data: currentInv, error: getError } = await supabase
+    // Get current inventory (may not exist for new sizes)
+    const { data: currentInv } = await supabase
       .from('product_inventory')
       .select('quantity')
       .eq('product_id', productId)
       .eq('size', size)
       .single();
 
-    if (getError) {
-      return NextResponse.json(
-        { success: false, error: 'Inventory not found' },
-        { status: 404 }
-      );
-    }
+    const previousQuantity = currentInv?.quantity ?? 0;
+    const exists = !!currentInv;
 
     let newQuantity: number;
-    const previousQuantity = currentInv.quantity;
-
     switch (action) {
       case 'add':
         newQuantity = previousQuantity + quantity;
@@ -57,18 +51,52 @@ export async function PATCH(
         break;
     }
 
-    // Update inventory
-    const { error: updateError } = await supabase
-      .from('product_inventory')
-      .update({ quantity: newQuantity })
-      .eq('product_id', productId)
-      .eq('size', size);
+    if (exists) {
+      // Update existing inventory
+      const { error: updateError } = await supabase
+        .from('product_inventory')
+        .update({ quantity: newQuantity })
+        .eq('product_id', productId)
+        .eq('size', size);
 
-    if (updateError) {
-      return NextResponse.json(
-        { success: false, error: updateError.message },
-        { status: 500 }
-      );
+      if (updateError) {
+        return NextResponse.json(
+          { success: false, error: updateError.message },
+          { status: 500 }
+        );
+      }
+    } else {
+      // Insert new size
+      const { error: insertError } = await supabase
+        .from('product_inventory')
+        .insert({
+          product_id: productId,
+          size,
+          quantity: newQuantity,
+          reserved_quantity: 0,
+          low_stock_threshold: 5,
+        });
+
+      if (insertError) {
+        return NextResponse.json(
+          { success: false, error: insertError.message },
+          { status: 500 }
+        );
+      }
+
+      // Also add the size to the product's sizes array
+      const { data: product } = await supabase
+        .from('products')
+        .select('sizes')
+        .eq('id', productId)
+        .single();
+
+      if (product && !product.sizes.includes(size)) {
+        await supabase
+          .from('products')
+          .update({ sizes: [...product.sizes, size] })
+          .eq('id', productId);
+      }
     }
 
     // Log the stock change
@@ -78,13 +106,16 @@ export async function PATCH(
       previous_quantity: previousQuantity,
       new_quantity: newQuantity,
       change_type: 'manual',
-      notes: `Manual update: ${action} ${quantity}`,
+      notes: exists
+        ? `Manual update: ${action} ${quantity}`
+        : `New size added with quantity ${newQuantity}`,
     });
 
     return NextResponse.json({
       success: true,
       previousQuantity,
       newQuantity,
+      created: !exists,
     });
   } catch (error) {
     console.error('Error updating inventory:', error);

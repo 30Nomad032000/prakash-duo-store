@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Playfair_Display, DM_Sans, Courier_Prime } from "ne
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -34,7 +35,11 @@ const courierPrime = Courier_Prime({
 });
 
 export const metadata: Metadata = {
-  title: "Bangles by Prakash Duo | Handcrafted Bangles from Thrissur, Kerala",
+  metadataBase: new URL('https://banglesbyprakashduo.store'),
+  title: {
+    default: "Bangles by Prakash Duo | Handcrafted Bangles from Thrissur, Kerala",
+    template: "%s | Prakash Duo",
+  },
   description: "Celebrating India's rich tradition of bangle craftsmanship. Each piece is a testament to artisanal excellence and timeless elegance. Handmade in Thrissur, Kerala.",
   keywords: ["bangles", "indian jewelry", "bridal bangles", "traditional bangles", "handcrafted jewelry", "kerala bangles", "thrissur", "prakash duo", "AD stone bangles", "antique golden bangles"],
   authors: [{ name: "Prakash Duo" }],
@@ -42,6 +47,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/logo/Logo.png",
     apple: "/assets/logo/Logo.png",
+  },
+  alternates: {
+    canonical: 'https://banglesbyprakashduo.store',
+  },
+  verification: {
+    google: 'OcT3kRLhJejFhraMIE95nUGPEcWIvV_bSdNy0GyJeK8',
   },
   openGraph: {
     type: "website",
@@ -81,6 +92,8 @@ export default function RootLayout({
             <rect width="100%" height="100%" filter="url(#grain)" />
           </svg>
         </div>
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
         <CartProvider>
           <WishlistProvider>
             {children}

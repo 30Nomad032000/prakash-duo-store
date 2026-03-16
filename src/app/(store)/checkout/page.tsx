@@ -6,16 +6,16 @@ import { ShoppingBag, ArrowLeft, Bell, Sparkles, Instagram } from 'lucide-react'
 
 export default function CheckoutPage() {
   return (
-    <div className="min-h-screen bg-ivory noise-overlay">
+    <div className="min-h-screen bg-warm-ivory noise-overlay pt-20">
       {/* Header */}
-      <section className="py-4 bg-white border-b border-gold/10">
+      <section className="py-4 bg-warm-ivory border-b border-deep-ochre/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-charcoal/50 hover:text-gold transition-colors">Home</Link>
-            <span className="text-charcoal/30">/</span>
-            <Link href="/cart" className="text-charcoal/50 hover:text-gold transition-colors">Cart</Link>
-            <span className="text-charcoal/30">/</span>
-            <span className="text-charcoal font-medium">Checkout</span>
+            <Link href="/" className="text-raw-umber/50 hover:text-deep-ochre transition-colors">Home</Link>
+            <span className="text-raw-umber/30">/</span>
+            <Link href="/cart" className="text-raw-umber/50 hover:text-deep-ochre transition-colors">Cart</Link>
+            <span className="text-raw-umber/30">/</span>
+            <span className="text-raw-umber font-medium">Checkout</span>
           </nav>
         </div>
       </section>
@@ -32,19 +32,19 @@ export default function CheckoutPage() {
             {/* Back link */}
             <Link
               href="/cart"
-              className="inline-flex items-center gap-2 text-charcoal/60 hover:text-gold transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-raw-umber/60 hover:text-deep-ochre transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Cart
             </Link>
 
             {/* Main Card */}
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gold/10 relative overflow-hidden">
+            <div className="bg-warm-ivory rounded-3xl p-8 md:p-12 shadow-lg border border-deep-ochre/10 relative overflow-hidden">
               {/* Decorative corners */}
-              <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-gold/30" />
-              <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-gold/30" />
-              <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-gold/30" />
-              <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-gold/30" />
+              <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-deep-ochre/30" />
+              <div className="absolute top-0 right-0 w-20 h-20 border-r-2 border-t-2 border-deep-ochre/30" />
+              <div className="absolute bottom-0 left-0 w-20 h-20 border-l-2 border-b-2 border-deep-ochre/30" />
+              <div className="absolute bottom-0 right-0 w-20 h-20 border-r-2 border-b-2 border-deep-ochre/30" />
 
               {/* Background pattern */}
               <div className="absolute inset-0 opacity-5" style={{
@@ -57,13 +57,13 @@ export default function CheckoutPage() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-gold/20 to-rose-gold/20 flex items-center justify-center"
+                  className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-deep-ochre/20 to-deep-ochre/20 flex items-center justify-center"
                 >
                   <motion.div
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                   >
-                    <ShoppingBag className="w-12 h-12 text-gold" />
+                    <ShoppingBag className="w-12 h-12 text-deep-ochre" />
                   </motion.div>
                 </motion.div>
 
@@ -72,10 +72,10 @@ export default function CheckoutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-burgundy/10 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-crimson-thread/10 rounded-full mb-6"
                 >
-                  <Sparkles className="w-4 h-4 text-burgundy" />
-                  <span className="text-burgundy text-sm font-medium">Coming Soon</span>
+                  <Sparkles className="w-4 h-4 text-crimson-thread" />
+                  <span className="text-crimson-thread text-sm font-medium">Coming Soon</span>
                 </motion.div>
 
                 {/* Title */}
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
-                  className="font-display text-3xl md:text-4xl text-charcoal mb-4"
+                  className="font-display text-3xl md:text-4xl text-raw-umber mb-4"
                 >
                   Online Ordering
                   <br />
@@ -95,7 +95,7 @@ export default function CheckoutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="text-charcoal/60 max-w-md mx-auto mb-8 leading-relaxed"
+                  className="text-raw-umber/60 max-w-md mx-auto mb-8 leading-relaxed"
                 >
                   We&apos;re putting the finishing touches on our online store.
                   Soon you&apos;ll be able to order our beautiful handcrafted bangles
@@ -104,9 +104,9 @@ export default function CheckoutPage() {
 
                 {/* Divider */}
                 <div className="flex items-center justify-center gap-4 mb-8">
-                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-gold/30" />
-                  <div className="w-2 h-2 rotate-45 bg-gold/30" />
-                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-gold/30" />
+                  <div className="w-12 h-px bg-gradient-to-r from-transparent to-deep-ochre/30" />
+                  <div className="w-2 h-2 rotate-45 bg-deep-ochre/30" />
+                  <div className="w-12 h-px bg-gradient-to-l from-transparent to-deep-ochre/30" />
                 </div>
 
                 {/* Contact Info */}
@@ -114,18 +114,18 @@ export default function CheckoutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
-                  className="bg-ivory rounded-xl p-6 mb-8"
+                  className="bg-warm-ivory rounded-xl p-6 mb-8"
                 >
-                  <p className="text-charcoal font-medium mb-3">
+                  <p className="text-raw-umber font-medium mb-3">
                     Want to place an order now?
                   </p>
-                  <p className="text-charcoal/60 text-sm mb-4">
+                  <p className="text-raw-umber/60 text-sm mb-4">
                     Contact us directly and we&apos;ll help you with your purchase!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <a
                       href="tel:+917909202091"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-charcoal text-white rounded-full hover:bg-burgundy transition-colors"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-raw-umber text-white rounded-full hover:bg-crimson-thread transition-colors"
                     >
                       <Bell className="w-4 h-4" />
                       Call: +91 79092 02091
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
                       href="https://instagram.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-charcoal/20 text-charcoal rounded-full hover:border-gold hover:text-gold transition-colors"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-raw-umber/20 text-raw-umber rounded-full hover:border-deep-ochre hover:text-deep-ochre transition-colors"
                     >
                       <Instagram className="w-4 h-4" />
                       DM on Instagram
@@ -150,7 +150,7 @@ export default function CheckoutPage() {
                 >
                   <Link
                     href="/categories"
-                    className="inline-flex items-center gap-2 text-gold hover:text-burgundy transition-colors font-medium"
+                    className="inline-flex items-center gap-2 text-deep-ochre hover:text-crimson-thread transition-colors font-medium"
                   >
                     Continue Browsing Our Collection
                     <Sparkles className="w-4 h-4" />

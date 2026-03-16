@@ -1,11 +1,17 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import ProductCard from "@/components/ProductCard";
-import { Sparkles, ArrowRight, Star, Crown, Gift } from "lucide-react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight, Crown } from 'lucide-react';
+import ProductCard from '@/components/ProductCard';
+import PageSeo from '@/components/seo/PageSeo';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface Product {
   id: string;
@@ -13,66 +19,41 @@ interface Product {
   price: number;
   images: string[];
   category: string;
-}
-
-function AnimatedSection({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  inventory?: { size: string; quantity: string }[];
 }
 
 const featuredCollections = [
   {
-    title: "Best Sellers",
-    subtitle: "Customer Favorites",
-    description: "Discover the bangles that have won the hearts of our customers across India",
-    image: "/assets/AD Stone bangles/AD stone brick ruby stone/1.webp",
-    icon: Star,
-    href: "/best-sellers",
-    accent: "from-gold/20 to-rose-gold/20",
+    title: 'Best Sellers',
+    subtitle: 'Customer Favorites',
+    description: 'Discover the bangles that have won the hearts of our customers across India',
+    image: '/assets/AD Stone bangles/AD stone brick ruby stone/1.webp',
+    href: '/best-sellers',
   },
   {
-    title: "New Arrivals",
-    subtitle: "Fresh from Artisans",
-    description: "Latest additions crafted with modern elegance and traditional techniques",
-    image: "/assets/antique golden Bangles/antique  flower rode/1.webp",
-    icon: Sparkles,
-    href: "/categories",
-    accent: "from-rose-gold/20 to-burgundy/20",
+    title: 'New Arrivals',
+    subtitle: 'Fresh from Artisans',
+    description: 'Latest additions crafted with modern elegance and traditional techniques',
+    image: '/assets/antique golden Bangles/antique  flower rode/1.webp',
+    href: '/categories',
   },
   {
-    title: "Traditional",
-    subtitle: "Timeless Classics",
-    description: "Heritage designs cherished across generations of Indian families",
-    image: "/assets/bracelet bangle/drop shaped bangle/1.webp",
-    icon: Crown,
-    href: "/categories",
-    accent: "from-burgundy/20 to-charcoal/20",
+    title: 'Traditional',
+    subtitle: 'Timeless Classics',
+    description: 'Heritage designs cherished across generations of Indian families',
+    image: '/assets/bracelet bangle/drop shaped bangle/1.webp',
+    href: '/categories',
   },
 ];
 
 export default function CollectionsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
+  const collectionsRef = useRef<HTMLElement>(null);
+  const productsRef = useRef<HTMLElement>(null);
+  const whyRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -90,194 +71,304 @@ export default function CollectionsPage() {
     fetchData();
   }, []);
 
+  // Hero animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.hero-label', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.2,
+      });
+      gsap.from('.hero-title', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        delay: 0.4,
+      });
+      gsap.from('.hero-subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 0.6,
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Featured collections animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.collection-card', {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.18,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: collectionsRef.current,
+          start: 'top 80%',
+        },
+      });
+    }, collectionsRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Products grid animations
+  useEffect(() => {
+    if (products.length === 0) return;
+    const ctx = gsap.context(() => {
+      gsap.from('.product-card-item', {
+        y: 50,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: productsRef.current,
+          start: 'top 80%',
+        },
+      });
+    }, productsRef);
+
+    return () => ctx.revert();
+  }, [products]);
+
+  // Why section animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.why-heading', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: whyRef.current,
+          start: 'top 80%',
+        },
+      });
+      gsap.from('.why-item', {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: whyRef.current,
+          start: 'top 75%',
+        },
+      });
+    }, whyRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // CTA animation
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.cta-button', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 90%',
+        },
+      });
+    }, ctaRef);
+
+    return () => ctx.revert();
+  }, []);
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-ivory flex items-center justify-center">
-        <motion.div
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-center"
-        >
-          <Crown className="w-12 h-12 text-gold mx-auto mb-4" />
-          <p className="text-charcoal/60 font-display text-xl">Curating collections...</p>
-        </motion.div>
+      <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
+        <div className="text-center animate-pulse">
+          <Crown className="w-12 h-12 text-deep-ochre mx-auto mb-4" />
+          <p className="text-raw-umber/60 font-display text-xl">Curating collections...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-ivory noise-overlay">
+    <div className="bg-warm-ivory noise-overlay">
+      <PageSeo
+        title="Bangle Collections — Curated Handcrafted Sets"
+        description="Explore curated bangle collections for every occasion. Bridal, traditional, and contemporary designs handcrafted in Kerala."
+        canonical="https://banglesbyprakashduo.store/collections"
+      />
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-champagne via-ivory to-white overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-rose-gold/5 rounded-full blur-3xl" />
-        </div>
+      <section ref={heroRef} className="relative pt-28 md:pt-36 pb-16 md:pb-20 bg-blush-dust/30 overflow-hidden">
+        {/* Subtle decorative blurs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-deep-ochre/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-crimson-thread/5 rounded-full blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-charcoal/5 backdrop-blur-sm rounded-full border border-gold/20 mb-6">
-              <Gift className="w-4 h-4 text-gold" />
-              <span className="text-charcoal text-sm font-medium tracking-widest uppercase">
-                Curated Collections
-              </span>
-            </span>
+        <div className="relative max-w-7xl mx-auto px-6 md:px-16 text-center">
+          <p className="hero-label font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-4">
+            Curated Collections
+          </p>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6">
-              Special <span className="gradient-text">Collections</span>
-            </h1>
+          <h1 className="hero-title font-display text-raw-umber text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <span className="font-drama italic font-normal">Crafted for</span> Every Occasion.
+          </h1>
 
-            <p className="text-lg text-charcoal/70 max-w-2xl mx-auto">
-              Explore our handpicked collections featuring the finest bangles for every occasion and celebration
-            </p>
-          </motion.div>
+          <p className="hero-subtitle font-body text-raw-umber/70 text-base md:text-lg max-w-2xl mx-auto">
+            Explore our handpicked collections featuring the finest bangles for every occasion and celebration
+          </p>
         </div>
       </section>
 
       {/* Featured Collections */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+      <section ref={collectionsRef} className="py-16 md:py-24 bg-warm-ivory">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="mb-12 md:mb-16">
+            <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-3">Explore</p>
+            <h2 className="font-display text-raw-umber text-4xl md:text-5xl font-bold">
+              Featured <span className="font-drama italic font-normal">Collections</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {featuredCollections.map((collection, index) => (
-              <AnimatedSection key={index} delay={index * 0.15}>
-                <Link href={collection.href} className="group block h-full">
-                  <div className="relative h-full bg-white rounded-lg overflow-hidden border border-gold/10 hover:border-gold/30 hover:shadow-xl transition-all duration-500">
-                    {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={collection.image}
-                        alt={collection.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
+              <div key={index} className="collection-card">
+                <Link href={collection.href} className="group block relative overflow-hidden rounded-3xl h-[320px] md:h-[380px]">
+                  <Image
+                    src={collection.image}
+                    alt={collection.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  {/* Dark gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-raw-umber/80 via-raw-umber/20 to-transparent" />
 
-                      {/* Icon Badge */}
-                      <div className="absolute top-4 right-4">
-                        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${collection.accent} backdrop-blur-sm flex items-center justify-center`}>
-                          <collection.icon className="w-5 h-5 text-gold" />
-                        </div>
-                      </div>
-
-                      {/* Title Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <p className="text-gold text-sm font-medium tracking-wider uppercase mb-1">
-                          {collection.subtitle}
-                        </p>
-                        <h3 className="font-display text-2xl text-white">
-                          {collection.title}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6">
-                      <p className="text-charcoal/70 text-sm mb-4 line-clamp-2">
-                        {collection.description}
-                      </p>
-                      <div className="flex items-center gap-2 text-gold font-medium text-sm group-hover:gap-3 transition-all">
-                        <span>Shop Collection</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </div>
-
-                    {/* Hover accent line */}
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-gold to-rose-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  {/* Content at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                    <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.15em] mb-2">
+                      {collection.subtitle}
+                    </p>
+                    <h3 className="font-display font-bold text-warm-ivory text-2xl md:text-3xl leading-tight mb-2">
+                      {collection.title}
+                    </h3>
+                    <p className="font-body text-blush-dust/80 text-sm mb-4 line-clamp-2">
+                      {collection.description}
+                    </p>
+                    <span className="inline-flex items-center gap-2 font-body text-deep-ochre text-sm font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                      Shop Collection <ArrowRight className="w-4 h-4" />
+                    </span>
                   </div>
                 </Link>
-              </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <span className="text-gold text-sm font-medium tracking-widest uppercase">
-              Handpicked Selection
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-2">
-              Featured Products
-            </h2>
-            <div className="mt-6 w-24 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto" />
-          </AnimatedSection>
+      <section ref={productsRef} className="py-16 md:py-24 bg-warm-ivory">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-3">Handpicked Selection</p>
+              <h2 className="font-display text-raw-umber text-4xl md:text-5xl font-bold">
+                Featured <span className="font-drama italic font-normal">Products</span>
+              </h2>
+            </div>
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-raw-umber/20 text-raw-umber font-body text-sm font-medium rounded-full hover:border-deep-ochre hover:bg-deep-ochre/5 transition-all duration-300 self-start md:self-auto"
+            >
+              View All Products <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product, index) => (
-              <AnimatedSection key={product.id} delay={index * 0.05}>
+            {products.map((product) => (
+              <div key={product.id} className="product-card-item">
                 <ProductCard
                   id={product.id}
                   name={product.name}
                   price={product.price}
                   images={product.images}
                   category={product.category}
+                  inventory={product.inventory}
                 />
-              </AnimatedSection>
+              </div>
             ))}
           </div>
 
-          <AnimatedSection delay={0.3} className="text-center mt-12">
+          {/* CTA */}
+          <div ref={ctaRef} className="text-center mt-16">
             <Link
               href="/categories"
-              className="group inline-flex items-center gap-3 bg-charcoal text-white px-10 py-5 font-semibold hover:bg-burgundy transition-colors duration-300"
+              className="cta-button group inline-flex items-center gap-3 bg-crimson-thread text-warm-ivory px-8 py-4 rounded-full font-body font-medium text-sm md:text-base overflow-hidden relative transition-transform duration-300 hover:scale-[1.02] press-effect"
             >
-              View All Products
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span className="relative z-10">View All Products</span>
+              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <span className="absolute inset-0 bg-deep-ochre translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             </Link>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      {/* Why Our Collections */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-champagne to-ivory">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal">
-              Why Our Collections Stand Out
+      {/* Why Our Collections Stand Out */}
+      <section ref={whyRef} className="py-16 md:py-24 bg-blush-dust/30">
+        <div className="max-w-5xl mx-auto px-6 md:px-16">
+          <div className="text-center mb-12">
+            <p className="why-heading font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-3">The Difference</p>
+            <h2 className="why-heading font-display text-raw-umber text-3xl md:text-4xl font-bold">
+              Why Our Collections <span className="font-drama italic font-normal">Stand Out</span>
             </h2>
-          </AnimatedSection>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {[
               {
-                num: "01",
-                title: "Handpicked Selection",
-                desc: "Every collection is carefully curated by our team to ensure you get only the finest bangles.",
+                num: '01',
+                title: 'Handpicked Selection',
+                desc: 'Every collection is carefully curated by our team to ensure you get only the finest bangles.',
               },
               {
-                num: "02",
-                title: "Artisan Crafted",
-                desc: "Each piece is handcrafted by skilled artisans using traditional techniques passed down through generations.",
+                num: '02',
+                title: 'Artisan Crafted',
+                desc: 'Each piece is handcrafted by skilled artisans using traditional techniques passed down through generations.',
               },
               {
-                num: "03",
-                title: "Quality Assured",
-                desc: "Every bangle goes through strict quality checks to ensure you receive nothing but the best.",
+                num: '03',
+                title: 'Quality Assured',
+                desc: 'Every bangle goes through strict quality checks to ensure you receive nothing but the best.',
               },
               {
-                num: "04",
-                title: "Exclusive Designs",
-                desc: "Many pieces in our collections are limited edition or exclusive designs you won't find elsewhere.",
+                num: '04',
+                title: 'Exclusive Designs',
+                desc: 'Many pieces in our collections are limited edition or exclusive designs you won\'t find elsewhere.',
               },
             ].map((item, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="flex gap-6 p-6 bg-white rounded-lg border border-gold/10 hover:shadow-lg transition-all">
-                  <div className="flex-shrink-0">
-                    <span className="font-display text-4xl text-gold/30">{item.num}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl text-charcoal mb-2">{item.title}</h3>
-                    <p className="text-charcoal/60 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
+              <div key={i} className="why-item flex gap-6 p-6 md:p-8 bg-warm-ivory rounded-3xl">
+                <div className="flex-shrink-0">
+                  <span className="font-display text-4xl md:text-5xl text-deep-ochre/30 font-bold">{item.num}</span>
                 </div>
-              </AnimatedSection>
+                <div>
+                  <h3 className="font-display text-xl text-raw-umber mb-2">{item.title}</h3>
+                  <p className="font-body text-raw-umber/60 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Micro-facts */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-12">
+            {['Premium Materials Only', '100% Handmade', 'Free Delivery Available'].map((fact) => (
+              <p key={fact} className="font-mono text-raw-umber/60 text-sm flex items-center gap-3">
+                <span className="text-deep-ochre text-lg">&#10022;</span>
+                {fact}
+              </p>
             ))}
           </div>
         </div>

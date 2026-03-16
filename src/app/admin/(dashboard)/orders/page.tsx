@@ -12,6 +12,7 @@ import {
   Truck,
   Package,
 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Order } from '@/lib/types';
 
 const statusColors: Record<string, string> = {
@@ -27,7 +28,7 @@ const paymentStatusColors: Record<string, string> = {
   pending: 'bg-yellow-100 text-yellow-800',
   paid: 'bg-green-100 text-green-800',
   failed: 'bg-red-100 text-red-800',
-  refunded: 'bg-gray-100 text-gray-800',
+  refunded: 'bg-charcoal/10 text-charcoal',
 };
 
 export default function OrdersPage() {
@@ -102,33 +103,37 @@ export default function OrdersPage() {
           {/* Search */}
           <form onSubmit={handleSearch} className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-charcoal/40 w-5 h-5" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by order ID, email, or phone..."
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
               />
             </div>
           </form>
 
           {/* Status filter */}
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-400" />
-            <select
-              value={status}
-              onChange={(e) => handleStatusFilter(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+            <Filter className="w-5 h-5 text-charcoal/40" />
+            <Select
+              value={status || "all"}
+              onValueChange={(val) => handleStatusFilter(val === "all" ? "" : val)}
             >
-              <option value="">All Statuses</option>
-              <option value="pending">Pending</option>
-              <option value="confirmed">Confirmed</option>
-              <option value="processing">Processing</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
+              <SelectTrigger className="w-full md:w-[180px] shrink-0 px-4 py-2.5 border border-charcoal/15 rounded-lg h-auto">
+                <SelectValue placeholder="All Statuses" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="confirmed">Confirmed</SelectItem>
+                <SelectItem value="processing">Processing</SelectItem>
+                <SelectItem value="shipped">Shipped</SelectItem>
+                <SelectItem value="delivered">Delivered</SelectItem>
+                <SelectItem value="cancelled">Cancelled</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
@@ -137,71 +142,71 @@ export default function OrdersPage() {
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deep-ochre mx-auto"></div>
           </div>
         ) : orders.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            <Package className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <div className="p-8 text-center text-charcoal/50">
+            <Package className="w-12 h-12 mx-auto mb-4 text-charcoal/20" />
             <p>No orders found</p>
           </div>
         ) : (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-warm-ivory/50 border-b">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Order ID
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Customer
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Items
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Total
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Payment
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Date
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-charcoal/10">
                   {orders.map((order) => (
-                    <tr key={order.id} className="hover:bg-gray-50">
+                    <tr key={order.id} className="hover:bg-deep-ochre/5">
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="font-mono text-sm font-medium text-gray-900">
+                        <span className="font-mono text-sm font-medium text-charcoal">
                           {order.orderId}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <div>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-charcoal">
                             {order.customer.firstName} {order.customer.lastName}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-charcoal/50">
                             {order.customer.email}
                           </p>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900">
+                        <span className="text-sm text-charcoal">
                           {order.items.length} item
                           {order.items.length > 1 ? 's' : ''}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-charcoal">
                           ₹{order.total.toLocaleString('en-IN')}
                         </span>
                       </td>
@@ -225,7 +230,7 @@ export default function OrdersPage() {
                             order.paymentStatus.slice(1)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-charcoal/50">
                         {new Date(order.createdAt).toLocaleDateString('en-IN', {
                           day: '2-digit',
                           month: 'short',
@@ -236,7 +241,7 @@ export default function OrdersPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             href={`/admin/orders/${order.orderId}`}
-                            className="p-2 text-gray-500 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
+                            className="p-2 text-charcoal/50 hover:text-deep-ochre hover:bg-deep-ochre/5 rounded-lg transition"
                             title="View Order"
                           >
                             <Eye className="w-4 h-4" />
@@ -245,7 +250,7 @@ export default function OrdersPage() {
                           order.status === 'processing' ? (
                             <Link
                               href={`/admin/orders/${order.orderId}?action=ship`}
-                              className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                              className="p-2 text-charcoal/50 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
                               title="Add Tracking"
                             >
                               <Truck className="w-4 h-4" />
@@ -262,7 +267,7 @@ export default function OrdersPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="px-6 py-4 border-t flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-charcoal/50">
                   Showing {(page - 1) * limit + 1} to{' '}
                   {Math.min(page * limit, total)} of {total} orders
                 </p>
@@ -273,7 +278,7 @@ export default function OrdersPage() {
                       updateUrl({ page: (page - 1).toString() });
                     }}
                     disabled={page === 1}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -286,7 +291,7 @@ export default function OrdersPage() {
                       updateUrl({ page: (page + 1).toString() });
                     }}
                     disabled={page === totalPages}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>

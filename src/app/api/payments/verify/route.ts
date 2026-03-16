@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyPaymentSignature, fetchPayment } from '@/lib/razorpay';
 import { getOrderByOrderId, updatePaymentStatus, commitStockSale } from '@/lib/supabase-orders';
-import { sendOrderConfirmation } from '@/lib/email/send';
+import { sendOrderConfirmation, sendNewOrderNotification } from '@/lib/email/send';
 import type { ApiResponse, VerifyPaymentResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -99,12 +99,17 @@ export async function POST(request: NextRequest) {
     }));
     await commitStockSale(stockItems);
 
-    // Step 6: Send order confirmation email
+    // Step 6: Send order confirmation email + notify store owner
     const updatedOrder = await getOrderByOrderId(order_id);
     if (updatedOrder) {
       await sendOrderConfirmation(updatedOrder).catch((emailErr) => {
         console.error('Failed to send confirmation email:', emailErr);
         // Don't fail the payment verification if email fails
+      });
+
+      // Step 7: Notify store owner of new order
+      await sendNewOrderNotification(updatedOrder).catch((emailErr) => {
+        console.error('Failed to send owner notification:', emailErr);
       });
     }
 

@@ -6,6 +6,7 @@ import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Package, Clock, MapPin, Truck, Sparkles, CheckCircle, ArrowRight, XCircle, Loader2 } from 'lucide-react';
+import PageSeo from '@/components/seo/PageSeo';
 import type { Order } from '@/lib/types';
 
 interface TrackingInfo {
@@ -168,12 +169,17 @@ function TrackOrderContent() {
   const trackingSteps = getTrackingSteps(order);
 
   return (
-    <div className="bg-ivory noise-overlay">
+    <div className="bg-warm-ivory noise-overlay">
+      <PageSeo
+        title="Track Your Order"
+        description="Track your Prakash Duo order status and DTDC shipping updates."
+        canonical="https://banglesbyprakashduo.store/track-order"
+      />
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-charcoal overflow-hidden">
+      <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 bg-raw-umber overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-gold/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-deep-ochre/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-deep-ochre/5 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -182,9 +188,9 @@ function TrackOrderContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-gold/20 mb-6">
-              <Package className="w-4 h-4 text-gold" />
-              <span className="text-gold text-sm font-medium tracking-widest uppercase">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-deep-ochre/20 mb-6">
+              <Package className="w-4 h-4 text-deep-ochre" />
+              <span className="text-deep-ochre text-sm font-medium tracking-widest uppercase">
                 Order Tracking
               </span>
             </span>
@@ -204,17 +210,17 @@ function TrackOrderContent() {
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="relative bg-white rounded-lg p-8 md:p-12 border border-gold/10 shadow-xl overflow-hidden">
+            <div className="relative bg-warm-ivory rounded-3xl p-8 md:p-12 border border-deep-ochre/10 shadow-xl overflow-hidden">
               {/* Decorative corners */}
-              <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-gold/20" />
-              <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-gold/20" />
+              <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-deep-ochre/20" />
+              <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-deep-ochre/20" />
 
               <div className="relative">
                 <div className="mb-8">
-                  <h2 className="font-display text-2xl text-charcoal mb-2">
+                  <h2 className="font-display text-2xl text-raw-umber mb-2">
                     Enter Order ID
                   </h2>
-                  <p className="text-charcoal/60">
+                  <p className="text-raw-umber/60">
                     You can find your order ID in the confirmation email sent to you
                   </p>
                 </div>
@@ -226,13 +232,13 @@ function TrackOrderContent() {
                       value={orderId}
                       onChange={(e) => setOrderId(e.target.value)}
                       placeholder="e.g., PD-XXXXX-XXXX"
-                      className="w-full px-6 py-4 bg-ivory border-2 border-gold/20 rounded-lg focus:outline-none focus:border-gold transition-colors text-charcoal placeholder:text-charcoal/40"
+                      className="w-full px-6 py-4 bg-warm-ivory border-2 border-deep-ochre/20 rounded-lg focus:outline-none focus:border-deep-ochre transition-colors text-raw-umber placeholder:text-raw-umber/40"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={!orderId.trim() || loading}
-                    className="group inline-flex items-center justify-center gap-2 bg-charcoal hover:bg-burgundy text-white px-8 py-4 font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    className="group inline-flex items-center justify-center gap-2 bg-raw-umber hover:bg-crimson-thread text-white px-8 py-4 font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                   >
                     {loading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -249,7 +255,7 @@ function TrackOrderContent() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="mt-12 pt-8 border-t border-gold/10"
+                    className="mt-12 pt-8 border-t border-deep-ochre/10"
                   >
                     {error ? (
                       /* Order Not Found */
@@ -257,9 +263,9 @@ function TrackOrderContent() {
                         <div className="w-16 h-16 mx-auto rounded-full bg-red-50 flex items-center justify-center mb-4">
                           <XCircle className="w-8 h-8 text-red-500" />
                         </div>
-                        <h3 className="font-display text-xl text-charcoal mb-2">Order Not Found</h3>
-                        <p className="text-charcoal/60 mb-4">{error}</p>
-                        <p className="text-sm text-charcoal/50">
+                        <h3 className="font-display text-xl text-raw-umber mb-2">Order Not Found</h3>
+                        <p className="text-raw-umber/60 mb-4">{error}</p>
+                        <p className="text-sm text-raw-umber/50">
                           Please check the order ID and try again, or contact support if you need help.
                         </p>
                       </div>
@@ -272,8 +278,8 @@ function TrackOrderContent() {
                             <CheckCircle className="w-7 h-7 text-green-600" />
                           </div>
                           <div>
-                            <h3 className="font-display text-xl text-charcoal">Order Found</h3>
-                            <p className="text-charcoal/60">Order ID: {order.orderId}</p>
+                            <h3 className="font-display text-xl text-raw-umber">Order Found</h3>
+                            <p className="text-raw-umber/60">Order ID: {order.orderId}</p>
                           </div>
                           <div className="ml-auto">
                             <span className={`px-3 py-1 text-sm font-medium rounded-full ${
@@ -295,25 +301,25 @@ function TrackOrderContent() {
                               <div className="flex flex-col items-center">
                                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                                   step.completed
-                                    ? 'bg-gold text-white'
-                                    : 'bg-charcoal/10 text-charcoal/40'
+                                    ? 'bg-deep-ochre text-white'
+                                    : 'bg-raw-umber/10 text-raw-umber/40'
                                 }`}>
                                   <step.icon className="w-5 h-5" />
                                 </div>
                                 {i < trackingSteps.length - 1 && (
                                   <div className={`w-0.5 h-16 mt-2 ${
-                                    step.completed ? 'bg-gold' : 'bg-charcoal/10'
+                                    step.completed ? 'bg-deep-ochre' : 'bg-raw-umber/10'
                                   }`} />
                                 )}
                               </div>
                               <div className="flex-1 pt-3 pb-8">
                                 <h4 className={`font-display text-lg ${
-                                  step.completed ? 'text-charcoal' : 'text-charcoal/40'
+                                  step.completed ? 'text-raw-umber' : 'text-raw-umber/40'
                                 }`}>
                                   {step.title}
                                 </h4>
                                 <p className={`text-sm ${
-                                  step.completed ? 'text-charcoal/60' : 'text-charcoal/30'
+                                  step.completed ? 'text-raw-umber/60' : 'text-raw-umber/30'
                                 }`}>
                                   {step.desc}
                                 </p>
@@ -330,19 +336,19 @@ function TrackOrderContent() {
                                 <Truck className="w-5 h-5 text-white" />
                               </div>
                               <div>
-                                <h4 className="font-display text-lg text-charcoal">Courier Tracking</h4>
-                                <p className="text-sm text-charcoal/60">Track via {order.trackingInfo.carrier}</p>
+                                <h4 className="font-display text-lg text-raw-umber">Courier Tracking</h4>
+                                <p className="text-sm text-raw-umber/60">Track via {order.trackingInfo.carrier}</p>
                               </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 mb-4">
                               <div>
-                                <p className="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Tracking ID</p>
-                                <p className="font-mono font-semibold text-charcoal">{order.trackingInfo.trackingId}</p>
+                                <p className="text-xs text-raw-umber/50 uppercase tracking-wider mb-1">Tracking ID</p>
+                                <p className="font-mono font-semibold text-raw-umber">{order.trackingInfo.trackingId}</p>
                               </div>
                               {order.trackingInfo.estimatedDelivery && (
                                 <div>
-                                  <p className="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Expected Delivery</p>
-                                  <p className="font-semibold text-charcoal">
+                                  <p className="text-xs text-raw-umber/50 uppercase tracking-wider mb-1">Expected Delivery</p>
+                                  <p className="font-semibold text-raw-umber">
                                     {new Date(order.trackingInfo.estimatedDelivery).toLocaleDateString('en-IN', {
                                       weekday: 'short',
                                       day: 'numeric',
@@ -353,7 +359,7 @@ function TrackOrderContent() {
                               )}
                             </div>
                             {order.trackingInfo.notes && (
-                              <p className="text-sm text-charcoal/70 mb-4 p-3 bg-white/50 rounded">{order.trackingInfo.notes}</p>
+                              <p className="text-sm text-raw-umber/70 mb-4 p-3 bg-white/50 rounded">{order.trackingInfo.notes}</p>
                             )}
                             <a
                               href={`https://www.dtdc.in/tracking/shipment-tracking.asp?strCnno=${order.trackingInfo.trackingId}`}
@@ -369,8 +375,8 @@ function TrackOrderContent() {
                         )}
 
                         {/* Order Items */}
-                        <div className="mb-8 p-4 bg-ivory rounded-lg">
-                          <h4 className="font-medium text-charcoal mb-4">Order Items</h4>
+                        <div className="mb-8 p-4 bg-warm-ivory rounded-lg">
+                          <h4 className="font-medium text-raw-umber mb-4">Order Items</h4>
                           <div className="space-y-3">
                             {order.items.map((item, index) => (
                               <div key={index} className="flex items-center gap-3">
@@ -383,30 +389,30 @@ function TrackOrderContent() {
                                   />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-charcoal truncate">{item.name}</p>
-                                  <p className="text-xs text-charcoal/50">Size: {item.size} | Qty: {item.quantity}</p>
+                                  <p className="text-sm font-medium text-raw-umber truncate">{item.name}</p>
+                                  <p className="text-xs text-raw-umber/50">Size: {item.size} | Qty: {item.quantity}</p>
                                 </div>
-                                <p className="text-sm font-medium text-charcoal">₹{(item.price * item.quantity).toLocaleString()}</p>
+                                <p className="text-sm font-medium text-raw-umber">₹{(item.price * item.quantity).toLocaleString()}</p>
                               </div>
                             ))}
                           </div>
                         </div>
 
                         {/* Delivery Info */}
-                        <div className="p-6 bg-gradient-to-br from-champagne to-ivory rounded-lg border border-gold/10">
+                        <div className="p-6 bg-gradient-to-br from-blush-dust to-warm-ivory rounded-lg border border-deep-ochre/10">
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                              <p className="text-sm text-charcoal/50 mb-1">Shipping To</p>
-                              <p className="font-display text-charcoal">
+                              <p className="text-sm text-raw-umber/50 mb-1">Shipping To</p>
+                              <p className="font-display text-raw-umber">
                                 {order.shippingAddress.firstName} {order.shippingAddress.lastName}
                               </p>
-                              <p className="text-sm text-charcoal/60">
+                              <p className="text-sm text-raw-umber/60">
                                 {order.shippingAddress.city}, {order.shippingAddress.state}
                               </p>
                             </div>
                             <div>
-                              <p className="text-sm text-charcoal/50 mb-1">Order Total</p>
-                              <p className="font-display text-lg text-gold">₹{order.total.toLocaleString()}</p>
+                              <p className="text-sm text-raw-umber/50 mb-1">Order Total</p>
+                              <p className="font-display text-lg text-deep-ochre">₹{order.total.toLocaleString()}</p>
                             </div>
                           </div>
                         </div>
@@ -417,14 +423,14 @@ function TrackOrderContent() {
 
                 {/* Features Grid (when not searched) */}
                 {!searched && (
-                  <div className="mt-12 pt-8 border-t border-gold/10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="mt-12 pt-8 border-t border-deep-ochre/10 grid grid-cols-1 md:grid-cols-3 gap-6">
                     {features.map((feature, i) => (
                       <div key={i} className="text-center group">
-                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <feature.icon className="w-7 h-7 text-gold" />
+                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-deep-ochre/10 to-deep-ochre/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <feature.icon className="w-7 h-7 text-deep-ochre" />
                         </div>
-                        <h3 className="font-display text-charcoal mb-1">{feature.title}</h3>
-                        <p className="text-charcoal/60 text-sm">{feature.desc}</p>
+                        <h3 className="font-display text-raw-umber mb-1">{feature.title}</h3>
+                        <p className="text-raw-umber/60 text-sm">{feature.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -436,34 +442,34 @@ function TrackOrderContent() {
           {/* Help Section */}
           <AnimatedSection delay={0.2} className="mt-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg p-6 border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all">
+              <div className="bg-warm-ivory rounded-3xl p-6 border border-deep-ochre/10 hover:border-deep-ochre/30 hover:shadow-lg transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-gold" />
+                  <div className="w-12 h-12 rounded-full bg-deep-ochre/10 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-deep-ochre" />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg text-charcoal mb-2">Order Not Found?</h3>
-                    <p className="text-charcoal/60 text-sm mb-3">
+                    <h3 className="font-display text-lg text-raw-umber mb-2">Order Not Found?</h3>
+                    <p className="text-raw-umber/60 text-sm mb-3">
                       It may take up to 24 hours for tracking information to appear after your order is placed.
                     </p>
-                    <Link href="/faq" className="text-gold hover:text-burgundy text-sm font-medium inline-flex items-center gap-1 transition-colors">
+                    <Link href="/faq" className="text-deep-ochre hover:text-crimson-thread text-sm font-medium inline-flex items-center gap-1 transition-colors">
                       View FAQs <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg p-6 border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all">
+              <div className="bg-warm-ivory rounded-3xl p-6 border border-deep-ochre/10 hover:border-deep-ochre/30 hover:shadow-lg transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-5 h-5 text-gold" />
+                  <div className="w-12 h-12 rounded-full bg-deep-ochre/10 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-5 h-5 text-deep-ochre" />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg text-charcoal mb-2">Need Help?</h3>
-                    <p className="text-charcoal/60 text-sm mb-3">
+                    <h3 className="font-display text-lg text-raw-umber mb-2">Need Help?</h3>
+                    <p className="text-raw-umber/60 text-sm mb-3">
                       Our customer support team is available to assist you with any queries.
                     </p>
-                    <Link href="/contact" className="text-gold hover:text-burgundy text-sm font-medium inline-flex items-center gap-1 transition-colors">
+                    <Link href="/contact" className="text-deep-ochre hover:text-crimson-thread text-sm font-medium inline-flex items-center gap-1 transition-colors">
                       Contact Us <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
@@ -475,13 +481,13 @@ function TrackOrderContent() {
       </section>
 
       {/* Shipping Info Banner */}
-      <section className="py-12 bg-charcoal">
+      <section className="py-12 bg-raw-umber">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center">
-                  <Truck className="w-6 h-6 text-gold" />
+                <div className="w-14 h-14 rounded-full bg-deep-ochre/20 flex items-center justify-center">
+                  <Truck className="w-6 h-6 text-deep-ochre" />
                 </div>
                 <div>
                   <h3 className="font-display text-xl text-white">Fast & Reliable Shipping</h3>
@@ -490,7 +496,7 @@ function TrackOrderContent() {
               </div>
               <Link
                 href="/shipping"
-                className="text-gold hover:text-rose-gold font-medium transition-colors flex items-center gap-2"
+                className="text-deep-ochre hover:text-deep-ochre/80 font-medium transition-colors flex items-center gap-2"
               >
                 View shipping policy
                 <ArrowRight className="w-4 h-4" />
@@ -507,8 +513,8 @@ export default function TrackOrderPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-ivory flex items-center justify-center">
-          <Loader2 className="w-12 h-12 text-gold animate-spin" />
+        <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-deep-ochre animate-spin" />
         </div>
       }
     >

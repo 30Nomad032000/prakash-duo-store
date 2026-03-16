@@ -16,6 +16,7 @@ import {
   Package,
   AlertTriangle,
 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface Product {
   id: string;
@@ -130,11 +131,11 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-500">{total} products total</p>
+          <p className="text-sm text-charcoal/50">{total} products total</p>
         </div>
         <Link
           href="/admin/products/new"
-          className="flex items-center gap-2 px-4 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition"
+          className="flex items-center gap-2 px-4 py-2.5 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 transition"
         >
           <Plus className="w-4 h-4" />
           Add Product
@@ -147,36 +148,41 @@ export default function ProductsPage() {
           {/* Search */}
           <form onSubmit={handleSearch} className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-charcoal/40 w-5 h-5" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
               />
             </div>
           </form>
 
           {/* Category filter */}
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-400" />
-            <select
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
+            <Filter className="w-5 h-5 text-charcoal/40" />
+            <Select
+              value={category || "all"}
+              onValueChange={(val) => {
+                const newCategory = val === "all" ? "" : val;
+                setCategory(newCategory);
                 setPage(1);
-                updateUrl({ category: e.target.value, page: '1' });
+                updateUrl({ category: newCategory, page: '1' });
               }}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
             >
-              <option value="">All Categories</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full md:w-[200px] shrink-0 px-4 py-2.5 border border-charcoal/15 rounded-lg h-auto">
+                <SelectValue placeholder="All Categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Show inactive toggle */}
@@ -192,9 +198,9 @@ export default function ProductsPage() {
                   page: '1',
                 });
               }}
-              className="w-4 h-4 text-amber-600 rounded focus:ring-amber-500"
+              className="w-4 h-4 text-deep-ochre rounded focus:ring-deep-ochre"
             />
-            <span className="text-sm text-gray-600">Show inactive</span>
+            <span className="text-sm text-charcoal/60">Show inactive</span>
           </label>
         </div>
       </div>
@@ -203,50 +209,50 @@ export default function ProductsPage() {
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deep-ochre mx-auto"></div>
           </div>
         ) : products.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            <Package className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <div className="p-8 text-center text-charcoal/50">
+            <Package className="w-12 h-12 mx-auto mb-4 text-charcoal/20" />
             <p>No products found</p>
           </div>
         ) : (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-warm-ivory/50 border-b">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Product
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Price
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Stock
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-charcoal/10">
                   {products.map((product) => (
                     <tr
                       key={product.id}
-                      className={`hover:bg-gray-50 ${
+                      className={`hover:bg-deep-ochre/5 ${
                         !product.is_active ? 'opacity-60' : ''
                       }`}
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
-                          <div className="relative w-12 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                          <div className="relative w-12 h-12 bg-charcoal/5 rounded-lg overflow-hidden flex-shrink-0">
                             {product.images[0] && (
                               <Image
                                 src={product.images[0]}
@@ -257,10 +263,10 @@ export default function ProductsPage() {
                             )}
                           </div>
                           <div className="min-w-0">
-                            <p className="font-medium text-gray-900 truncate max-w-xs">
+                            <p className="font-medium text-charcoal truncate max-w-xs">
                               {product.name}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-charcoal/50">
                               {product.sizes.length} size
                               {product.sizes.length > 1 ? 's' : ''}
                             </p>
@@ -268,11 +274,11 @@ export default function ProductsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-charcoal/60">
                           {product.category}
                         </span>
                         {product.subcategory && (
-                          <span className="text-xs text-gray-400 block">
+                          <span className="text-xs text-charcoal/40 block">
                             {product.subcategory}
                           </span>
                         )}
@@ -311,7 +317,7 @@ export default function ProductsPage() {
                           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                             product.is_active
                               ? 'bg-green-100 text-green-800'
-                              : 'bg-gray-100 text-gray-800'
+                              : 'bg-charcoal/10 text-charcoal'
                           }`}
                         >
                           {product.is_active ? 'Active' : 'Inactive'}
@@ -321,7 +327,7 @@ export default function ProductsPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             href={`/admin/products/${product.id}`}
-                            className="p-2 text-gray-500 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
+                            className="p-2 text-charcoal/50 hover:text-deep-ochre hover:bg-deep-ochre/5 rounded-lg transition"
                             title="Edit Product"
                           >
                             <Edit2 className="w-4 h-4" />
@@ -332,8 +338,8 @@ export default function ProductsPage() {
                             }
                             className={`p-2 rounded-lg transition ${
                               product.is_active
-                                ? 'text-gray-500 hover:text-red-600 hover:bg-red-50'
-                                : 'text-gray-500 hover:text-green-600 hover:bg-green-50'
+                                ? 'text-charcoal/50 hover:text-red-600 hover:bg-red-50'
+                                : 'text-charcoal/50 hover:text-green-600 hover:bg-green-50'
                             }`}
                             title={
                               product.is_active
@@ -358,7 +364,7 @@ export default function ProductsPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="px-6 py-4 border-t flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-charcoal/50">
                   Showing {(page - 1) * limit + 1} to{' '}
                   {Math.min(page * limit, total)} of {total} products
                 </p>
@@ -369,7 +375,7 @@ export default function ProductsPage() {
                       updateUrl({ page: (page - 1).toString() });
                     }}
                     disabled={page === 1}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -382,7 +388,7 @@ export default function ProductsPage() {
                       updateUrl({ page: (page + 1).toString() });
                     }}
                     disabled={page === totalPages}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>

@@ -2,320 +2,211 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Heart, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useHaptics } from "@/hooks/useHaptics";
+
+// Pages that have a dark hero section extending behind the navbar
+const DARK_HERO_PAGES = [
+  "/categories",
+  "/best-sellers",
+  "/about",
+  "/contact",
+  "/faq",
+  "/wishlist",
+  "/shipping",
+  "/refund",
+  "/privacy",
+  "/terms",
+  "/track-order",
+];
 
 export default function Header() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { itemCount, openCart } = useCart();
   const { itemCount: wishlistCount } = useWishlist();
+  const { trigger: haptic } = useHaptics();
+
+  const hasDarkHero =
+    DARK_HERO_PAGES.includes(pathname) ||
+    pathname.startsWith("/category/");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isActive = (path: string) => {
-    if (path === "/") return pathname === "/";
-    if (path === "/categories")
-      return (
-        pathname.startsWith("/categories") ||
-        pathname.startsWith("/category") ||
-        pathname.startsWith("/product")
-      );
-    if (path === "/collections")
-      return (
-        pathname.startsWith("/collections") ||
-        pathname.startsWith("/collection")
-      );
-    if (path === "/wishlist") return pathname === "/wishlist";
-    return pathname.startsWith(path);
-  };
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/categories", label: "Shop" },
-    { path: "/collections", label: "Collections" },
-    { path: "/best-sellers", label: "Best Sellers" },
-    { path: "/about", label: "About" },
-    { path: "/contact", label: "Contact" },
+  // When not scrolled on a dark hero page, use light text on transparent bg
+  const isTransparent = hasDarkHero && !scrolled;
+
+  const navLinks = [
+    { label: "Collections", href: "/categories" },
+    { label: "Best Sellers", href: "/best-sellers" },
+    { label: "Our Story", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
+  const isActive = (path: string) => {
+    if (path === "/categories")
+      return pathname.startsWith("/categories") || pathname.startsWith("/category") || pathname.startsWith("/product");
+    return pathname === path || pathname.startsWith(path + "/");
+  };
+
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-gold/5"
-          : "bg-transparent"
-      }`}
-    >
-      {/* Decorative top line */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      <nav
+        className={`
+          w-full max-w-5xl rounded-full px-6 py-3 flex items-center justify-between transition-all duration-700
+          ${isTransparent
+            ? "bg-transparent border border-transparent"
+            : "bg-warm-ivory/80 backdrop-blur-xl border border-raw-umber/10 shadow-luxury"
+          }
+        `}
+      >
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-1 group">
+          <span className={`font-display text-2xl font-bold tracking-tight transition-colors duration-500 ${
+            isTransparent ? "text-warm-ivory" : "text-raw-umber"
+          }`}>
+            Prakash<span className="text-deep-ochre">Duo</span>
+          </span>
+        </Link>
 
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-4 py-2 text-sm font-body font-medium tracking-wide rounded-full transition-all duration-300 ${
+                isActive(link.href)
+                  ? isTransparent
+                    ? "bg-white/15 text-warm-ivory"
+                    : "bg-deep-ochre/15 text-raw-umber"
+                  : isTransparent
+                    ? "text-warm-ivory/80 hover:text-warm-ivory hover:bg-white/10"
+                    : "text-raw-umber/60 hover:text-raw-umber hover:bg-deep-ochre/10"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          <Link
+            href="/wishlist"
+            className={`relative p-2 rounded-full transition-colors ${
+              isTransparent ? "text-warm-ivory/70 hover:text-warm-ivory" : "text-raw-umber/60 hover:text-raw-umber"
+            }`}
           >
-            <Link href="/" className="flex items-center group">
-              <Image
-                src="/assets/logo/Logo.png"
-                alt="Prakash Duo - Bangles"
-                width={56}
-                height={56}
-                className="h-12 lg:h-14 w-auto transition-all duration-300 group-hover:scale-105"
-              />
-            </Link>
-          </motion.div>
+            <Heart className={`w-5 h-5 ${wishlistCount > 0 ? "fill-current text-crimson-thread" : ""}`} />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-crimson-thread text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item, i) => (
-              <motion.div
-                key={item.path}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-              >
-                <Link
-                  href={item.path}
-                  className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
-                    isActive(item.path)
-                      ? "text-charcoal"
-                      : "text-charcoal/60 hover:text-charcoal"
-                  }`}
-                >
-                  <span className="relative z-10">{item.label}</span>
-                  {isActive(item.path) && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-gradient-to-r from-gold/10 via-gold/20 to-gold/10 rounded-full"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                  <motion.span
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "80%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
-          </nav>
-
-          {/* Desktop Actions */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="hidden lg:flex items-center gap-2"
+          <button
+            onClick={() => { haptic("nudge"); openCart(); }}
+            className={`relative p-2 rounded-full transition-colors ${
+              isTransparent ? "text-warm-ivory/70 hover:text-warm-ivory" : "text-raw-umber/60 hover:text-raw-umber"
+            }`}
           >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative p-3 text-charcoal/70 hover:text-charcoal transition-colors group"
-            >
-              <Search className="w-5 h-5" strokeWidth={1.5} />
-              <span className="absolute inset-0 rounded-full bg-gold/0 group-hover:bg-gold/10 transition-colors" />
-            </motion.button>
+            <ShoppingBag className="w-5 h-5" />
+            {itemCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-deep-ochre text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
+          </button>
 
-            <Link href="/wishlist">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative p-3 transition-colors group rounded-full ${
-                  isActive("/wishlist")
-                    ? "text-rose-500 bg-rose-50"
-                    : "text-charcoal/70 hover:text-rose-500"
-                }`}
-              >
-                <Heart
-                  className={`w-5 h-5 ${wishlistCount > 0 ? "fill-current" : ""}`}
-                  strokeWidth={1.5}
-                />
-                {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {wishlistCount > 9 ? "9+" : wishlistCount}
-                  </span>
-                )}
-                <span className="absolute inset-0 rounded-full bg-rose-500/0 group-hover:bg-rose-500/10 transition-colors" />
-              </motion.div>
-            </Link>
+          {/* CTA Desktop */}
+          <Link
+            href="/categories"
+            className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-crimson-thread text-warm-ivory text-sm font-body font-medium rounded-full hover:bg-crimson-thread/90 transition-all duration-300 press-effect"
+          >
+            Browse Collections
+          </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={openCart}
-              className="relative ml-2 p-3 bg-charcoal text-white rounded-full group overflow-hidden"
-            >
-              <ShoppingBag className="w-5 h-5 relative z-10" strokeWidth={1.5} />
-              {itemCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-gold text-charcoal text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {itemCount > 9 ? '9+' : itemCount}
-                </span>
-              )}
-              <span className="absolute inset-0 bg-gradient-to-r from-gold to-rose-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.button>
-          </motion.div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-2">
-            {/* Mobile Wishlist */}
-            <Link href="/wishlist">
-              <motion.div
-                whileTap={{ scale: 0.95 }}
-                className={`relative p-2 transition-colors rounded-full ${
-                  wishlistCount > 0 ? "text-rose-500" : "text-charcoal/70"
-                }`}
-              >
-                <Heart
-                  className={`w-5 h-5 ${wishlistCount > 0 ? "fill-current" : ""}`}
-                />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                    {wishlistCount > 9 ? "9+" : wishlistCount}
-                  </span>
-                )}
-              </motion.div>
-            </Link>
-
-            {/* Mobile Cart */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={openCart}
-              className="relative p-2 text-charcoal"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {itemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-gold text-charcoal text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {itemCount > 9 ? '9+' : itemCount}
-                </span>
-              )}
-            </motion.button>
-
-            {/* Mobile Menu Toggle */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-charcoal"
-            >
-              <AnimatePresence mode="wait">
-                {mobileMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="w-6 h-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="w-6 h-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => { haptic("nudge"); setMobileOpen(!mobileOpen); }}
+            className={`lg:hidden p-2 rounded-full transition-colors ${
+              isTransparent ? "text-warm-ivory" : "text-raw-umber"
+            }`}
+          >
+            <div className="w-5 h-4 flex flex-col justify-between">
+              <span className={`block h-[2px] rounded-full transition-all duration-300 ${
+                mobileOpen ? "rotate-45 translate-y-[7px]" : ""
+              } ${isTransparent ? "bg-warm-ivory" : "bg-raw-umber"}`} />
+              <span className={`block h-[2px] rounded-full transition-all duration-300 ${
+                mobileOpen ? "opacity-0" : ""
+              } ${isTransparent ? "bg-warm-ivory" : "bg-raw-umber"}`} />
+              <span className={`block h-[2px] rounded-full transition-all duration-300 ${
+                mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
+              } ${isTransparent ? "bg-warm-ivory" : "bg-raw-umber"}`} />
+            </div>
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-gold/10"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-x-0 top-20 mx-4 bg-warm-ivory/95 backdrop-blur-xl rounded-3xl border border-raw-umber/10 shadow-luxury-lg p-6 z-40"
           >
-            <div className="max-w-7xl mx-auto px-4 py-6">
-              <div className="space-y-1">
-                {navItems.map((item, i) => (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <Link
-                      href={item.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-                        isActive(item.path)
-                          ? "text-charcoal bg-gradient-to-r from-gold/20 to-rose-gold/10"
-                          : "text-charcoal/70 hover:text-charcoal hover:bg-gold/5"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
-
-                {/* Wishlist link in mobile menu */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.05 }}
+            <div className="space-y-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-4 py-3 font-body font-medium rounded-2xl transition-colors ${
+                    isActive(link.href)
+                      ? "text-raw-umber bg-deep-ochre/15"
+                      : "text-raw-umber hover:bg-deep-ochre/10"
+                  }`}
                 >
-                  <Link
-                    href="/wishlist"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
-                      isActive("/wishlist")
-                        ? "text-rose-500 bg-rose-50"
-                        : "text-charcoal/70 hover:text-rose-500 hover:bg-rose-50/50"
-                    }`}
-                  >
-                    <Heart
-                      className={`w-5 h-5 ${wishlistCount > 0 ? "fill-current" : ""}`}
-                    />
-                    Wishlist
-                    {wishlistCount > 0 && (
-                      <span className="ml-auto px-2 py-0.5 bg-rose-500 text-white text-xs font-bold rounded-full">
-                        {wishlistCount}
-                      </span>
-                    )}
-                  </Link>
-                </motion.div>
-              </div>
-
-              {/* Mobile Actions */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-6 pt-6 border-t border-gold/10 flex items-center justify-center gap-4"
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/wishlist"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-4 py-3 font-body font-medium rounded-2xl text-raw-umber hover:bg-deep-ochre/10 transition-colors"
               >
-                <button className="p-3 text-charcoal/70 hover:text-charcoal rounded-full hover:bg-gold/10 transition-all">
-                  <Search className="w-5 h-5" />
-                </button>
-              </motion.div>
+                <Heart className={`w-5 h-5 ${wishlistCount > 0 ? "fill-current text-crimson-thread" : ""}`} />
+                Wishlist
+                {wishlistCount > 0 && (
+                  <span className="ml-auto px-2 py-0.5 bg-crimson-thread text-warm-ivory text-xs font-bold rounded-full">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+              <Link
+                href="/categories"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 bg-crimson-thread text-warm-ivory font-body font-medium rounded-2xl text-center mt-4"
+              >
+                Browse Collections
+              </Link>
             </div>
           </motion.div>
         )}

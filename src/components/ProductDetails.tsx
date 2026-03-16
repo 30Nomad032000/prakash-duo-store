@@ -99,20 +99,30 @@ export default function ProductDetails({
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
-  const handleIncrease = () => {
-    setQuantity(quantity + 1);
-  };
-
   const getStockForSize = (size: string): string => {
     const item = inventory.find(inv => inv.size === size);
     return item ? item.quantity : '0';
   };
 
-  const isInStock = (size: string): boolean => {
+  const getNumericStock = (size: string): number => {
     const stock = getStockForSize(size);
-    const qty = parseInt(stock) || (stock.includes('set') ? 1 : 0);
-    return qty > 0;
+    return parseInt(stock) || (stock.includes('set') ? 1 : 0);
   };
+
+  const isInStock = (size: string): boolean => {
+    return getNumericStock(size) > 0;
+  };
+
+  const maxQuantity = selectedSize ? getNumericStock(selectedSize) : 99;
+
+  const handleIncrease = () => {
+    if (quantity < maxQuantity) setQuantity(quantity + 1);
+  };
+
+  const isEntirelyOutOfStock = inventory.length > 0 && inventory.every((item) => {
+    const qty = parseInt(item.quantity) || (item.quantity.includes('set') ? 1 : 0);
+    return qty <= 0;
+  });
 
   const handleAddToCart = () => {
     if (!selectedSize && sizes.length > 0) {
@@ -181,12 +191,11 @@ export default function ProductDetails({
         // User cancelled or error
       }
     } else {
-      // Fallback: copy to clipboard
       navigator.clipboard.writeText(window.location.href);
     }
   };
 
-  const canAddToCart = sizes.length === 0 || (selectedSize && isInStock(selectedSize));
+  const canAddToCart = !isEntirelyOutOfStock && (sizes.length === 0 || (selectedSize && isInStock(selectedSize)));
 
   return (
     <motion.div
@@ -198,11 +207,11 @@ export default function ProductDetails({
       {/* Category badges and action buttons */}
       <motion.div variants={itemVariants} className="flex items-center justify-between">
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-gold/10 text-gold hover:bg-gold/20 border border-gold/20">
+          <Badge className="bg-deep-ochre/10 text-deep-ochre hover:bg-deep-ochre/20 border border-deep-ochre/20">
             {category}
           </Badge>
           {subcategory && subcategory !== category && (
-            <Badge variant="outline" className="text-charcoal/60 border-charcoal/20">
+            <Badge variant="outline" className="text-raw-umber/60 border-raw-umber/20">
               {subcategory}
             </Badge>
           )}
@@ -214,7 +223,7 @@ export default function ProductDetails({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleShare}
-            className="p-2.5 rounded-full border border-charcoal/20 text-charcoal/60 hover:bg-charcoal/5 hover:text-charcoal transition-colors"
+            className="p-2.5 rounded-full border border-raw-umber/20 text-raw-umber/60 hover:bg-raw-umber/5 hover:text-raw-umber transition-colors"
             aria-label="Share product"
           >
             <Share2 className="w-5 h-5" />
@@ -227,7 +236,7 @@ export default function ProductDetails({
             className={`relative p-2.5 rounded-full border transition-all ${
               isFavorited
                 ? 'bg-rose-500 border-rose-500 text-white'
-                : 'border-charcoal/20 text-charcoal/60 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-500'
+                : 'border-raw-umber/20 text-raw-umber/60 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-500'
             }`}
             aria-label={isFavorited ? 'Remove from wishlist' : 'Add to wishlist'}
           >
@@ -245,26 +254,41 @@ export default function ProductDetails({
 
       <motion.h1
         variants={itemVariants}
-        className="text-3xl md:text-4xl font-serif font-bold text-gray-900 leading-tight"
+        className="text-3xl md:text-4xl font-display font-bold text-raw-umber leading-tight"
       >
         {name}
       </motion.h1>
 
       <motion.div variants={itemVariants} className="flex items-baseline gap-3">
-        <span className="text-2xl md:text-3xl font-bold text-gold">
+        <span className="text-2xl md:text-3xl font-bold text-deep-ochre">
           ₹{price.toLocaleString()}
         </span>
       </motion.div>
 
-      <motion.p variants={itemVariants} className="text-gray-600 leading-relaxed">
+      {/* Out of Stock Banner */}
+      {isEntirelyOutOfStock && (
+        <motion.div
+          variants={itemVariants}
+          className="px-5 py-4 bg-crimson-thread/10 border border-crimson-thread/20 rounded-2xl"
+        >
+          <p className="font-mono text-crimson-thread text-sm uppercase tracking-wider font-semibold">
+            Currently Out of Stock
+          </p>
+          <p className="text-raw-umber/60 text-sm mt-1">
+            This item is currently unavailable. Please check back later or contact us for updates.
+          </p>
+        </motion.div>
+      )}
+
+      <motion.p variants={itemVariants} className="text-raw-umber/60 leading-relaxed font-body">
         Handcrafted with love and precision by skilled artisans. Each piece is unique
         and tells a story of tradition and elegance.
       </motion.p>
 
       {/* Size Selection */}
       {sizes.length > 0 && (
-        <motion.div variants={itemVariants} className="border-t border-stone-200 pt-4">
-          <label className="block text-sm font-medium text-gray-900 mb-3">
+        <motion.div variants={itemVariants} className="border-t border-raw-umber/10 pt-4">
+          <label className="block text-sm font-medium text-raw-umber mb-3">
             Select Size
           </label>
           <div className="flex flex-wrap gap-2">
@@ -274,22 +298,26 @@ export default function ProductDetails({
               return (
                 <button
                   key={size}
-                  onClick={() => inStock && setSelectedSize(size)}
+                  onClick={() => { if (inStock) { setSelectedSize(size); setQuantity(1); } }}
                   disabled={!inStock}
                   className={`
-                    relative px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all
+                    relative px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all
                     ${selectedSize === size
-                      ? 'border-gold bg-gold/10 text-gold'
+                      ? 'border-deep-ochre bg-deep-ochre/10 text-deep-ochre'
                       : inStock
-                        ? 'border-stone-200 hover:border-gold/50 text-gray-700'
-                        : 'border-stone-100 bg-stone-50 text-gray-400 cursor-not-allowed line-through'
+                        ? 'border-raw-umber/15 hover:border-deep-ochre/50 text-raw-umber'
+                        : 'border-raw-umber/10 bg-raw-umber/5 text-raw-umber/30 cursor-not-allowed line-through'
                     }
                   `}
                 >
                   {size}
-                  {inStock && (
-                    <span className="block text-[10px] text-gray-400 font-normal">
+                  {inStock ? (
+                    <span className="block text-[10px] text-raw-umber/40 font-normal">
                       {stock} available
+                    </span>
+                  ) : (
+                    <span className="block text-[10px] text-crimson-thread/60 font-normal no-underline">
+                      Out of stock
                     </span>
                   )}
                 </button>
@@ -299,8 +327,8 @@ export default function ProductDetails({
         </motion.div>
       )}
 
-      <motion.div variants={itemVariants} className="border-t border-b border-stone-200 py-4">
-        <label className="block text-sm font-medium text-gray-900 mb-3">
+      <motion.div variants={itemVariants} className="border-t border-b border-raw-umber/10 py-4">
+        <label className="block text-sm font-medium text-raw-umber mb-3">
           Quantity
         </label>
         <div className="flex items-center gap-3">
@@ -309,21 +337,27 @@ export default function ProductDetails({
             size="icon"
             onClick={handleDecrease}
             disabled={quantity <= 1}
-            className="w-10 h-10 hover:bg-gold/10 hover:border-gold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-10 h-10 hover:bg-deep-ochre/10 hover:border-deep-ochre disabled:opacity-50 disabled:cursor-not-allowed"
           >
             -
           </Button>
-          <span className="w-14 h-10 flex items-center justify-center border border-stone-300 rounded bg-white text-lg font-medium">
+          <span className="w-14 h-10 flex items-center justify-center border border-raw-umber/15 rounded-lg bg-warm-ivory text-lg font-medium">
             {quantity}
           </span>
           <Button
             variant="outline"
             size="icon"
             onClick={handleIncrease}
-            className="w-10 h-10 hover:bg-gold/10 hover:border-gold"
+            disabled={quantity >= maxQuantity}
+            className="w-10 h-10 hover:bg-deep-ochre/10 hover:border-deep-ochre disabled:opacity-50 disabled:cursor-not-allowed"
           >
             +
           </Button>
+          {selectedSize && maxQuantity > 0 && maxQuantity < 10 && (
+            <span className="text-xs text-raw-umber/40 font-mono ml-2">
+              Only {maxQuantity} left
+            </span>
+          )}
         </div>
       </motion.div>
 
@@ -332,42 +366,45 @@ export default function ProductDetails({
           <Button
             onClick={handleAddToCart}
             disabled={!canAddToCart}
-            className="w-full bg-gold hover:bg-rose-gold text-white py-4 font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gold"
+            className="w-full bg-crimson-thread hover:bg-crimson-thread/90 text-warm-ivory py-4 font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {addedToCart ? (
               <span className="flex items-center justify-center gap-2">
                 <Check className="w-5 h-5" />
                 Added to Cart
               </span>
+            ) : isEntirelyOutOfStock ? (
+              'Out of Stock'
             ) : (
               'Add to Cart'
             )}
           </Button>
         </motion.div>
-        <motion.div whileHover={canAddToCart ? { scale: 1.02 } : {}} whileTap={canAddToCart ? { scale: 0.98 } : {}}>
-          <Button
-            onClick={handleBuyNow}
-            disabled={!canAddToCart}
-            className="w-full bg-burgundy hover:bg-burgundy/90 text-white py-4 font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-burgundy"
-          >
-            Buy Now
-          </Button>
-        </motion.div>
+        {!isEntirelyOutOfStock && (
+          <motion.div whileHover={canAddToCart ? { scale: 1.02 } : {}} whileTap={canAddToCart ? { scale: 0.98 } : {}}>
+            <Button
+              onClick={handleBuyNow}
+              disabled={!canAddToCart}
+              className="w-full bg-raw-umber hover:bg-raw-umber/90 text-warm-ivory py-4 font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Buy Now
+            </Button>
+          </motion.div>
+        )}
 
-        {/* Mobile Favorite Button - Large and accessible */}
+        {/* Mobile Favorite Button */}
         <motion.button
           whileTap={{ scale: 0.98 }}
           onClick={handleToggleFavorite}
           className={`md:hidden relative w-full py-4 font-medium rounded-full flex items-center justify-center gap-2 transition-all duration-300 shadow-lg ${
             isFavorited
               ? 'bg-rose-500 text-white'
-              : 'bg-white border-2 border-rose-300 text-rose-500'
+              : 'bg-warm-ivory border-2 border-rose-300 text-rose-500'
           }`}
         >
           <Heart className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
           {isFavorited ? 'Added to Wishlist' : 'Add to Wishlist'}
 
-          {/* Heart burst particles for mobile button */}
           <AnimatePresence>
             {showHeartBurst && particles.map((i) => (
               <HeartParticle key={i} index={i} />
@@ -378,7 +415,7 @@ export default function ProductDetails({
 
       <motion.div
         variants={itemVariants}
-        className="pt-6 space-y-4 border-t border-stone-200"
+        className="pt-6 space-y-4 border-t border-raw-umber/10"
       >
         {[
           { title: 'Free Shipping', subtitle: 'On orders above ₹999' },
@@ -390,10 +427,10 @@ export default function ProductDetails({
             variants={itemVariants}
             className="flex items-start gap-3"
           >
-            <span className="text-gold text-lg">✓</span>
+            <span className="text-deep-ochre text-lg">✓</span>
             <div>
-              <p className="text-sm font-medium text-gray-900">{item.title}</p>
-              <p className="text-xs text-gray-500">{item.subtitle}</p>
+              <p className="text-sm font-medium text-raw-umber">{item.title}</p>
+              <p className="text-xs text-raw-umber/50">{item.subtitle}</p>
             </div>
           </motion.div>
         ))}

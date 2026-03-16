@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface EmailLog {
   id: string;
@@ -130,48 +131,58 @@ export default function EmailsPage() {
           {/* Search */}
           <form onSubmit={handleSearch} className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-charcoal/40 w-5 h-5" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by email or order ID..."
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
               />
             </div>
           </form>
 
           {/* Status filter */}
-          <select
-            value={status}
-            onChange={(e) => {
-              setStatus(e.target.value);
+          <Select
+            value={status || "all"}
+            onValueChange={(val) => {
+              const newStatus = val === "all" ? "" : val;
+              setStatus(newStatus);
               setPage(1);
-              updateUrl({ status: e.target.value, page: '1' });
+              updateUrl({ status: newStatus, page: '1' });
             }}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
           >
-            <option value="">All Statuses</option>
-            <option value="sent">Sent</option>
-            <option value="failed">Failed</option>
-            <option value="pending">Pending</option>
-          </select>
+            <SelectTrigger className="w-full md:w-[160px] shrink-0 px-4 py-2.5 border border-charcoal/15 rounded-lg h-auto">
+              <SelectValue placeholder="All Statuses" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="sent">Sent</SelectItem>
+              <SelectItem value="failed">Failed</SelectItem>
+              <SelectItem value="pending">Pending</SelectItem>
+            </SelectContent>
+          </Select>
 
           {/* Type filter */}
-          <select
-            value={emailType}
-            onChange={(e) => {
-              setEmailType(e.target.value);
+          <Select
+            value={emailType || "all"}
+            onValueChange={(val) => {
+              const newType = val === "all" ? "" : val;
+              setEmailType(newType);
               setPage(1);
-              updateUrl({ type: e.target.value, page: '1' });
+              updateUrl({ type: newType, page: '1' });
             }}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
           >
-            <option value="">All Types</option>
-            <option value="order_confirmation">Order Confirmation</option>
-            <option value="shipping_notification">Shipping Notification</option>
-            <option value="delivery_confirmation">Delivery Confirmation</option>
-          </select>
+            <SelectTrigger className="w-full md:w-[200px] shrink-0 px-4 py-2.5 border border-charcoal/15 rounded-lg h-auto">
+              <SelectValue placeholder="All Types" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="order_confirmation">Order Confirmation</SelectItem>
+              <SelectItem value="shipping_notification">Shipping Notification</SelectItem>
+              <SelectItem value="delivery_confirmation">Delivery Confirmation</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -179,67 +190,67 @@ export default function EmailsPage() {
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deep-ochre mx-auto"></div>
           </div>
         ) : emails.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            <Mail className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <div className="p-8 text-center text-charcoal/50">
+            <Mail className="w-12 h-12 mx-auto mb-4 text-charcoal/20" />
             <p>No emails found</p>
           </div>
         ) : (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-warm-ivory/50 border-b">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Email Type
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Recipient
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Order
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Sent At
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-medium text-charcoal/50 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-charcoal/10">
                   {emails.map((email) => {
                     const StatusIcon = statusIcons[email.status];
                     return (
-                      <tr key={email.id} className="hover:bg-gray-50">
+                      <tr key={email.id} className="hover:bg-deep-ochre/5">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <Mail className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm font-medium text-gray-900">
+                            <Mail className="w-4 h-4 text-charcoal/40" />
+                            <span className="text-sm font-medium text-charcoal">
                               {emailTypeLabels[email.email_type]}
                             </span>
                           </div>
                           <p
-                            className="text-xs text-gray-500 mt-1 truncate max-w-xs"
+                            className="text-xs text-charcoal/50 mt-1 truncate max-w-xs"
                             title={email.subject}
                           >
                             {email.subject}
                           </p>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="text-sm text-gray-900">
+                          <span className="text-sm text-charcoal">
                             {email.recipient_email}
                           </span>
                         </td>
                         <td className="px-6 py-4">
                           <Link
                             href={`/admin/orders/${email.order_display_id}`}
-                            className="text-sm font-mono text-amber-600 hover:text-amber-700"
+                            className="text-sm font-mono text-deep-ochre hover:text-deep-ochre/80"
                           >
                             {email.order_display_id}
                           </Link>
@@ -265,7 +276,7 @@ export default function EmailsPage() {
                             )}
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-6 py-4 text-sm text-charcoal/50">
                           {email.sent_at
                             ? new Date(email.sent_at).toLocaleString('en-IN', {
                                 day: '2-digit',
@@ -280,7 +291,7 @@ export default function EmailsPage() {
                             <button
                               onClick={() => handleResend(email.id)}
                               disabled={resending === email.id}
-                              className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-amber-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition disabled:opacity-50"
+                              className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-deep-ochre hover:text-deep-ochre/80 hover:bg-deep-ochre/5 rounded-lg transition disabled:opacity-50"
                             >
                               <RefreshCw
                                 className={`w-4 h-4 ${
@@ -301,7 +312,7 @@ export default function EmailsPage() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="px-6 py-4 border-t flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-charcoal/50">
                   Showing {(page - 1) * limit + 1} to{' '}
                   {Math.min(page * limit, total)} of {total} emails
                 </p>
@@ -312,7 +323,7 @@ export default function EmailsPage() {
                       updateUrl({ page: (page - 1).toString() });
                     }}
                     disabled={page === 1}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -325,7 +336,7 @@ export default function EmailsPage() {
                       updateUrl({ page: (page + 1).toString() });
                     }}
                     disabled={page === totalPages}
-                    className="p-2 rounded-lg border hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 rounded-lg border hover:bg-deep-ochre/5 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>

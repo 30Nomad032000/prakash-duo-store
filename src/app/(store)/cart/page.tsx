@@ -7,19 +7,25 @@ import { useCart } from '@/context/CartContext';
 import CartItem from '@/components/cart/CartItem';
 import CartSummary from '@/components/cart/CartSummary';
 import { Button } from '@/components/ui/button';
+import PageSeo from '@/components/seo/PageSeo';
 
 export default function CartPage() {
   const { state, clearCart, itemCount } = useCart();
 
   return (
-    <div className="min-h-screen bg-ivory noise-overlay">
+    <div className="min-h-screen bg-warm-ivory noise-overlay pt-20">
+      <PageSeo
+        title="Shopping Bag"
+        description="Review items in your shopping bag."
+        canonical="https://banglesbyprakashduo.store/cart"
+      />
       {/* Header */}
-      <section className="py-4 bg-white border-b border-gold/10">
+      <section className="py-4 bg-warm-ivory border-b border-deep-ochre/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-charcoal/50 hover:text-gold transition-colors">Home</Link>
-            <span className="text-charcoal/30">/</span>
-            <span className="text-charcoal font-medium">Shopping Bag</span>
+            <Link href="/" className="text-raw-umber/50 hover:text-deep-ochre transition-colors">Home</Link>
+            <span className="text-raw-umber/30">/</span>
+            <span className="text-raw-umber font-medium">Shopping Bag</span>
           </nav>
         </div>
       </section>
@@ -33,17 +39,17 @@ export default function CartPage() {
             className="mb-8 md:mb-12"
           >
             <div className="flex items-center gap-4">
-              <ShoppingBag className="w-8 h-8 text-gold" />
-              <h1 className="font-serif text-3xl md:text-4xl text-charcoal">
+              <ShoppingBag className="w-8 h-8 text-deep-ochre" />
+              <h1 className="font-display text-3xl md:text-4xl text-raw-umber">
                 Shopping Bag
               </h1>
               {itemCount > 0 && (
-                <span className="px-3 py-1 text-sm font-medium bg-gold/10 text-gold rounded-full">
+                <span className="px-3 py-1 text-sm font-medium bg-deep-ochre/10 text-deep-ochre rounded-full">
                   {itemCount} {itemCount === 1 ? 'item' : 'items'}
                 </span>
               )}
             </div>
-            <div className="mt-4 w-24 h-[1px] bg-gradient-to-r from-gold to-transparent" />
+            <div className="mt-4 w-24 h-[1px] bg-gradient-to-r from-deep-ochre to-transparent" />
           </motion.div>
 
           {state.items.length === 0 ? (
@@ -53,19 +59,19 @@ export default function CartPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center py-20"
             >
-              <div className="w-24 h-24 mx-auto rounded-full bg-stone-100 flex items-center justify-center mb-6">
-                <ShoppingBag className="w-12 h-12 text-stone-400" />
+              <div className="w-24 h-24 mx-auto rounded-full bg-blush-dust flex items-center justify-center mb-6">
+                <ShoppingBag className="w-12 h-12 text-raw-umber/30" />
               </div>
-              <h2 className="text-2xl font-serif text-charcoal mb-3">
+              <h2 className="text-2xl font-display text-raw-umber mb-3">
                 Your bag is empty
               </h2>
-              <p className="text-charcoal/60 mb-8 max-w-md mx-auto">
+              <p className="text-raw-umber/60 mb-8 max-w-md mx-auto">
                 Looks like you haven&apos;t added any items to your bag yet.
                 Explore our exquisite collection of handcrafted bangles.
               </p>
               <Button
                 asChild
-                className="bg-gold hover:bg-rose-gold text-white rounded-full px-10 py-6 text-base"
+                className="bg-crimson-thread hover:bg-crimson-thread/90 text-warm-ivory rounded-full px-10 py-6 text-base"
               >
                 <Link href="/categories" className="flex items-center gap-2">
                   Start Shopping
@@ -82,14 +88,14 @@ export default function CartPage() {
                 animate={{ opacity: 1, x: 0 }}
                 className="lg:col-span-2"
               >
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-stone-200">
-                    <h2 className="text-lg font-medium text-charcoal">
+                <div className="bg-warm-ivory rounded-3xl p-6 md:p-8 shadow-sm border border-raw-umber/10">
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-raw-umber/10">
+                    <h2 className="text-lg font-medium text-raw-umber">
                       Your Items
                     </h2>
                     <button
                       onClick={clearCart}
-                      className="flex items-center gap-2 text-sm text-charcoal/50 hover:text-red-500 transition-colors"
+                      className="flex items-center gap-2 text-sm text-raw-umber/50 hover:text-crimson-thread transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                       Clear All
@@ -107,10 +113,10 @@ export default function CartPage() {
                   </AnimatePresence>
 
                   {/* Continue Shopping */}
-                  <div className="mt-6 pt-6 border-t border-stone-200">
+                  <div className="mt-6 pt-6 border-t border-raw-umber/10">
                     <Link
                       href="/categories"
-                      className="inline-flex items-center gap-2 text-charcoal/60 hover:text-gold transition-colors"
+                      className="inline-flex items-center gap-2 text-raw-umber/60 hover:text-deep-ochre transition-colors"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       Continue Shopping
@@ -125,18 +131,18 @@ export default function CartPage() {
                 animate={{ opacity: 1, x: 0 }}
                 className="lg:col-span-1"
               >
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm sticky top-8">
-                  <h2 className="text-lg font-medium text-charcoal mb-6 pb-4 border-b border-stone-200">
+                <div className="bg-warm-ivory rounded-3xl p-6 md:p-8 shadow-sm border border-raw-umber/10 sticky top-8">
+                  <h2 className="text-lg font-medium text-raw-umber mb-6 pb-4 border-b border-raw-umber/10">
                     Order Summary
                   </h2>
 
                   <CartSummary showShipping={true} />
 
-                  <div className="mt-6 pt-6 border-t border-stone-200 space-y-3">
+                  <div className="mt-6 pt-6 border-t border-raw-umber/10 space-y-3">
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                       <Button
                         asChild
-                        className="w-full bg-gold hover:bg-rose-gold text-white py-4 rounded-full font-medium"
+                        className="w-full bg-crimson-thread hover:bg-crimson-thread/90 text-warm-ivory py-4 rounded-full font-medium"
                       >
                         <Link href="/checkout" className="flex items-center justify-center gap-2">
                           Proceed to Checkout
@@ -145,23 +151,23 @@ export default function CartPage() {
                       </Button>
                     </motion.div>
 
-                    <p className="text-xs text-center text-charcoal/50">
+                    <p className="text-xs text-center text-raw-umber/50">
                       Secure checkout powered by Razorpay
                     </p>
                   </div>
 
                   {/* Trust Badges */}
-                  <div className="mt-8 pt-6 border-t border-stone-200 space-y-3">
+                  <div className="mt-8 pt-6 border-t border-raw-umber/10 space-y-3">
                     {[
                       { title: 'Free Shipping', desc: 'On orders above ₹999' },
                       { title: 'Secure Payment', desc: '100% secure transactions' },
                       { title: 'Easy Returns', desc: '7 days return policy' },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="text-gold text-sm">✓</span>
+                        <span className="text-deep-ochre text-sm">✓</span>
                         <div>
-                          <p className="text-sm font-medium text-charcoal">{item.title}</p>
-                          <p className="text-xs text-charcoal/50">{item.desc}</p>
+                          <p className="text-sm font-medium text-raw-umber">{item.title}</p>
+                          <p className="text-xs text-raw-umber/50">{item.desc}</p>
                         </div>
                       </div>
                     ))}

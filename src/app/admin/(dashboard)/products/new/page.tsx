@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Plus, X, Save } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const BANGLE_SIZES = ['2.2', '2.4', '2.6', '2.8', '2.10'];
 
@@ -148,11 +149,11 @@ export default function NewProductPage() {
       <div className="flex items-center gap-4 mb-6">
         <Link
           href="/admin/products"
-          className="p-2 hover:bg-gray-100 rounded-lg transition"
+          className="p-2 hover:bg-charcoal/5 rounded-lg transition"
         >
           <ArrowLeft className="w-5 h-5" />
         </Link>
-        <h1 className="text-xl font-bold text-gray-900">Add New Product</h1>
+        <h1 className="text-xl font-bold text-charcoal">Add New Product</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -164,12 +165,12 @@ export default function NewProductPage() {
 
         {/* Basic Info */}
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4">
             Basic Information
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-charcoal/70 mb-1">
                 Product Name *
               </label>
               <input
@@ -178,13 +179,13 @@ export default function NewProductPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="e.g., Premium AD Stone Ruby Bangle"
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-charcoal/70 mb-1">
                   Price (INR) *
                 </label>
                 <input
@@ -195,32 +196,34 @@ export default function NewProductPage() {
                   min="0"
                   step="1"
                   placeholder="e.g., 399"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-charcoal/70 mb-1">
                   Category *
                 </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                <Select
+                  value={category || undefined}
+                  onValueChange={(val) => setCategory(val)}
                 >
-                  <option value="">Select category</option>
-                  {categories.map((cat) => (
-                    <option key={cat.id} value={cat.name}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg h-auto">
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.name}>
+                        {cat.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-charcoal/70 mb-1">
                 Subcategory (optional)
               </label>
               <input
@@ -228,7 +231,7 @@ export default function NewProductPage() {
                 value={subcategory}
                 onChange={(e) => setSubcategory(e.target.value)}
                 placeholder="e.g., Ruby Collection"
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
               />
             </div>
           </div>
@@ -236,12 +239,12 @@ export default function NewProductPage() {
 
         {/* Sizes & Stock */}
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4">
             Sizes & Initial Stock
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-charcoal/70 mb-2">
                 Available Sizes *
               </label>
               <div className="flex flex-wrap gap-2">
@@ -252,8 +255,8 @@ export default function NewProductPage() {
                     onClick={() => handleSizeToggle(size)}
                     className={`px-4 py-2 rounded-lg border-2 font-medium transition ${
                       selectedSizes.includes(size)
-                        ? 'border-amber-500 bg-amber-50 text-amber-700'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-deep-ochre bg-deep-ochre/5 text-deep-ochre/80'
+                        : 'border-gold/10 hover:border-charcoal/15'
                     }`}
                   >
                     {size}
@@ -264,7 +267,7 @@ export default function NewProductPage() {
 
             {selectedSizes.length > 0 && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-charcoal/70 mb-2">
                   Initial Stock per Size
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -283,7 +286,7 @@ export default function NewProductPage() {
                           })
                         }
                         min="0"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                        className="flex-1 px-3 py-2 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                       />
                     </div>
                   ))}
@@ -295,7 +298,7 @@ export default function NewProductPage() {
 
         {/* Images */}
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4">
             Product Images
           </h2>
           <div className="space-y-4">
@@ -308,7 +311,7 @@ export default function NewProductPage() {
                       value={image}
                       onChange={(e) => handleImageChange(index, e.target.value)}
                       placeholder={`Image URL ${index + 1}`}
-                      className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                     />
                     {images.length > 1 && (
                       <button
@@ -321,7 +324,7 @@ export default function NewProductPage() {
                     )}
                   </div>
                   {image && (
-                    <div className="mt-2 relative w-20 h-20 bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="mt-2 relative w-20 h-20 bg-charcoal/5 rounded-lg overflow-hidden">
                       <Image
                         src={image}
                         alt={`Preview ${index + 1}`}
@@ -339,12 +342,12 @@ export default function NewProductPage() {
             <button
               type="button"
               onClick={addImageField}
-              className="flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium"
+              className="flex items-center gap-2 text-deep-ochre hover:text-deep-ochre/80 font-medium"
             >
               <Plus className="w-4 h-4" />
               Add Another Image
             </button>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-charcoal/50">
               Enter the URL path for product images (e.g.,
               /assets/category/product/1.webp)
             </p>
@@ -355,14 +358,14 @@ export default function NewProductPage() {
         <div className="flex gap-4">
           <Link
             href="/admin/products"
-            className="flex-1 px-6 py-3 border border-gray-300 rounded-lg text-center hover:bg-gray-50 transition"
+            className="flex-1 px-6 py-3 border border-charcoal/15 rounded-lg text-center hover:bg-warm-ivory/50 transition"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 transition disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             {loading ? 'Creating...' : 'Create Product'}

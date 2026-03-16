@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import {
   ArrowLeft,
   Package,
@@ -18,6 +18,7 @@ import {
   Calendar,
   X,
   Send,
+  Printer,
 } from 'lucide-react';
 import type { Order } from '@/lib/types';
 
@@ -51,12 +52,8 @@ interface ExtendedOrder extends Order {
   trackingInfo?: TrackingInfo;
 }
 
-export default function OrderDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function OrderDetailPage() {
+  const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const searchParams = useSearchParams();
   const showShipModal = searchParams.get('action') === 'ship';
@@ -163,7 +160,7 @@ export default function OrderDetailPage({
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deep-ochre"></div>
       </div>
     );
   }
@@ -171,11 +168,11 @@ export default function OrderDetailPage({
   if (!order) {
     return (
       <div className="text-center py-12">
-        <Package className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-        <p className="text-gray-500">Order not found</p>
+        <Package className="w-12 h-12 mx-auto mb-4 text-charcoal/30" />
+        <p className="text-charcoal/50">Order not found</p>
         <Link
           href="/admin/orders"
-          className="mt-4 inline-flex items-center gap-2 text-amber-600 hover:text-amber-700"
+          className="mt-4 inline-flex items-center gap-2 text-deep-ochre hover:text-deep-ochre/80"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Orders
@@ -193,13 +190,13 @@ export default function OrderDetailPage({
         <div className="flex items-center gap-4">
           <Link
             href="/admin/orders"
-            className="p-2 hover:bg-gray-100 rounded-lg transition"
+            className="p-2 hover:bg-charcoal/5 rounded-lg transition"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">{order.orderId}</h1>
-            <p className="text-sm text-gray-500">
+            <h1 className="text-xl font-bold text-charcoal">{order.orderId}</h1>
+            <p className="text-sm text-charcoal/50">
               Placed on{' '}
               {new Date(order.createdAt).toLocaleDateString('en-IN', {
                 day: '2-digit',
@@ -212,6 +209,14 @@ export default function OrderDetailPage({
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <Link
+            href={`/admin/orders/${order.orderId}/invoice`}
+            target="_blank"
+            className="px-4 py-2 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 flex items-center gap-2 text-sm font-medium"
+          >
+            <Printer className="w-4 h-4" />
+            Print Invoice
+          </Link>
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
               statusColors[order.status]
@@ -225,7 +230,7 @@ export default function OrderDetailPage({
       {/* Status Timeline */}
       {order.status !== 'cancelled' && (
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">
+          <h2 className="text-lg font-semibold text-charcoal mb-6">
             Order Status
           </h2>
           <div className="relative">
@@ -242,14 +247,14 @@ export default function OrderDetailPage({
                       className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         isCompleted
                           ? 'bg-green-500 text-white'
-                          : 'bg-gray-200 text-gray-400'
+                          : 'bg-charcoal/10 text-charcoal/40'
                       } ${isCurrent ? 'ring-4 ring-green-100' : ''}`}
                     >
                       <step.icon className="w-5 h-5" />
                     </div>
                     <span
                       className={`mt-2 text-sm font-medium ${
-                        isCompleted ? 'text-green-600' : 'text-gray-400'
+                        isCompleted ? 'text-green-600' : 'text-charcoal/40'
                       }`}
                     >
                       {step.label}
@@ -259,7 +264,7 @@ export default function OrderDetailPage({
               })}
             </div>
             {/* Progress line */}
-            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 -z-0">
+            <div className="absolute top-5 left-0 right-0 h-0.5 bg-charcoal/10 -z-0">
               <div
                 className="h-full bg-green-500 transition-all duration-500"
                 style={{
@@ -317,23 +322,23 @@ export default function OrderDetailPage({
       {/* Tracking Info */}
       {order.trackingInfo?.trackingId && (
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4">
             Shipping Information
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <p className="text-sm text-gray-500">Carrier</p>
+              <p className="text-sm text-charcoal/50">Carrier</p>
               <p className="font-medium">{order.trackingInfo.carrier}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Tracking ID</p>
+              <p className="text-sm text-charcoal/50">Tracking ID</p>
               <p className="font-mono font-medium">
                 {order.trackingInfo.trackingId}
               </p>
             </div>
             {order.trackingInfo.shippedAt && (
               <div>
-                <p className="text-sm text-gray-500">Shipped At</p>
+                <p className="text-sm text-charcoal/50">Shipped At</p>
                 <p className="font-medium">
                   {new Date(order.trackingInfo.shippedAt).toLocaleDateString(
                     'en-IN'
@@ -343,7 +348,7 @@ export default function OrderDetailPage({
             )}
             {order.trackingInfo.estimatedDelivery && (
               <div>
-                <p className="text-sm text-gray-500">Est. Delivery</p>
+                <p className="text-sm text-charcoal/50">Est. Delivery</p>
                 <p className="font-medium">
                   {new Date(
                     order.trackingInfo.estimatedDelivery
@@ -353,15 +358,15 @@ export default function OrderDetailPage({
             )}
           </div>
           {order.trackingInfo.notes && (
-            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600">{order.trackingInfo.notes}</p>
+            <div className="mt-4 p-3 bg-warm-ivory/50 rounded-lg">
+              <p className="text-sm text-charcoal/60">{order.trackingInfo.notes}</p>
             </div>
           )}
           <a
             href={`https://www.dtdc.in/tracking/shipment-tracking.asp?strCnno=${order.trackingInfo.trackingId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 text-sm font-medium"
+            className="mt-4 inline-flex items-center gap-2 text-deep-ochre hover:text-deep-ochre/80 text-sm font-medium"
           >
             <Truck className="w-4 h-4" />
             Track on DTDC Website
@@ -373,12 +378,12 @@ export default function OrderDetailPage({
         {/* Order Items */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm">
           <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">Order Items</h2>
+            <h2 className="text-lg font-semibold text-charcoal">Order Items</h2>
           </div>
           <div className="divide-y">
             {order.items.map((item, index) => (
               <div key={index} className="p-6 flex gap-4">
-                <div className="relative w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                <div className="relative w-20 h-20 bg-charcoal/5 rounded-lg overflow-hidden flex-shrink-0">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -387,31 +392,31 @@ export default function OrderDetailPage({
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium text-gray-900 truncate">
+                  <h3 className="font-medium text-charcoal truncate">
                     {item.name}
                   </h3>
-                  <p className="text-sm text-gray-500 mt-1">Size: {item.size}</p>
-                  <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                  <p className="text-sm text-charcoal/50 mt-1">Size: {item.size}</p>
+                  <p className="text-sm text-charcoal/50">Qty: {item.quantity}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium text-gray-900">
+                  <p className="font-medium text-charcoal">
                     ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-charcoal/50">
                     ₹{item.price.toLocaleString('en-IN')} each
                   </p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="p-6 bg-gray-50 border-t">
+          <div className="p-6 bg-warm-ivory/50 border-t">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Subtotal</span>
+                <span className="text-charcoal/50">Subtotal</span>
                 <span>₹{order.subtotal.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Shipping</span>
+                <span className="text-charcoal/50">Shipping</span>
                 <span>
                   {order.shipping === 0
                     ? 'Free'
@@ -420,7 +425,7 @@ export default function OrderDetailPage({
               </div>
               {order.tax > 0 && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Tax</span>
+                  <span className="text-charcoal/50">Tax</span>
                   <span>₹{order.tax.toLocaleString('en-IN')}</span>
                 </div>
               )}
@@ -436,30 +441,30 @@ export default function OrderDetailPage({
         <div className="space-y-6">
           {/* Customer Info */}
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            <h2 className="text-lg font-semibold text-charcoal mb-4">
               Customer
             </h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <User className="w-4 h-4 text-gray-400" />
+                <User className="w-4 h-4 text-charcoal/40" />
                 <span>
                   {order.customer.firstName} {order.customer.lastName}
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-gray-400" />
+                <Mail className="w-4 h-4 text-charcoal/40" />
                 <a
                   href={`mailto:${order.customer.email}`}
-                  className="text-amber-600 hover:text-amber-700"
+                  className="text-deep-ochre hover:text-deep-ochre/80"
                 >
                   {order.customer.email}
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-gray-400" />
+                <Phone className="w-4 h-4 text-charcoal/40" />
                 <a
                   href={`tel:${order.customer.phone}`}
-                  className="text-amber-600 hover:text-amber-700"
+                  className="text-deep-ochre hover:text-deep-ochre/80"
                 >
                   {order.customer.phone}
                 </a>
@@ -469,13 +474,13 @@ export default function OrderDetailPage({
 
           {/* Shipping Address */}
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            <h2 className="text-lg font-semibold text-charcoal mb-4">
               Shipping Address
             </h2>
             <div className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 text-gray-400 mt-1" />
-              <div className="text-sm text-gray-600">
-                <p className="font-medium text-gray-900">
+              <MapPin className="w-4 h-4 text-charcoal/40 mt-1" />
+              <div className="text-sm text-charcoal/60">
+                <p className="font-medium text-charcoal">
                   {order.shippingAddress.firstName}{' '}
                   {order.shippingAddress.lastName}
                 </p>
@@ -494,11 +499,11 @@ export default function OrderDetailPage({
 
           {/* Payment Info */}
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Payment</h2>
+            <h2 className="text-lg font-semibold text-charcoal mb-4">Payment</h2>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <CreditCard className="w-4 h-4 text-gray-400" />
+                  <CreditCard className="w-4 h-4 text-charcoal/40" />
                   <span className="text-sm">Status</span>
                 </div>
                 <span
@@ -517,10 +522,10 @@ export default function OrderDetailPage({
               {order.paymentSessionId && (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-4 h-4 text-gray-400" />
+                    <Calendar className="w-4 h-4 text-charcoal/40" />
                     <span className="text-sm">Session ID</span>
                   </div>
-                  <span className="text-xs font-mono text-gray-500">
+                  <span className="text-xs font-mono text-charcoal/50">
                     {order.paymentSessionId.slice(0, 12)}...
                   </span>
                 </div>
@@ -543,7 +548,7 @@ export default function OrderDetailPage({
           <div className="relative min-h-screen flex items-center justify-center p-4">
             <div className="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-charcoal">
                   Add Shipping Details
                 </h3>
                 <button
@@ -551,7 +556,7 @@ export default function OrderDetailPage({
                     setTrackingModal(false);
                     router.replace(`/admin/orders/${id}`);
                   }}
-                  className="p-2 hover:bg-gray-100 rounded-lg"
+                  className="p-2 hover:bg-charcoal/5 rounded-lg"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -559,7 +564,7 @@ export default function OrderDetailPage({
 
               <form onSubmit={addTracking} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-charcoal/70 mb-1">
                     DTDC Tracking ID *
                   </label>
                   <input
@@ -568,24 +573,24 @@ export default function OrderDetailPage({
                     onChange={(e) => setTrackingId(e.target.value)}
                     required
                     placeholder="e.g., D12345678"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-charcoal/70 mb-1">
                     Estimated Delivery Date
                   </label>
                   <input
                     type="date"
                     value={estimatedDelivery}
                     onChange={(e) => setEstimatedDelivery(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-charcoal/70 mb-1">
                     Notes (optional)
                   </label>
                   <textarea
@@ -593,7 +598,7 @@ export default function OrderDetailPage({
                     onChange={(e) => setTrackingNotes(e.target.value)}
                     rows={3}
                     placeholder="Any additional notes..."
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none resize-none"
+                    className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none resize-none"
                   />
                 </div>
 
@@ -611,14 +616,14 @@ export default function OrderDetailPage({
                       setTrackingModal(false);
                       router.replace(`/admin/orders/${id}`);
                     }}
-                    className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50"
+                    className="flex-1 px-4 py-2.5 border border-charcoal/15 rounded-lg hover:bg-deep-ochre/5"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={updating || !trackingId}
-                    className="flex-1 px-4 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 disabled:opacity-50"
                   >
                     {updating ? 'Saving...' : 'Add & Ship'}
                   </button>

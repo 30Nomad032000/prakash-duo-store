@@ -9,7 +9,7 @@ import {
   Boxes,
   FolderTree,
   Mail,
-  Settings,
+  ExternalLink,
 } from 'lucide-react';
 
 const navigation = [
@@ -35,45 +35,83 @@ export default function AdminSidebar() {
     <>
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-gray-900 overflow-y-auto">
-          {/* Logo */}
-          <div className="flex items-center h-16 px-6 bg-gray-950">
-            <Link href="/admin" className="flex items-center gap-2">
-              <span className="text-xl font-bold text-white">Prakash Duo</span>
+        <div className="flex flex-col flex-grow bg-raw-umber overflow-y-auto noise-overlay">
+          {/* Brand header */}
+          <div className="px-6 pt-8 pb-6">
+            <Link href="/admin" className="block">
+              <span className="font-display text-2xl font-bold text-warm-ivory tracking-tight">
+                Prakash<span className="text-deep-ochre">Duo</span>
+              </span>
+              <div className="flex items-center gap-2 mt-1.5">
+                <div className="h-px w-6 bg-deep-ochre/40" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-warm-ivory/40">
+                  Admin
+                </span>
+              </div>
             </Link>
           </div>
 
+          {/* Divider */}
+          <div className="mx-6 h-px bg-gradient-to-r from-deep-ochre/30 via-warm-ivory/10 to-transparent" />
+
           {/* Navigation */}
-          <nav className="flex-1 px-3 py-4 space-y-1">
+          <nav className="flex-1 px-4 py-6 space-y-1">
             {navigation.map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                  className={`group relative flex items-center px-3 py-2.5 text-sm font-body font-medium rounded-xl transition-all duration-300 ${
                     active
-                      ? 'bg-amber-600 text-white'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      ? 'bg-warm-ivory/10 text-deep-ochre'
+                      : 'text-warm-ivory/50 hover:bg-warm-ivory/5 hover:text-warm-ivory/80'
                   }`}
                 >
-                  <item.icon className="w-5 h-5 mr-3" />
-                  {item.name}
+                  {/* Active indicator — gold left bar */}
+                  {active && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-deep-ochre rounded-r-full" />
+                  )}
+
+                  <item.icon className={`w-[18px] h-[18px] mr-3 transition-colors duration-300 ${
+                    active ? 'text-deep-ochre' : 'text-warm-ivory/40 group-hover:text-warm-ivory/60'
+                  }`} />
+
+                  <span className="relative">
+                    {item.name}
+                    {/* Subtle underline on active */}
+                    {active && (
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-deep-ochre/30" />
+                    )}
+                  </span>
                 </Link>
               );
             })}
           </nav>
 
-          {/* Store link */}
-          <div className="px-3 py-4 border-t border-gray-800">
+          {/* Bottom section */}
+          <div className="px-4 pb-6">
+            {/* Divider */}
+            <div className="mx-2 mb-4 h-px bg-gradient-to-r from-deep-ochre/20 via-warm-ivory/8 to-transparent" />
+
             <Link
               href="/"
               target="_blank"
-              className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 transition-colors"
+              className="group flex items-center px-3 py-2.5 text-sm font-body font-medium text-warm-ivory/40 hover:text-warm-ivory/70 rounded-xl hover:bg-warm-ivory/5 transition-all duration-300"
             >
-              <Settings className="w-5 h-5 mr-3" />
+              <ExternalLink className="w-[18px] h-[18px] mr-3 text-warm-ivory/30 group-hover:text-deep-ochre/60 transition-colors" />
               View Store
             </Link>
+
+            {/* Tiny brand footer */}
+            <div className="mt-6 px-3">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
+                <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-warm-ivory/25">
+                  System Online
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

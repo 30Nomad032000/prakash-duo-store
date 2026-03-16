@@ -60,14 +60,14 @@ function OrderConfirmationContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-ivory flex items-center justify-center">
+      <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
         <motion.div
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="text-center"
         >
-          <Loader2 className="w-12 h-12 text-gold mx-auto mb-4 animate-spin" />
-          <p className="text-charcoal/60 font-display text-xl">Loading your order...</p>
+          <Loader2 className="w-12 h-12 text-deep-ochre mx-auto mb-4 animate-spin" />
+          <p className="text-raw-umber/60 font-display text-xl">Loading your order...</p>
         </motion.div>
       </div>
     );
@@ -75,7 +75,7 @@ function OrderConfirmationContent() {
 
   if (error || !order) {
     return (
-      <div className="min-h-screen bg-ivory">
+      <div className="min-h-screen bg-warm-ivory">
         <div className="max-w-4xl mx-auto px-4 py-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,13 +85,13 @@ function OrderConfirmationContent() {
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-50 flex items-center justify-center">
               <XCircle className="w-10 h-10 text-red-500" />
             </div>
-            <h1 className="font-display text-4xl text-charcoal mb-4">
+            <h1 className="font-display text-4xl text-raw-umber mb-4">
               Order Not Found
             </h1>
-            <p className="text-charcoal/60 mb-8 max-w-md mx-auto">
+            <p className="text-raw-umber/60 mb-8 max-w-md mx-auto">
               {error || "We couldn't find your order. Please check your order ID and try again."}
             </p>
-            <Button asChild className="bg-gold hover:bg-rose-gold text-white rounded-full px-8">
+            <Button asChild className="bg-crimson-thread hover:bg-crimson-thread/90 text-warm-ivory rounded-full px-8">
               <Link href="/">Return to Home</Link>
             </Button>
           </motion.div>
@@ -103,9 +103,9 @@ function OrderConfirmationContent() {
   const isPaid = order.paymentStatus === 'paid';
 
   return (
-    <div className="min-h-screen bg-ivory noise-overlay">
+    <div className="min-h-screen bg-warm-ivory noise-overlay pt-20">
       {/* Success Header */}
-      <section className="py-16 bg-white border-b border-gold/10">
+      <section className="py-16 bg-warm-ivory border-b border-deep-ochre/10">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div
             initial={{ scale: 0 }}
@@ -120,7 +120,7 @@ function OrderConfirmationContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-serif text-3xl md:text-4xl text-charcoal mb-3"
+            className="font-display text-3xl md:text-4xl text-raw-umber mb-3"
           >
             {isPaid ? 'Thank You for Your Order!' : 'Order Received'}
           </motion.h1>
@@ -129,7 +129,7 @@ function OrderConfirmationContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-charcoal/60 mb-4"
+            className="text-raw-umber/60 mb-4"
           >
             {isPaid
               ? 'Your order has been confirmed and is being processed.'
@@ -140,10 +140,10 @@ function OrderConfirmationContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 rounded-full"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-deep-ochre/10 rounded-full"
           >
-            <span className="text-sm text-charcoal/60">Order ID:</span>
-            <span className="text-sm font-semibold text-charcoal">{order.orderId}</span>
+            <span className="text-sm text-raw-umber/60">Order ID:</span>
+            <span className="text-sm font-semibold text-raw-umber">{order.orderId}</span>
           </motion.div>
         </div>
       </section>
@@ -157,10 +157,10 @@ function OrderConfirmationContent() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white rounded-2xl p-6 shadow-sm"
+              className="bg-warm-ivory rounded-3xl p-6 shadow-sm"
             >
-              <h2 className="text-lg font-medium text-charcoal mb-6 flex items-center gap-2">
-                <Package className="w-5 h-5 text-gold" />
+              <h2 className="text-lg font-medium text-raw-umber mb-6 flex items-center gap-2">
+                <Package className="w-5 h-5 text-deep-ochre" />
                 Order Status
               </h2>
 
@@ -170,8 +170,8 @@ function OrderConfirmationContent() {
                     <CheckCircle className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="font-medium text-charcoal">Order Placed</p>
-                    <p className="text-sm text-charcoal/50">
+                    <p className="font-medium text-raw-umber">Order Placed</p>
+                    <p className="text-sm text-raw-umber/50">
                       {new Date(order.createdAt).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
@@ -194,22 +194,22 @@ function OrderConfirmationContent() {
                     )}
                   </div>
                   <div>
-                    <p className="font-medium text-charcoal">
+                    <p className="font-medium text-raw-umber">
                       {isPaid ? 'Payment Confirmed' : 'Awaiting Payment'}
                     </p>
-                    <p className="text-sm text-charcoal/50">
+                    <p className="text-sm text-raw-umber/50">
                       {isPaid ? 'Payment received successfully' : 'Verifying payment...'}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center">
-                    <Truck className="w-5 h-5 text-stone-400" />
+                  <div className="w-10 h-10 rounded-full bg-blush-dust/30 flex items-center justify-center">
+                    <Truck className="w-5 h-5 text-raw-umber/40" />
                   </div>
                   <div>
-                    <p className="font-medium text-charcoal/50">Shipping</p>
-                    <p className="text-sm text-charcoal/40">Estimated 3-5 business days</p>
+                    <p className="font-medium text-raw-umber/50">Shipping</p>
+                    <p className="text-sm text-raw-umber/40">Estimated 3-5 business days</p>
                   </div>
                 </div>
               </div>
@@ -220,15 +220,15 @@ function OrderConfirmationContent() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-white rounded-2xl p-6 shadow-sm"
+              className="bg-warm-ivory rounded-3xl p-6 shadow-sm"
             >
-              <h2 className="text-lg font-medium text-charcoal mb-6 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-gold" />
+              <h2 className="text-lg font-medium text-raw-umber mb-6 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-deep-ochre" />
                 Shipping Address
               </h2>
 
-              <div className="text-charcoal/80">
-                <p className="font-medium text-charcoal">
+              <div className="text-raw-umber/80">
+                <p className="font-medium text-raw-umber">
                   {order.shippingAddress.firstName} {order.shippingAddress.lastName}
                 </p>
                 <p>{order.shippingAddress.address}</p>
@@ -237,7 +237,7 @@ function OrderConfirmationContent() {
                   {order.shippingAddress.city}, {order.shippingAddress.state} -{' '}
                   {order.shippingAddress.pincode}
                 </p>
-                <p className="mt-2 text-charcoal/60">Phone: {order.shippingAddress.phone}</p>
+                <p className="mt-2 text-raw-umber/60">Phone: {order.shippingAddress.phone}</p>
               </div>
             </motion.div>
           </div>
@@ -247,17 +247,17 @@ function OrderConfirmationContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="mt-8 bg-white rounded-2xl p-6 shadow-sm"
+            className="mt-8 bg-warm-ivory rounded-3xl p-6 shadow-sm"
           >
-            <h2 className="text-lg font-medium text-charcoal mb-6">Order Items</h2>
+            <h2 className="text-lg font-medium text-raw-umber mb-6">Order Items</h2>
 
             <div className="space-y-4">
               {order.items.map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 py-4 border-b border-stone-100 last:border-0"
+                  className="flex gap-4 py-4 border-b border-raw-umber/10 last:border-0"
                 >
-                  <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-stone-100">
+                  <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-blush-dust/30">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -266,13 +266,13 @@ function OrderConfirmationContent() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-charcoal">{item.name}</h3>
-                    <p className="text-sm text-charcoal/50">
+                    <h3 className="font-medium text-raw-umber">{item.name}</h3>
+                    <p className="text-sm text-raw-umber/50">
                       Size: {item.size} | Qty: {item.quantity}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-charcoal">
+                    <p className="font-semibold text-raw-umber">
                       ₹{(item.price * item.quantity).toLocaleString()}
                     </p>
                   </div>
@@ -281,18 +281,18 @@ function OrderConfirmationContent() {
             </div>
 
             {/* Order Summary */}
-            <div className="mt-6 pt-6 border-t border-stone-200 space-y-2">
-              <div className="flex justify-between text-sm text-charcoal/70">
+            <div className="mt-6 pt-6 border-t border-raw-umber/10 space-y-2">
+              <div className="flex justify-between text-sm text-raw-umber/70">
                 <span>Subtotal</span>
                 <span>₹{order.subtotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-sm text-charcoal/70">
+              <div className="flex justify-between text-sm text-raw-umber/70">
                 <span>Shipping</span>
                 <span>{order.shipping === 0 ? 'FREE' : `₹${order.shipping}`}</span>
               </div>
-              <div className="flex justify-between text-lg font-semibold text-charcoal pt-2 border-t border-stone-200">
+              <div className="flex justify-between text-lg font-semibold text-raw-umber pt-2 border-t border-raw-umber/10">
                 <span>Total</span>
-                <span className="text-gold">₹{order.total.toLocaleString()}</span>
+                <span className="text-deep-ochre">₹{order.total.toLocaleString()}</span>
               </div>
             </div>
           </motion.div>
@@ -306,7 +306,7 @@ function OrderConfirmationContent() {
           >
             <Button
               asChild
-              className="bg-gold hover:bg-rose-gold text-white rounded-full px-8"
+              className="bg-crimson-thread hover:bg-crimson-thread/90 text-warm-ivory rounded-full px-8"
             >
               <Link href="/categories" className="flex items-center gap-2">
                 Continue Shopping
@@ -316,7 +316,7 @@ function OrderConfirmationContent() {
             <Button
               asChild
               variant="outline"
-              className="rounded-full px-8 border-charcoal/20 hover:border-gold hover:bg-gold/5"
+              className="rounded-full px-8 border-raw-umber/20 hover:border-deep-ochre hover:bg-deep-ochre/5"
             >
               <Link href={`/track-order?order_id=${order.orderId}`}>Track Order</Link>
             </Button>
@@ -327,15 +327,15 @@ function OrderConfirmationContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="mt-12 text-center text-sm text-charcoal/50"
+            className="mt-12 text-center text-sm text-raw-umber/50"
           >
             <p>
               A confirmation email has been sent to{' '}
-              <span className="font-medium text-charcoal">{order.customer.email}</span>
+              <span className="font-medium text-raw-umber">{order.customer.email}</span>
             </p>
             <p className="mt-2">
               Questions? Contact us at{' '}
-              <a href="mailto:support@prakashduo.com" className="text-gold hover:underline">
+              <a href="mailto:support@prakashduo.com" className="text-deep-ochre hover:underline">
                 support@prakashduo.com
               </a>
             </p>
@@ -350,8 +350,8 @@ export default function OrderConfirmationPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-ivory flex items-center justify-center">
-          <Loader2 className="w-12 h-12 text-gold animate-spin" />
+        <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-deep-ochre animate-spin" />
         </div>
       }
     >

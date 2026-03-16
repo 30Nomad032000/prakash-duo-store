@@ -68,20 +68,20 @@ export default function AdminHeader() {
 
   return (
     <>
-      <header className="bg-white shadow-sm sticky top-0 z-40">
+      <header className="bg-warm-ivory border-b border-gold/10 sticky top-0 z-40">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
+              className="lg:hidden p-2 rounded-md text-charcoal/60 hover:bg-charcoal/5"
               onClick={() => setMobileMenuOpen(true)}
             >
               <Menu className="w-6 h-6" />
             </button>
 
             {/* Page title */}
-            <h1 className="text-lg font-semibold text-gray-900 lg:ml-0 ml-4">
+            <h1 className="text-lg font-semibold text-charcoal font-display lg:ml-0 ml-4">
               {getPageTitle()}
             </h1>
 
@@ -89,13 +89,13 @@ export default function AdminHeader() {
             <div className="relative">
               <button
                 type="button"
-                className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition"
+                className="flex items-center gap-2 p-2 rounded-lg hover:bg-charcoal/5 transition"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
               >
-                <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-amber-600" />
+                <div className="w-8 h-8 bg-deep-ochre/15 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-deep-ochre" />
                 </div>
-                <ChevronDown className="w-4 h-4 text-gray-500" />
+                <ChevronDown className="w-4 h-4 text-charcoal/50" />
               </button>
 
               {userMenuOpen && (
@@ -104,11 +104,11 @@ export default function AdminHeader() {
                     className="fixed inset-0 z-40"
                     onClick={() => setUserMenuOpen(false)}
                   />
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
-                    <div className="py-1">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-raw-umber/10 z-50 overflow-hidden">
+                    <div className="p-1">
                       <button
                         onClick={handleSignOut}
-                        className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="w-full flex items-center px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                       >
                         <LogOut className="w-4 h-4 mr-3" />
                         Sign Out
@@ -127,24 +127,37 @@ export default function AdminHeader() {
         <div className="lg:hidden fixed inset-0 z-50">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-gray-900/80"
+            className="fixed inset-0 bg-raw-umber/80"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Sidebar */}
-          <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 overflow-y-auto">
-            <div className="flex items-center justify-between h-16 px-6 bg-gray-950">
-              <span className="text-xl font-bold text-white">Prakash Duo</span>
+          <div className="fixed inset-y-0 left-0 w-64 bg-raw-umber overflow-y-auto noise-overlay">
+            {/* Brand header */}
+            <div className="flex items-center justify-between px-6 pt-8 pb-6">
+              <div>
+                <span className="font-display text-2xl font-bold text-warm-ivory tracking-tight">
+                  Prakash<span className="text-deep-ochre">Duo</span>
+                </span>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="h-px w-6 bg-deep-ochre/40" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-warm-ivory/40">
+                    Admin
+                  </span>
+                </div>
+              </div>
               <button
                 type="button"
-                className="p-2 rounded-md text-gray-400 hover:text-white"
+                className="p-2 rounded-xl text-warm-ivory/50 hover:text-warm-ivory hover:bg-warm-ivory/5 transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="px-3 py-4 space-y-1">
+            <div className="mx-6 h-px bg-gradient-to-r from-deep-ochre/30 via-warm-ivory/10 to-transparent" />
+
+            <nav className="px-4 py-6 space-y-1">
               {navigation.map((item) => {
                 const active = isActive(item.href);
                 return (
@@ -152,13 +165,18 @@ export default function AdminHeader() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                    className={`group relative flex items-center px-3 py-2.5 text-sm font-body font-medium rounded-xl transition-all duration-300 ${
                       active
-                        ? 'bg-amber-600 text-white'
-                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                        ? 'bg-warm-ivory/10 text-deep-ochre'
+                        : 'text-warm-ivory/50 hover:bg-warm-ivory/5 hover:text-warm-ivory/80'
                     }`}
                   >
-                    <item.icon className="w-5 h-5 mr-3" />
+                    {active && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-deep-ochre rounded-r-full" />
+                    )}
+                    <item.icon className={`w-[18px] h-[18px] mr-3 transition-colors duration-300 ${
+                      active ? 'text-deep-ochre' : 'text-warm-ivory/40 group-hover:text-warm-ivory/60'
+                    }`} />
                     {item.name}
                   </Link>
                 );

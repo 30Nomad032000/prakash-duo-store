@@ -1,40 +1,25 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, MapPin, Phone, Clock, Send, Instagram } from "lucide-react";
+import PageSeo from '@/components/seo/PageSeo';
 
-function AnimatedSection({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function ContactPage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -75,36 +60,88 @@ export default function ContactPage() {
     { icon: Instagram, label: "Instagram", href: "#" },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero text entrance
+      gsap.from(".contact-hero-text > *", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.2,
+      });
+
+      // Contact info cards
+      gsap.from(".contact-info-card", {
+        y: 50,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+        },
+      });
+
+      // Social links
+      gsap.from(".social-block", {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 60%",
+        },
+      });
+
+      // Contact form
+      gsap.from(".contact-form-block", {
+        y: 60,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: "top 80%",
+        },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="bg-ivory noise-overlay">
+    <div className="bg-warm-ivory noise-overlay">
+      <PageSeo
+        title="Contact Us — Prakash Duo Bangles"
+        description="Get in touch with Prakash Duo for handcrafted bangles. Call +91 79092 02091 or email us. Based in Thrissur, Kerala."
+        canonical="https://banglesbyprakashduo.store/contact"
+      />
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-charcoal overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 md:pt-36 pb-16 md:pb-20 bg-raw-umber overflow-hidden">
+        {/* Grain texture */}
+        <div className="absolute inset-0 hero-grain pointer-events-none" />
+        {/* Decorative blurs */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-deep-ochre/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-gold/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-gold/20 mb-6">
-              <Mail className="w-4 h-4 text-gold" />
-              <span className="text-gold text-sm font-medium tracking-widest uppercase">
-                Get in Touch
-              </span>
-            </span>
+        <div className="contact-hero-text relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-6">
+            Get in Touch
+          </p>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">
-              Contact <span className="gradient-text">Us</span>
-            </h1>
+          <h1 className="font-display text-warm-ivory text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            Contact <span className="font-drama italic font-normal">Us.</span>
+          </h1>
 
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Have a question or need assistance? We&apos;re here to help you find the perfect piece
-            </p>
-          </motion.div>
+          <p className="font-body text-warm-ivory/70 text-lg max-w-2xl mx-auto">
+            Have a question or need assistance? We&apos;re here to help you find the perfect piece.
+          </p>
         </div>
       </section>
 
@@ -112,99 +149,106 @@ export default function ContactPage() {
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Contact Info */}
-            <div>
-              <AnimatedSection>
-                <h2 className="font-display text-3xl md:text-4xl text-charcoal mb-8">
-                  Let&apos;s Start a Conversation
+            {/* Contact Info Column */}
+            <div ref={infoRef}>
+              <div className="mb-10">
+                <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-3">
+                  Reach Out
+                </p>
+                <h2 className="font-display text-raw-umber text-3xl md:text-4xl font-bold mb-4">
+                  Let&apos;s Start a <span className="font-drama italic font-normal">Conversation.</span>
                 </h2>
-                <p className="text-charcoal/70 mb-10 leading-relaxed">
+                <p className="font-body text-raw-umber/70 leading-relaxed">
                   Whether you have a question about our bangles, need help with an order,
                   or just want to share your feedback, we&apos;d love to hear from you.
                 </p>
-              </AnimatedSection>
+              </div>
 
-              <div className="grid sm:grid-cols-2 gap-6">
-                {contactInfo.map((item, i) => (
-                  <AnimatedSection key={i} delay={i * 0.1}>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        className="group block p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300"
-                      >
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                          <item.icon className="w-5 h-5 text-gold" />
-                        </div>
-                        <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
-                        {item.lines.map((line, j) => (
-                          <p key={j} className="text-charcoal/60 text-sm group-hover:text-gold transition-colors">{line}</p>
-                        ))}
-                      </a>
-                    ) : (
-                      <div className="group p-6 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-lg transition-all duration-300">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                          <item.icon className="w-5 h-5 text-gold" />
-                        </div>
-                        <h3 className="font-display text-lg text-charcoal mb-2">{item.title}</h3>
-                        {item.lines.map((line, j) => (
-                          <p key={j} className="text-charcoal/60 text-sm">{line}</p>
-                        ))}
+              <div className="grid sm:grid-cols-2 gap-5">
+                {contactInfo.map((item, i) => {
+                  const CardContent = (
+                    <>
+                      <div className="w-12 h-12 rounded-full bg-deep-ochre/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-5 h-5 text-deep-ochre" />
                       </div>
-                    )}
-                  </AnimatedSection>
-                ))}
+                      <h3 className="font-display text-lg text-raw-umber mb-2">
+                        {item.title}
+                      </h3>
+                      {item.lines.map((line, j) => (
+                        <p
+                          key={j}
+                          className="font-body text-raw-umber/60 text-sm group-hover:text-deep-ochre transition-colors"
+                        >
+                          {line}
+                        </p>
+                      ))}
+                    </>
+                  );
+
+                  return item.href ? (
+                    <a
+                      key={i}
+                      href={item.href}
+                      className="contact-info-card group block p-6 rounded-3xl bg-warm-ivory border border-raw-umber/10 hover:shadow-luxury transition-all duration-300"
+                    >
+                      {CardContent}
+                    </a>
+                  ) : (
+                    <div
+                      key={i}
+                      className="contact-info-card group p-6 rounded-3xl bg-warm-ivory border border-raw-umber/10 hover:shadow-luxury transition-all duration-300"
+                    >
+                      {CardContent}
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Social Links */}
-              <AnimatedSection delay={0.4} className="mt-10">
-                <h3 className="font-display text-xl text-charcoal mb-4">Follow Us</h3>
+              <div className="social-block mt-10">
+                <h3 className="font-display text-xl text-raw-umber mb-4">Follow Us</h3>
                 <div className="flex gap-3">
                   {socialLinks.map((social, i) => (
-                    <motion.a
+                    <a
                       key={i}
                       href={social.href}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-gold transition-colors"
+                      className="w-12 h-12 rounded-full bg-raw-umber text-warm-ivory flex items-center justify-center hover:bg-deep-ochre transition-colors duration-300"
                       aria-label={social.label}
                     >
                       <social.icon className="w-5 h-5" />
-                    </motion.a>
+                    </a>
                   ))}
                 </div>
-              </AnimatedSection>
+              </div>
             </div>
 
-            {/* Contact Form */}
-            <AnimatedSection delay={0.2}>
-              <div className="bg-white p-8 md:p-10 rounded-lg border border-gold/10 shadow-lg relative overflow-hidden">
-                {/* Decorative corner */}
-                <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-gold/20" />
-                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-gold/20" />
-
-                <h2 className="font-display text-2xl text-charcoal mb-6">Send a Message</h2>
+            {/* Contact Form Column */}
+            <div ref={formRef}>
+              <div className="contact-form-block rounded-3xl bg-warm-ivory border border-raw-umber/10 p-8 md:p-10 shadow-luxury relative overflow-hidden">
+                <h2 className="font-display text-2xl text-raw-umber mb-6">
+                  Send a Message
+                </h2>
 
                 {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-gradient-to-br from-gold/10 to-rose-gold/10 border border-gold/30 rounded-lg p-8 text-center"
-                  >
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                      <Mail className="w-7 h-7 text-gold" />
+                  <div className="rounded-2xl bg-blush-dust/30 border border-deep-ochre/20 p-8 text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-deep-ochre/10 flex items-center justify-center">
+                      <Mail className="w-7 h-7 text-deep-ochre" />
                     </div>
-                    <h3 className="font-display text-xl text-charcoal mb-2">
+                    <h3 className="font-display text-xl text-raw-umber mb-2">
                       Message Sent!
                     </h3>
-                    <p className="text-charcoal/70">
+                    <p className="font-body text-raw-umber/70">
                       Thank you for reaching out. We&apos;ll get back to you within 24 hours.
                     </p>
-                  </motion.div>
+                  </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-charcoal mb-2">
+                        <label
+                          htmlFor="name"
+                          className="block font-body text-sm font-medium text-raw-umber mb-2"
+                        >
                           Your Name
                         </label>
                         <input
@@ -212,13 +256,18 @@ export default function ContactPage() {
                           id="name"
                           required
                           value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
+                          className="w-full px-4 py-3 bg-blush-dust/30 border border-raw-umber/10 rounded-2xl font-body focus:outline-none focus:border-deep-ochre transition-all"
                           placeholder="John Doe"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-charcoal mb-2">
+                        <label
+                          htmlFor="email"
+                          className="block font-body text-sm font-medium text-raw-umber mb-2"
+                        >
                           Email Address
                         </label>
                         <input
@@ -226,15 +275,20 @@ export default function ContactPage() {
                           id="email"
                           required
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                          className="w-full px-4 py-3 bg-blush-dust/30 border border-raw-umber/10 rounded-2xl font-body focus:outline-none focus:border-deep-ochre transition-all"
                           placeholder="you@example.com"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-charcoal mb-2">
+                      <label
+                        htmlFor="subject"
+                        className="block font-body text-sm font-medium text-raw-umber mb-2"
+                      >
                         Subject
                       </label>
                       <input
@@ -242,14 +296,19 @@ export default function ContactPage() {
                         id="subject"
                         required
                         value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+                        onChange={(e) =>
+                          setFormData({ ...formData, subject: e.target.value })
+                        }
+                        className="w-full px-4 py-3 bg-blush-dust/30 border border-raw-umber/10 rounded-2xl font-body focus:outline-none focus:border-deep-ochre transition-all"
                         placeholder="How can we help?"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-charcoal mb-2">
+                      <label
+                        htmlFor="message"
+                        className="block font-body text-sm font-medium text-raw-umber mb-2"
+                      >
                         Message
                       </label>
                       <textarea
@@ -257,29 +316,29 @@ export default function ContactPage() {
                         required
                         rows={5}
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-4 py-3 bg-ivory border border-gold/20 rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all resize-none"
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
+                        className="w-full px-4 py-3 bg-blush-dust/30 border border-raw-umber/10 rounded-2xl font-body focus:outline-none focus:border-deep-ochre transition-all resize-none"
                         placeholder="Your message..."
                       />
                     </div>
 
-                    <motion.button
+                    <button
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full bg-charcoal text-white py-4 font-semibold rounded-lg hover:bg-burgundy transition-colors flex items-center justify-center gap-2"
+                      className="group w-full relative overflow-hidden bg-crimson-thread text-warm-ivory py-4 font-body font-semibold rounded-full flex items-center justify-center gap-2 transition-transform duration-300 hover:scale-[1.02] press-effect"
                     >
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </motion.button>
+                      <Send className="w-5 h-5 relative z-10" />
+                      <span className="relative z-10">Send Message</span>
+                      <span className="absolute inset-0 bg-deep-ochre translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                    </button>
                   </form>
                 )}
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 }

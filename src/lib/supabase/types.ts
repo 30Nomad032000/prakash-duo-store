@@ -3,7 +3,7 @@
 
 export type OrderStatus = 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded';
-export type EmailType = 'order_confirmation' | 'shipping_notification' | 'delivery_confirmation';
+export type EmailType = 'order_confirmation' | 'shipping_notification' | 'delivery_confirmation' | 'new_order_notification';
 export type EmailStatus = 'pending' | 'sent' | 'failed';
 
 export interface DbProduct {

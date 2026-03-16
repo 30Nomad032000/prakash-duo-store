@@ -1,9 +1,16 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronDown, MessageCircle, Sparkles, HelpCircle, ArrowRight } from 'lucide-react';
+import { ChevronDown, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import PageSeo from '@/components/seo/PageSeo';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface FAQ {
   id: string;
@@ -89,34 +96,12 @@ const faqs: FAQ[] = [
 
 const categories = Array.from(new Set(faqs.map(faq => faq.category)));
 
-function AnimatedSection({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 export default function FAQPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   const filteredFAQs = selectedCategory === 'All'
     ? faqs
@@ -126,54 +111,110 @@ export default function FAQPage() {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.hero-text-el', {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+        delay: 0.2,
+      });
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.from('.filter-section', {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 85%',
+        },
+      });
+
+      gsap.from('.faq-item', {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.faq-list',
+          start: 'top 85%',
+        },
+      });
+    }, contentRef);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (!ctaRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.from('.cta-card', {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 85%',
+        },
+      });
+    }, ctaRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="bg-ivory noise-overlay">
+    <div className="bg-warm-ivory noise-overlay">
+      <PageSeo
+        title="FAQs — Shipping, Returns & Bangle Care"
+        description="Find answers about ordering, shipping, returns, and caring for your handcrafted bangles from Prakash Duo."
+        canonical="https://banglesbyprakashduo.store/faq"
+      />
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-charcoal overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 md:pt-36 pb-16 md:pb-20 bg-raw-umber overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-gold/5 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-deep-ochre/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-crimson-thread/5 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-gold/20 mb-6">
-              <HelpCircle className="w-4 h-4 text-gold" />
-              <span className="text-gold text-sm font-medium tracking-widest uppercase">
-                Help Center
-              </span>
-            </span>
+          <p className="hero-text-el font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-4">
+            Help Center
+          </p>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">
-              Frequently Asked <span className="gradient-text">Questions</span>
-            </h1>
+          <h1 className="hero-text-el font-display text-5xl md:text-6xl lg:text-7xl text-warm-ivory font-bold mb-6">
+            Frequently Asked <span className="font-drama italic font-normal">Questions</span>
+          </h1>
 
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Find answers to common questions about our products, shipping, and policies
-            </p>
-          </motion.div>
+          <p className="hero-text-el font-body text-lg text-warm-ivory/60 max-w-2xl mx-auto">
+            Find answers to common questions about our products, shipping, and policies
+          </p>
         </div>
       </section>
 
       {/* FAQ Content */}
-      <section className="py-16 md:py-24">
+      <section ref={contentRef} className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filter */}
-          <AnimatedSection className="mb-12">
-            <h2 className="font-display text-2xl text-charcoal mb-6">
+          <div className="filter-section mb-12">
+            <h2 className="font-display text-2xl text-raw-umber mb-6">
               Browse by Category
             </h2>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory('All')}
-                className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+                className={`px-6 py-2.5 rounded-full font-body font-medium transition-all duration-300 ${
                   selectedCategory === 'All'
-                    ? 'bg-charcoal text-white shadow-lg'
-                    : 'bg-white text-charcoal border border-gold/20 hover:border-gold hover:text-gold'
+                    ? 'bg-raw-umber text-warm-ivory shadow-lg'
+                    : 'bg-warm-ivory text-raw-umber border border-raw-umber/10 hover:border-deep-ochre'
                 }`}
               >
                 All
@@ -182,29 +223,29 @@ export default function FAQPage() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-full font-body font-medium transition-all duration-300 ${
                     selectedCategory === category
-                      ? 'bg-charcoal text-white shadow-lg'
-                      : 'bg-white text-charcoal border border-gold/20 hover:border-gold hover:text-gold'
+                      ? 'bg-raw-umber text-warm-ivory shadow-lg'
+                      : 'bg-warm-ivory text-raw-umber border border-raw-umber/10 hover:border-deep-ochre'
                   }`}
                 >
                   {category}
                 </button>
               ))}
             </div>
-          </AnimatedSection>
+          </div>
 
           {/* FAQ List */}
-          <div className="space-y-4">
+          <div className="faq-list space-y-4">
             <AnimatePresence mode="wait">
-              {filteredFAQs.map((faq, index) => (
+              {filteredFAQs.map((faq) => (
                 <motion.div
                   key={faq.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-lg border border-gold/10 overflow-hidden hover:border-gold/30 hover:shadow-lg transition-all duration-300"
+                  transition={{ duration: 0.3 }}
+                  className="faq-item rounded-3xl bg-warm-ivory border border-raw-umber/10 overflow-hidden hover:border-deep-ochre/30 hover:shadow-lg transition-all duration-300"
                 >
                   <button
                     onClick={() => toggleExpand(faq.id)}
@@ -212,14 +253,14 @@ export default function FAQPage() {
                   >
                     <div className="flex-1">
                       <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center flex-shrink-0">
-                          <MessageCircle className="w-5 h-5 text-gold" />
+                        <div className="w-10 h-10 rounded-full bg-deep-ochre/10 flex items-center justify-center flex-shrink-0">
+                          <MessageCircle className="w-5 h-5 text-deep-ochre" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-display text-lg text-charcoal pr-4">
+                          <h3 className="font-display text-lg text-raw-umber pr-4">
                             {faq.question}
                           </h3>
-                          <span className="inline-block mt-2 text-xs bg-champagne text-charcoal/70 px-3 py-1 rounded-full">
+                          <span className="inline-block mt-2 text-xs bg-blush-dust text-raw-umber/70 px-3 py-1 rounded-full font-mono">
                             {faq.category}
                           </span>
                         </div>
@@ -230,7 +271,7 @@ export default function FAQPage() {
                       transition={{ duration: 0.3 }}
                       className="flex-shrink-0 mt-2"
                     >
-                      <ChevronDown className="w-5 h-5 text-gold" />
+                      <ChevronDown className="w-5 h-5 text-deep-ochre" />
                     </motion.div>
                   </button>
 
@@ -241,10 +282,10 @@ export default function FAQPage() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="border-t border-gold/10"
+                        className="border-t border-raw-umber/10"
                       >
                         <div className="p-6 pl-[4.5rem]">
-                          <p className="text-charcoal/70 leading-relaxed">
+                          <p className="font-body text-raw-umber/70 leading-relaxed">
                             {faq.answer}
                           </p>
                         </div>
@@ -257,26 +298,22 @@ export default function FAQPage() {
           </div>
 
           {/* Contact CTA */}
-          <AnimatedSection delay={0.3} className="mt-16">
-            <div className="relative bg-white p-8 md:p-12 rounded-lg border border-gold/20 overflow-hidden">
-              {/* Decorative corners */}
-              <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-gold/20" />
-              <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-gold/20" />
-
+          <div ref={ctaRef} className="mt-16">
+            <div className="cta-card relative rounded-3xl bg-warm-ivory border border-raw-umber/10 p-8 md:p-12 overflow-hidden">
               <div className="text-center relative">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold/10 to-rose-gold/10 flex items-center justify-center">
-                  <Sparkles className="w-7 h-7 text-gold" />
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-deep-ochre/10 flex items-center justify-center">
+                  <Sparkles className="w-7 h-7 text-deep-ochre" />
                 </div>
-                <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-4">
+                <h3 className="font-display text-2xl md:text-3xl text-raw-umber mb-4">
                   Still have questions?
                 </h3>
-                <p className="text-charcoal/60 mb-8 max-w-md mx-auto">
+                <p className="font-body text-raw-umber/60 mb-8 max-w-md mx-auto">
                   Can&apos;t find what you&apos;re looking for? Our customer support team is here to help.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/contact"
-                    className="group inline-flex items-center justify-center gap-2 bg-charcoal text-white px-8 py-4 font-semibold hover:bg-burgundy transition-colors"
+                    className="group inline-flex items-center justify-center gap-2 bg-crimson-thread text-warm-ivory px-8 py-4 rounded-full font-body font-semibold hover:bg-crimson-thread/90 transition-colors"
                   >
                     <MessageCircle className="w-5 h-5" />
                     Contact Support
@@ -284,14 +321,14 @@ export default function FAQPage() {
                   </Link>
                   <Link
                     href="/track-order"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-8 py-4 font-semibold transition-all"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-raw-umber/20 text-raw-umber hover:border-deep-ochre hover:bg-deep-ochre/5 px-8 py-4 rounded-full font-body font-semibold transition-all"
                   >
                     Track Your Order
                   </Link>
                 </div>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
     </div>

@@ -1,33 +1,21 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-// Create reusable transporter for Zoho SMTP
-export function createTransporter() {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.zoho.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+let resendInstance: Resend | null = null;
+
+export function getResend(): Resend {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resendInstance = new Resend(apiKey);
+  }
+  return resendInstance;
 }
 
 export const emailConfig = {
   from: {
-    name: process.env.SMTP_FROM_NAME || 'Prakash Duo',
-    email: process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER || '',
+    name: process.env.EMAIL_FROM_NAME || 'Prakash Duo',
+    email: process.env.EMAIL_FROM_ADDRESS || 'onboarding@resend.dev',
   },
 };
-
-// Verify transporter configuration
-export async function verifyTransporter(): Promise<boolean> {
-  try {
-    const transporter = createTransporter();
-    await transporter.verify();
-    return true;
-  } catch (error) {
-    console.error('Email transporter verification failed:', error);
-    return false;
-  }
-}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyWebhookSignature, fetchPayment } from '@/lib/razorpay';
 import { getOrderByOrderId, updatePaymentStatus, updateOrderStatus, commitStockSale } from '@/lib/supabase-orders';
-import { sendOrderConfirmation } from '@/lib/email/send';
+import { sendOrderConfirmation, sendNewOrderNotification } from '@/lib/email/send';
 
 interface RazorpayWebhookPayload {
   entity: string;
@@ -127,11 +127,15 @@ export async function POST(request: NextRequest) {
       }));
       await commitStockSale(stockItems);
 
-      // Send order confirmation email
+      // Send order confirmation email + notify store owner
       const updatedOrder = await getOrderByOrderId(order.orderId);
       if (updatedOrder) {
         await sendOrderConfirmation(updatedOrder).catch((emailErr) => {
           console.error('Failed to send confirmation email:', emailErr);
+        });
+
+        await sendNewOrderNotification(updatedOrder).catch((emailErr) => {
+          console.error('Failed to send owner notification:', emailErr);
         });
       }
     } else if (event === 'payment.failed') {

@@ -1,4 +1,4 @@
-import { createTransporter, emailConfig } from './nodemailer';
+import { getResend, emailConfig } from './nodemailer';
 import {
   orderConfirmationTemplate,
   orderConfirmationSubject,
@@ -11,6 +11,10 @@ import {
   deliveryConfirmationTemplate,
   deliveryConfirmationSubject,
 } from './templates/delivery-confirmation';
+import {
+  newOrderNotificationTemplate,
+  newOrderNotificationSubject,
+} from './templates/new-order-notification';
 import { createClient } from '@supabase/supabase-js';
 import type { Order } from '@/lib/types';
 import type { EmailType, EmailStatus } from '@/lib/supabase/types';
@@ -39,7 +43,6 @@ async function logEmail(
   try {
     const supabase = getUntypedClient();
 
-    // First get the order UUID from the order_id
     const { data: order } = await supabase
       .from('orders')
       .select('id')
@@ -62,6 +65,28 @@ async function logEmail(
   }
 }
 
+async function sendEmail(
+  to: string,
+  subject: string,
+  html: string
+): Promise<{ id?: string }> {
+  const resend = getResend();
+  const from = `${emailConfig.from.name} <${emailConfig.from.email}>`;
+
+  const { data, error } = await resend.emails.send({
+    from,
+    to,
+    subject,
+    html,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return { id: data?.id };
+}
+
 export async function sendOrderConfirmation(
   order: Order
 ): Promise<SendEmailResult> {
@@ -70,14 +95,7 @@ export async function sendOrderConfirmation(
   const recipientEmail = order.customer.email;
 
   try {
-    const transporter = createTransporter();
-
-    const result = await transporter.sendMail({
-      from: `"${emailConfig.from.name}" <${emailConfig.from.email}>`,
-      to: recipientEmail,
-      subject,
-      html,
-    });
+    const result = await sendEmail(recipientEmail, subject, html);
 
     await logEmail(
       order.orderId,
@@ -87,7 +105,7 @@ export async function sendOrderConfirmation(
       'sent'
     );
 
-    return { success: true, messageId: result.messageId };
+    return { success: true, messageId: result.id };
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
@@ -119,14 +137,7 @@ export async function sendShippingNotification(
   const recipientEmail = order.customer.email;
 
   try {
-    const transporter = createTransporter();
-
-    const result = await transporter.sendMail({
-      from: `"${emailConfig.from.name}" <${emailConfig.from.email}>`,
-      to: recipientEmail,
-      subject,
-      html,
-    });
+    const result = await sendEmail(recipientEmail, subject, html);
 
     await logEmail(
       order.orderId,
@@ -136,7 +147,7 @@ export async function sendShippingNotification(
       'sent'
     );
 
-    return { success: true, messageId: result.messageId };
+    return { success: true, messageId: result.id };
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
@@ -163,14 +174,7 @@ export async function sendDeliveryConfirmation(
   const recipientEmail = order.customer.email;
 
   try {
-    const transporter = createTransporter();
-
-    const result = await transporter.sendMail({
-      from: `"${emailConfig.from.name}" <${emailConfig.from.email}>`,
-      to: recipientEmail,
-      subject,
-      html,
-    });
+    const result = await sendEmail(recipientEmail, subject, html);
 
     await logEmail(
       order.orderId,
@@ -180,7 +184,7 @@ export async function sendDeliveryConfirmation(
       'sent'
     );
 
-    return { success: true, messageId: result.messageId };
+    return { success: true, messageId: result.id };
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
@@ -199,12 +203,53 @@ export async function sendDeliveryConfirmation(
   }
 }
 
+export async function sendNewOrderNotification(
+  order: Order
+): Promise<SendEmailResult> {
+  const ownerEmail = process.env.STORE_OWNER_EMAIL;
+  if (!ownerEmail) {
+    console.warn('STORE_OWNER_EMAIL not configured, skipping owner notification');
+    return { success: false, error: 'Owner email not configured' };
+  }
+
+  const subject = newOrderNotificationSubject(order.orderId);
+  const html = newOrderNotificationTemplate(order);
+
+  try {
+    const result = await sendEmail(ownerEmail, subject, html);
+
+    await logEmail(
+      order.orderId,
+      'new_order_notification',
+      ownerEmail,
+      subject,
+      'sent'
+    );
+
+    return { success: true, messageId: result.id };
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    console.error('Failed to send new order notification email:', error);
+
+    await logEmail(
+      order.orderId,
+      'new_order_notification',
+      ownerEmail,
+      subject,
+      'failed',
+      errorMessage
+    );
+
+    return { success: false, error: errorMessage };
+  }
+}
+
 // Resend a failed email
 export async function resendEmail(emailLogId: string): Promise<SendEmailResult> {
   try {
     const supabase = getUntypedClient();
 
-    // Get the email log
     const { data: emailLog, error: logError } = await supabase
       .from('email_logs')
       .select('*, orders(*)')
@@ -215,7 +260,6 @@ export async function resendEmail(emailLogId: string): Promise<SendEmailResult> 
       return { success: false, error: 'Email log not found' };
     }
 
-    // Get the full order with items
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .select('*, order_items(*)')
@@ -226,7 +270,6 @@ export async function resendEmail(emailLogId: string): Promise<SendEmailResult> 
       return { success: false, error: 'Order not found' };
     }
 
-    // Convert to Order type
     const orderData: Order = {
       id: order.id,
       orderId: order.order_id,
@@ -272,13 +315,11 @@ export async function resendEmail(emailLogId: string): Promise<SendEmailResult> 
       updatedAt: order.updated_at,
     };
 
-    // Resend based on email type
     switch (emailLog.email_type) {
       case 'order_confirmation':
         return sendOrderConfirmation(orderData);
 
       case 'shipping_notification':
-        // Get tracking info
         const { data: tracking } = await supabase
           .from('shipping_tracking')
           .select('*')

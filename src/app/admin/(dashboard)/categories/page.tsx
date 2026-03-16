@@ -143,7 +143,7 @@ export default function CategoriesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deep-ochre"></div>
       </div>
     );
   }
@@ -153,13 +153,13 @@ export default function CategoriesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-charcoal/50">
             {categories.length} categories total
           </p>
         </div>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 px-4 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition"
+          className="flex items-center gap-2 px-4 py-2.5 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 transition"
         >
           <Plus className="w-4 h-4" />
           Add Category
@@ -169,8 +169,8 @@ export default function CategoriesPage() {
       {/* Categories List */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         {categories.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            <FolderTree className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <div className="p-8 text-center text-charcoal/50">
+            <FolderTree className="w-12 h-12 mx-auto mb-4 text-charcoal/20" />
             <p>No categories found</p>
           </div>
         ) : (
@@ -178,22 +178,22 @@ export default function CategoriesPage() {
             {categories.map((category) => (
               <div
                 key={category.id}
-                className={`p-4 flex items-center gap-4 hover:bg-gray-50 ${
+                className={`p-4 flex items-center gap-4 hover:bg-deep-ochre/5 ${
                   !category.is_active ? 'opacity-60' : ''
                 }`}
               >
-                <div className="text-gray-300 cursor-grab">
+                <div className="text-charcoal/20 cursor-grab">
                   <GripVertical className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900">{category.name}</p>
-                  <p className="text-sm text-gray-500">/{category.slug}</p>
+                  <p className="font-medium text-charcoal">{category.name}</p>
+                  <p className="text-sm text-charcoal/50">/{category.slug}</p>
                 </div>
                 <span
                   className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
                     category.is_active
                       ? 'bg-green-100 text-green-800'
-                      : 'bg-gray-100 text-gray-800'
+                      : 'bg-charcoal/10 text-charcoal'
                   }`}
                 >
                   {category.is_active ? 'Active' : 'Inactive'}
@@ -201,7 +201,7 @@ export default function CategoriesPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditModal(category)}
-                    className="p-2 text-gray-500 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
+                    className="p-2 text-charcoal/50 hover:text-deep-ochre hover:bg-deep-ochre/5 rounded-lg transition"
                     title="Edit"
                   >
                     <Edit2 className="w-4 h-4" />
@@ -210,8 +210,8 @@ export default function CategoriesPage() {
                     onClick={() => toggleCategoryStatus(category)}
                     className={`p-2 rounded-lg transition ${
                       category.is_active
-                        ? 'text-gray-500 hover:text-red-600 hover:bg-red-50'
-                        : 'text-gray-500 hover:text-green-600 hover:bg-green-50'
+                        ? 'text-charcoal/50 hover:text-red-600 hover:bg-red-50'
+                        : 'text-charcoal/50 hover:text-green-600 hover:bg-green-50'
                     }`}
                     title={category.is_active ? 'Deactivate' : 'Activate'}
                   >
@@ -241,7 +241,7 @@ export default function CategoriesPage() {
           <div className="relative min-h-screen flex items-center justify-center p-4">
             <div className="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-charcoal">
                   {editModal ? 'Edit Category' : 'Add Category'}
                 </h3>
                 <button
@@ -249,7 +249,7 @@ export default function CategoriesPage() {
                     setAddModal(false);
                     setEditModal(null);
                   }}
-                  className="p-2 hover:bg-gray-100 rounded-lg"
+                  className="p-2 hover:bg-charcoal/5 rounded-lg"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -260,7 +260,7 @@ export default function CategoriesPage() {
                 className="space-y-4"
               >
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-charcoal/70 mb-1">
                     Category Name *
                   </label>
                   <input
@@ -274,12 +274,12 @@ export default function CategoriesPage() {
                     }}
                     required
                     placeholder="e.g., AD Stone Bangles"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-charcoal/70 mb-1">
                     Slug
                   </label>
                   <input
@@ -287,7 +287,7 @@ export default function CategoriesPage() {
                     value={formSlug}
                     onChange={(e) => setFormSlug(e.target.value)}
                     placeholder="e.g., ad-stone-bangles"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-charcoal/15 rounded-lg focus:ring-2 focus:ring-deep-ochre focus:border-transparent outline-none"
                   />
                 </div>
 
@@ -296,9 +296,9 @@ export default function CategoriesPage() {
                     type="checkbox"
                     checked={formActive}
                     onChange={(e) => setFormActive(e.target.checked)}
-                    className="w-4 h-4 text-amber-600 rounded focus:ring-amber-500"
+                    className="w-4 h-4 text-deep-ochre rounded focus:ring-deep-ochre"
                   />
-                  <span className="text-sm text-gray-700">Active</span>
+                  <span className="text-sm text-charcoal/70">Active</span>
                 </label>
 
                 <div className="flex gap-3 pt-4">
@@ -308,14 +308,14 @@ export default function CategoriesPage() {
                       setAddModal(false);
                       setEditModal(null);
                     }}
-                    className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50"
+                    className="flex-1 px-4 py-2.5 border border-charcoal/15 rounded-lg hover:bg-deep-ochre/5"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={saving || !formName}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-deep-ochre text-white rounded-lg hover:bg-deep-ochre/90 disabled:opacity-50"
                   >
                     <Save className="w-4 h-4" />
                     {saving ? 'Saving...' : 'Save'}
