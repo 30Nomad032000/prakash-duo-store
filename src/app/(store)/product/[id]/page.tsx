@@ -191,7 +191,7 @@ export default function ProductPage() {
     <div className="bg-warm-ivory noise-overlay pt-20">
       <PageSeo
         title={`${product.name} — Handcrafted ${product.category}`}
-        description={`Buy ${product.name} online. Handcrafted ${product.category.toLowerCase()} by Prakash Duo, Thrissur, Kerala. ₹${product.price.toLocaleString()}. Free shipping above ₹999.`}
+        description={`Buy ${product.name} online. Handcrafted ${product.category.toLowerCase()} by Prakash Duo, Thrissur, Kerala. ₹${product.price.toLocaleString()}. Free shipping above ₹599.`}
         canonical={`https://banglesbyprakashduo.store/product/${product.id}`}
         ogImage={product.images[0]?.startsWith('http') ? product.images[0] : `https://banglesbyprakashduo.store${product.images[0]}`}
       />
@@ -333,7 +333,7 @@ export default function ProductPage() {
               </div>
               <div>
                 <h3 className="font-display text-xl text-warm-ivory">Free Shipping</h3>
-                <p className="font-body text-warm-ivory/60 text-sm">On orders above ₹999</p>
+                <p className="font-body text-warm-ivory/60 text-sm">On orders above ₹599</p>
               </div>
             </div>
             <Link

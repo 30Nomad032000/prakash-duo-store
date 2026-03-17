@@ -189,7 +189,7 @@ export default function CategoryPage() {
     <div className="bg-warm-ivory" ref={heroRef}>
       <PageSeo
         title={`${category.name} — Buy Handcrafted ${category.name} Online`}
-        description={`Shop ${products.length} handcrafted ${category.name.toLowerCase()} from Prakash Duo, Thrissur, Kerala. 100% handmade, free shipping above ₹999.`}
+        description={`Shop ${products.length} handcrafted ${category.name.toLowerCase()} from Prakash Duo, Thrissur, Kerala. 100% handmade, free shipping above ₹599.`}
         canonical={`https://banglesbyprakashduo.store/category/${params.slug}`}
         ogImage={products[0]?.images[0]?.startsWith('http') ? products[0].images[0] : `https://banglesbyprakashduo.store${products[0]?.images[0] || ''}`}
       />

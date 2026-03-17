@@ -9,7 +9,7 @@ interface CartSummaryProps {
 }
 
 // Shipping threshold for free shipping
-const FREE_SHIPPING_THRESHOLD = 999;
+const FREE_SHIPPING_THRESHOLD = 599;
 const SHIPPING_COST = 99;
 
 export default function CartSummary({ showShipping = true, className = '' }: CartSummaryProps) {

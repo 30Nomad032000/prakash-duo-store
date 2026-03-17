@@ -36,7 +36,7 @@ export default function ShippingPage() {
     {
       icon: Package,
       title: "Free Shipping",
-      desc: "On orders above ₹999 within India"
+      desc: "On orders above ₹599 within India"
     },
     {
       icon: Truck,
@@ -46,7 +46,7 @@ export default function ShippingPage() {
     {
       icon: Globe,
       title: "International",
-      desc: "We ship to most countries worldwide"
+      desc: "We ship worldwide — no free shipping"
     },
     {
       icon: Clock,
@@ -65,8 +65,8 @@ export default function ShippingPage() {
   return (
     <div className="bg-warm-ivory noise-overlay">
       <PageSeo
-        title="Shipping Policy — Free Delivery Above ₹999"
-        description="Free shipping on orders above ₹999. Delivery in 3-5 business days across India. Secure packaging for your handcrafted bangles."
+        title="Shipping Policy — Free Delivery Above ₹599"
+        description="Free shipping on orders above ₹599. ₹99 shipping for orders below ₹599. Delivery in 5-7 business days across India. Secure packaging for your handcrafted bangles."
         canonical="https://banglesbyprakashduo.store/shipping"
       />
       {/* Hero Section */}
@@ -130,7 +130,7 @@ export default function ShippingPage() {
                 </h2>
                 <div className="space-y-4 text-raw-umber/70">
                   <p>
-                    We offer free standard shipping on all orders above ₹999 within India. For orders below ₹999, a nominal shipping fee of ₹49 will be applied.
+                    We offer free standard shipping on all orders above ₹599 within India. For orders below ₹599, a shipping fee of ₹99 will be applied.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                     <div className="p-5 bg-gradient-to-br from-blush-dust to-warm-ivory rounded-lg border border-deep-ochre/10">
@@ -142,9 +142,9 @@ export default function ShippingPage() {
                         </li>
                         <li className="flex items-center gap-2">
                           <Package className="w-4 h-4 text-deep-ochre" />
-                          Free on orders above ₹999
+                          Free on orders above ₹599
                         </li>
-                        <li className="text-raw-umber/50 pl-6">₹49 for orders below ₹999</li>
+                        <li className="text-raw-umber/50 pl-6">₹99 for orders below ₹599</li>
                       </ul>
                     </div>
                     <div className="p-5 bg-gradient-to-br from-blush-dust to-warm-ivory rounded-lg border border-deep-ochre/10">
@@ -176,7 +176,7 @@ export default function ShippingPage() {
                 </h2>
                 <div className="space-y-4 text-raw-umber/70">
                   <p>
-                    We ship to most countries worldwide. International shipping rates are calculated at checkout based on the destination and package weight.
+                    We ship to most countries worldwide. Free shipping is not available for international orders. Shipping rates are calculated at checkout based on the destination and package weight.
                   </p>
                   <div className="overflow-x-auto mt-6">
                     <table className="w-full text-sm">
@@ -234,7 +234,7 @@ export default function ShippingPage() {
                     Once your order is shipped, you will receive an email with your tracking number. You can track your order on our website using the &ldquo;Track Order&rdquo; page or by visiting the courier partner&apos;s website with your tracking number.
                   </p>
                   <p>
-                    For any issues with tracking or delayed delivery, please contact our customer support team at support@prakashduo.com or call us at +91 XXXXX XXXXX.
+                    For any issues with tracking or delayed delivery, please contact our customer support team at support@banglesbyprakashduo.store or call us at +91 XXXXX XXXXX.
                   </p>
                   <Link
                     href="/track-order"

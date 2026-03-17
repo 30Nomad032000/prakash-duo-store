@@ -33,8 +33,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email Us",
-      lines: ["Prakashduo19@gmail.com"],
-      href: "mailto:Prakashduo19@gmail.com",
+      lines: ["support@banglesbyprakashduo.store"],
+      href: "mailto:support@banglesbyprakashduo.store",
     },
     {
       icon: Phone,

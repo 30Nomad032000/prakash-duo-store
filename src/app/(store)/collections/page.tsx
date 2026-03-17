@@ -364,7 +364,7 @@ export default function CollectionsPage() {
 
           {/* Micro-facts */}
           <div className="flex flex-wrap items-center justify-center gap-6 mt-12">
-            {['Premium Materials Only', '100% Handmade', 'Free Delivery Available'].map((fact) => (
+            {['Premium Materials Only', '100% Handmade', 'Free Delivery Above ₹599'].map((fact) => (
               <p key={fact} className="font-mono text-raw-umber/60 text-sm flex items-center gap-3">
                 <span className="text-deep-ochre text-lg">&#10022;</span>
                 {fact}

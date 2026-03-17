@@ -64,7 +64,7 @@ const TRUST_ITEMS = [
   "1000+ Bangles Crafted",
   "100% Handmade",
   "500+ Happy Customers",
-  "Free Delivery Available",
+  "Free Delivery Above ₹599",
   "Based in Thrissur, Kerala",
   "Premium Materials Only",
 ];
@@ -834,7 +834,7 @@ function BrandStory() {
             <div className="space-y-3 mb-8">
               {[
                 "Based in Thrissur, Kerala",
-                "Est. with love by SHILPA PRAKASH",
+                "Est. with love by Prakash Sisters",
                 "100% Artisan-Crafted",
               ].map((fact) => (
                 <p key={fact} className="font-mono text-raw-umber/60 text-sm flex items-center gap-3">
@@ -929,9 +929,9 @@ function CinematicFooter() {
                 <Phone className="w-4 h-4 text-deep-ochre" />
                 +91 79092 02091
               </a>
-              <a href="mailto:Prakashduo19@gmail.com" className="flex items-center gap-3 font-body text-warm-ivory/50 hover:text-deep-ochre transition-colors text-sm">
+              <a href="mailto:support@banglesbyprakashduo.store" className="flex items-center gap-3 font-body text-warm-ivory/50 hover:text-deep-ochre transition-colors text-sm">
                 <Mail className="w-4 h-4 text-deep-ochre" />
-                Prakashduo19@gmail.com
+                support@banglesbyprakashduo.store
               </a>
               <div className="flex items-center gap-3 font-body text-warm-ivory/50 text-sm">
                 <MapPin className="w-4 h-4 text-deep-ochre" />
@@ -996,8 +996,8 @@ function CinematicFooter() {
               <a href="tel:+917909202091" className="block font-body text-warm-ivory/50 hover:text-deep-ochre transition-colors text-sm">
                 +91 79092 02091
               </a>
-              <a href="mailto:Prakashduo19@gmail.com" className="block font-body text-warm-ivory/50 hover:text-deep-ochre transition-colors text-sm">
-                Prakashduo19@gmail.com
+              <a href="mailto:support@banglesbyprakashduo.store" className="block font-body text-warm-ivory/50 hover:text-deep-ochre transition-colors text-sm">
+                support@banglesbyprakashduo.store
               </a>
               <a
                 href="https://www.instagram.com/bangles_byprakashduo"

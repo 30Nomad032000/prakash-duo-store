@@ -159,7 +159,7 @@ export default function CartPage() {
                   {/* Trust Badges */}
                   <div className="mt-8 pt-6 border-t border-raw-umber/10 space-y-3">
                     {[
-                      { title: 'Free Shipping', desc: 'On orders above ₹999' },
+                      { title: 'Free Shipping', desc: 'On orders above ₹599' },
                       { title: 'Secure Payment', desc: '100% secure transactions' },
                       { title: 'Easy Returns', desc: '7 days return policy' },
                     ].map((item, i) => (

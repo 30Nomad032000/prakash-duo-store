@@ -115,7 +115,7 @@ export function generateOrderId(): string {
 
 // Calculate shipping cost
 export function calculateShipping(subtotal: number): number {
-  const FREE_SHIPPING_THRESHOLD = 999;
+  const FREE_SHIPPING_THRESHOLD = 599;
   const SHIPPING_COST = 99;
   return subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
 }

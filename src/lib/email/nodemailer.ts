@@ -15,7 +15,7 @@ export function getResend(): Resend {
 
 export const emailConfig = {
   from: {
-    name: process.env.EMAIL_FROM_NAME || 'Prakash Duo',
-    email: process.env.EMAIL_FROM_ADDRESS || 'onboarding@resend.dev',
+    name: process.env.EMAIL_FROM_NAME || 'Bangles by Prakash Duo',
+    email: process.env.EMAIL_FROM_ADDRESS || 'orders@banglesbyprakashduo.store',
   },
 };

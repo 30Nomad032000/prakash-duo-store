@@ -8,9 +8,11 @@ import { useCart } from '@/context/CartContext';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
 import { Button } from '@/components/ui/button';
+import { useHaptics } from '@/hooks/useHaptics';
 
 export default function CartDrawer() {
   const { state, closeCart, itemCount } = useCart();
+  const { trigger: haptic } = useHaptics();
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function CartDrawer() {
                 )}
               </div>
               <button
-                onClick={closeCart}
+                onClick={() => { haptic("nudge"); closeCart(); }}
                 className="p-2 rounded-full hover:bg-stone-100 transition-colors"
               >
                 <X className="w-5 h-5 text-charcoal/60" />

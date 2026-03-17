@@ -41,13 +41,13 @@ const faqs: FAQ[] = [
   {
     id: '4',
     question: 'Do you offer free shipping?',
-    answer: 'Yes! We offer free shipping on all orders above ₹999 within India. For orders below this amount, a nominal shipping fee of ₹49 will be applied.',
+    answer: 'Yes! We offer free shipping on all orders above ₹599 within India. For orders below ₹599, a shipping fee of ₹99 will be applied.',
     category: 'Shipping'
   },
   {
     id: '5',
     question: 'What if the bangle size doesn\'t fit?',
-    answer: 'We offer easy returns and exchanges within 7 days of delivery. You can return or exchange the bangles if they don\'t fit, provided they are in their original condition with all tags intact. Contact our support team at support@prakashduo.com to initiate a return.',
+    answer: 'We offer easy returns and exchanges within 7 days of delivery. You can return or exchange the bangles if they don\'t fit, provided they are in their original condition with all tags intact. Contact our support team at support@banglesbyprakashduo.store to initiate a return.',
     category: 'Returns'
   },
   {
@@ -65,7 +65,7 @@ const faqs: FAQ[] = [
   {
     id: '8',
     question: 'Do you ship internationally?',
-    answer: 'Yes, we ship to most countries worldwide. International shipping rates and delivery times vary by destination. During checkout, you will see the shipping cost and estimated delivery time for your country.',
+    answer: 'Yes, we ship to most countries worldwide. Please note that free shipping is not available for international orders. Shipping rates and delivery times vary by destination — you will see the cost and estimated delivery time during checkout.',
     category: 'Shipping'
   },
   {
@@ -89,7 +89,7 @@ const faqs: FAQ[] = [
   {
     id: '12',
     question: 'How can I contact customer support?',
-    answer: 'Our customer support team is available Monday to Saturday, 9 AM to 6 PM IST. You can reach us via email at support@prakashduo.com, WhatsApp at +91 XXXXX XXXXX, or call us at the same number. We typically respond within 24 hours.',
+    answer: 'Our customer support team is available Monday to Saturday, 9 AM to 6 PM IST. You can reach us via email at support@banglesbyprakashduo.store, WhatsApp at +91 XXXXX XXXXX, or call us at the same number. We typically respond within 24 hours.',
     category: 'Support'
   }
 ];

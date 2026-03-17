@@ -1,5 +1,21 @@
 import type { Order } from '@/lib/types';
 
+const SITE_URL = 'https://www.banglesbyprakashduo.store';
+
+const C = {
+  warmIvory: '#F5EFE0',
+  deepOchre: '#C8882A',
+  rawUmber: '#3D2B1F',
+  blushDust: '#EDD9C0',
+  crimsonThread: '#A0281A',
+  textMuted: '#7A6A5E',
+  border: '#E2D9CC',
+};
+
+const fontDisplay = "Georgia, 'Cormorant Garamond', 'Times New Roman', serif";
+const fontBody = "'DM Sans', 'Helvetica Neue', Arial, sans-serif";
+const fontMono = "'Courier Prime', 'Courier New', monospace";
+
 interface TrackingInfo {
   carrier: string;
   trackingId: string;
@@ -14,132 +30,161 @@ export function shippingNotificationTemplate(
     .map(
       (item) => `
         <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eee;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <img src="${process.env.NEXT_PUBLIC_BASE_URL}${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
-              <div>
-                <p style="margin: 0; font-weight: 500; font-size: 14px;">${item.name}</p>
-                <p style="margin: 4px 0 0; color: #666; font-size: 12px;">Size: ${item.size} | Qty: ${item.quantity}</p>
-              </div>
-            </div>
+          <td style="padding: 14px 0; border-bottom: 1px solid ${C.border};">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td width="56" style="vertical-align: top; padding-right: 14px;">
+                  <img src="${SITE_URL}${item.image}" alt="${item.name}" width="56" height="56" style="display: block; object-fit: cover; border-radius: 4px; border: 1px solid ${C.border};">
+                </td>
+                <td style="vertical-align: middle; font-family: ${fontBody};">
+                  <p style="margin: 0; font-weight: 500; color: ${C.rawUmber}; font-size: 14px;">${item.name}</p>
+                  <p style="margin: 4px 0 0; color: ${C.textMuted}; font-size: 12px; font-family: ${fontMono};">Size: ${item.size} · Qty: ${item.quantity}</p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       `
     )
     .join('');
 
-  const estimatedDeliveryHtml = tracking.estimatedDelivery
-    ? `
-      <div style="display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee;">
-        <span style="color: #6B7280;">Estimated Delivery</span>
-        <span style="font-weight: 500;">${new Date(tracking.estimatedDelivery).toLocaleDateString('en-IN', {
-          weekday: 'long',
-          day: '2-digit',
-          month: 'long',
-        })}</span>
-      </div>
-    `
-    : '';
-
   return `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Order Has Shipped!</title>
+  <title>Your Order Has Shipped</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; padding: 16px !important; }
+      .email-body { padding: 28px 20px !important; }
+      .header-pad { padding: 32px 20px !important; }
+      .footer-pad { padding: 24px 20px !important; }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+<body style="margin: 0; padding: 0; background-color: ${C.blushDust}; font-family: ${fontBody}; -webkit-font-smoothing: antialiased;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.blushDust}; padding: 40px 16px;">
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table class="email-container" width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.warmIvory}; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 3px rgba(61,43,31,0.08);">
+
           <!-- Header -->
           <tr>
-            <td style="background: linear-gradient(135deg, #4F46E5, #7C3AED); padding: 32px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px;">Prakash Duo</h1>
-              <p style="margin: 8px 0 0; color: #ffffff; opacity: 0.9;">Shipping Update</p>
+            <td class="header-pad" style="background-color: ${C.rawUmber}; padding: 40px 40px 36px; text-align: center;">
+              <p style="margin: 0 0 16px; color: ${C.deepOchre}; font-family: ${fontMono}; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;">Shipping Update</p>
+              <h1 style="margin: 0; color: ${C.warmIvory}; font-family: ${fontDisplay}; font-size: 26px; font-weight: 600;">Your order is on its way</h1>
+              <p style="margin: 12px 0 0; color: ${C.blushDust}; font-family: ${fontBody}; font-size: 14px; opacity: 0.7;">We've handed your package to ${tracking.carrier}.</p>
             </td>
           </tr>
 
-          <!-- Content -->
+          <!-- Ornamental divider -->
           <tr>
-            <td style="padding: 32px;">
-              <div style="text-align: center; margin-bottom: 32px;">
-                <div style="width: 64px; height: 64px; background-color: #EEF2FF; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;">
-                  <span style="font-size: 32px;">📦</span>
-                </div>
-                <h2 style="margin: 0; color: #111827; font-size: 20px;">Your order is on its way!</h2>
-                <p style="margin: 8px 0 0; color: #6B7280;">We've handed your package to ${tracking.carrier}.</p>
-              </div>
+            <td style="padding: 0; text-align: center; background-color: ${C.warmIvory};">
+              <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top: 28px;">
+                <tr>
+                  <td style="width: 40px; height: 1px; background-color: ${C.border};"></td>
+                  <td style="padding: 0 12px; color: ${C.deepOchre}; font-size: 14px; line-height: 1;">✦</td>
+                  <td style="width: 40px; height: 1px; background-color: ${C.border};"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-              <!-- Tracking Info -->
-              <div style="background-color: #F9FAFB; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                  <span style="color: #6B7280;">Order ID</span>
-                  <span style="font-weight: 600; font-family: monospace;">${order.orderId}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                  <span style="color: #6B7280;">Carrier</span>
-                  <span style="font-weight: 500;">${tracking.carrier}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #6B7280;">Tracking Number</span>
-                  <span style="font-weight: 600; font-family: monospace; color: #4F46E5;">${tracking.trackingId}</span>
-                </div>
-                ${estimatedDeliveryHtml}
-              </div>
+          <!-- Body -->
+          <tr>
+            <td class="email-body" style="padding: 24px 40px 40px;">
 
-              <!-- Track Button -->
-              <div style="text-align: center; margin-bottom: 32px;">
-                <a href="https://www.dtdc.in/tracking/shipment-tracking.asp?strCnno=${tracking.trackingId}" target="_blank" style="display: inline-block; background-color: #4F46E5; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 500;">
-                  Track on ${tracking.carrier} Website
+              <!-- Tracking details -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.blushDust}; border-radius: 4px; margin-bottom: 32px;">
+                <tr>
+                  <td style="padding: 18px 20px; border-bottom: 1px solid ${C.border};">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Order</td>
+                        <td style="text-align: right; font-weight: 600; font-family: ${fontMono}; color: ${C.rawUmber}; font-size: 14px;">${order.orderId}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 18px 20px; border-bottom: 1px solid ${C.border};">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Carrier</td>
+                        <td style="text-align: right; font-weight: 500; color: ${C.rawUmber}; font-size: 14px;">${tracking.carrier}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 18px 20px;${tracking.estimatedDelivery ? ' border-bottom: 1px solid ' + C.border + ';' : ''}">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Tracking #</td>
+                        <td style="text-align: right; font-weight: 600; font-family: ${fontMono}; color: ${C.deepOchre}; font-size: 14px;">${tracking.trackingId}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                ${tracking.estimatedDelivery ? `
+                <tr>
+                  <td style="padding: 18px 20px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Est. Delivery</td>
+                        <td style="text-align: right; font-weight: 500; color: ${C.rawUmber}; font-size: 14px;">${new Date(tracking.estimatedDelivery).toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long' })}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                ` : ''}
+              </table>
+
+              <!-- Track CTA -->
+              <div style="text-align: center; margin-bottom: 36px;">
+                <a href="https://www.dtdc.in/tracking/shipment-tracking.asp?strCnno=${tracking.trackingId}" target="_blank" style="display: inline-block; background-color: ${C.crimsonThread}; color: ${C.warmIvory}; text-decoration: none; padding: 14px 36px; border-radius: 50px; font-family: ${fontBody}; font-weight: 500; font-size: 14px;">
+                  Track on ${tracking.carrier} →
                 </a>
               </div>
 
-              <!-- Items Summary -->
-              <h3 style="margin: 0 0 16px; color: #111827; font-size: 16px;">Items in this shipment</h3>
-              <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
-                <tbody>
-                  ${itemsHtml}
-                </tbody>
+              <!-- Divider -->
+              <div style="height: 1px; background-color: ${C.border}; margin: 0 0 28px;"></div>
+
+              <!-- Items -->
+              <p style="margin: 0 0 16px; font-family: ${fontDisplay}; font-size: 18px; color: ${C.rawUmber}; font-weight: 600;">Items in Shipment</p>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                ${itemsHtml}
               </table>
 
-              <!-- Shipping Address -->
-              <div style="margin-top: 24px;">
-                <h3 style="margin: 0 0 12px; color: #111827; font-size: 16px;">Delivering to</h3>
-                <div style="background-color: #F9FAFB; border-radius: 8px; padding: 16px;">
-                  <p style="margin: 0; font-weight: 500;">${order.shippingAddress.firstName} ${order.shippingAddress.lastName}</p>
-                  <p style="margin: 4px 0 0; color: #6B7280; font-size: 14px;">
+              <!-- Delivering to -->
+              <div style="margin-top: 28px;">
+                <p style="margin: 0 0 12px; font-family: ${fontDisplay}; font-size: 18px; color: ${C.rawUmber}; font-weight: 600;">Delivering To</p>
+                <div style="background-color: ${C.blushDust}; border-radius: 4px; padding: 18px 20px;">
+                  <p style="margin: 0; font-weight: 500; color: ${C.rawUmber}; font-size: 15px;">${order.shippingAddress.firstName} ${order.shippingAddress.lastName}</p>
+                  <p style="margin: 6px 0 0; color: ${C.textMuted}; font-size: 14px; line-height: 1.5;">
                     ${order.shippingAddress.address}${order.shippingAddress.apartment ? ', ' + order.shippingAddress.apartment : ''}<br>
                     ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.pincode}
                   </p>
                 </div>
-              </div>
-
-              <!-- Help Section -->
-              <div style="margin-top: 32px; padding: 20px; background-color: #FEF3C7; border-radius: 8px;">
-                <h4 style="margin: 0 0 8px; color: #92400E; font-size: 14px;">💡 Delivery Tips</h4>
-                <ul style="margin: 0; padding-left: 20px; color: #92400E; font-size: 14px;">
-                  <li>Keep your phone nearby for delivery updates</li>
-                  <li>Ensure someone is available to receive the package</li>
-                  <li>Check the package for any damage before accepting</li>
-                </ul>
               </div>
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td style="background-color: #F9FAFB; padding: 24px; text-align: center; border-top: 1px solid #eee;">
-              <p style="margin: 0; color: #6B7280; font-size: 14px;">
-                Questions about your delivery? <a href="mailto:support@prakashduo.com" style="color: #4F46E5;">Contact us</a>
+            <td class="footer-pad" style="background-color: ${C.rawUmber}; padding: 28px 40px; text-align: center;">
+              <p style="margin: 0; color: ${C.blushDust}; font-family: ${fontBody}; font-size: 13px; opacity: 0.6;">
+                Questions? Write to <a href="mailto:support@banglesbyprakashduo.store" style="color: ${C.deepOchre}; text-decoration: none;">support@banglesbyprakashduo.store</a>
               </p>
-              <p style="margin: 12px 0 0; color: #9CA3AF; font-size: 12px;">
-                © ${new Date().getFullYear()} Prakash Duo. All rights reserved.
+              <p style="margin: 12px 0 0; color: ${C.blushDust}; font-family: ${fontMono}; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.4;">
+                © ${new Date().getFullYear()} Prakash Duo · Thrissur, Kerala
               </p>
             </td>
           </tr>
+
         </table>
       </td>
     </tr>
@@ -150,4 +195,4 @@ export function shippingNotificationTemplate(
 }
 
 export const shippingNotificationSubject = (orderId: string) =>
-  `Your Order ${orderId} Has Shipped! | Prakash Duo`;
+  `Your Order ${orderId} Has Shipped — Bangles by Prakash Duo`;

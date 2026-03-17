@@ -276,11 +276,11 @@ export default function TermsAndConditionsPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
-                    href="mailto:prakashduo19@gmail.com"
+                    href="mailto:support@banglesbyprakashduo.store"
                     className="group inline-flex items-center justify-center gap-2 bg-crimson-thread text-warm-ivory px-8 py-4 rounded-full font-semibold hover:bg-crimson-thread/90 transition-colors"
                   >
                     <Mail className="w-4 h-4" />
-                    prakashduo19@gmail.com
+                    support@banglesbyprakashduo.store
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <Link

@@ -9,6 +9,7 @@ import ShippingForm from './ShippingForm';
 import CartSummary, { FREE_SHIPPING_THRESHOLD, SHIPPING_COST } from '@/components/cart/CartSummary';
 import { Button } from '@/components/ui/button';
 import { checkoutFormSchema, type CheckoutFormData } from '@/lib/schemas';
+import { useHaptics } from '@/hooks/useHaptics';
 
 declare global {
   interface Window {
@@ -69,6 +70,7 @@ export default function CheckoutForm() {
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
+  const { trigger: haptic } = useHaptics();
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
   const total = subtotal + shipping;
 
@@ -118,6 +120,7 @@ export default function CheckoutForm() {
     setPaymentError(null);
 
     if (!validateForm()) {
+      haptic("error");
       return;
     }
 
@@ -203,6 +206,7 @@ export default function CheckoutForm() {
             const verifyData = await verifyResponse.json();
 
             if (verifyData.success && verifyData.data?.verified) {
+              haptic("success");
               clearCart();
               router.push(`/order-confirmation?order_id=${orderId}`);
             } else {
@@ -226,6 +230,7 @@ export default function CheckoutForm() {
       const razorpay = new window.Razorpay(razorpayOptions);
 
       razorpay.on('payment.failed', (response: { error: { description: string } }) => {
+        haptic("error");
         setIsProcessing(false);
         setPaymentError(response.error.description || 'Payment failed. Please try again.');
       });

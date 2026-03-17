@@ -279,7 +279,7 @@ export default function PrivacyPage() {
                     <li><strong className="text-raw-umber">Withdrawal:</strong> Withdraw consent at any time</li>
                   </ul>
                   <p className="text-sm text-raw-umber/50 mt-4">
-                    To exercise these rights, please contact us at privacy@prakashduo.com
+                    To exercise these rights, please contact us at support@banglesbyprakashduo.store
                   </p>
                 </div>
               </div>
@@ -324,7 +324,7 @@ export default function PrivacyPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
-                    href="mailto:privacy@prakashduo.com"
+                    href="mailto:support@banglesbyprakashduo.store"
                     className="group inline-flex items-center justify-center gap-2 bg-crimson-thread text-warm-ivory px-8 py-4 rounded-full font-semibold hover:bg-crimson-thread/90 transition-colors"
                   >
                     Privacy Email

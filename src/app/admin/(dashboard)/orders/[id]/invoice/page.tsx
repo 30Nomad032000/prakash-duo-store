@@ -11,7 +11,7 @@ const STORE = {
   legal: 'SHILPA PRAKASH',
   address: 'Thrissur, Kerala, India',
   phone: '+91 79092 02091',
-  email: 'Prakashduo19@gmail.com',
+  email: 'orders@banglesbyprakashduo.store',
   instagram: '@bangles_byprakashduo',
 };
 

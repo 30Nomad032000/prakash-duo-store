@@ -1,93 +1,127 @@
 import type { Order } from '@/lib/types';
 
+const SITE_URL = 'https://www.banglesbyprakashduo.store';
+
+const C = {
+  warmIvory: '#F5EFE0',
+  deepOchre: '#C8882A',
+  rawUmber: '#3D2B1F',
+  blushDust: '#EDD9C0',
+  crimsonThread: '#A0281A',
+  textMuted: '#7A6A5E',
+  border: '#E2D9CC',
+};
+
+const fontDisplay = "Georgia, 'Cormorant Garamond', 'Times New Roman', serif";
+const fontBody = "'DM Sans', 'Helvetica Neue', Arial, sans-serif";
+const fontMono = "'Courier Prime', 'Courier New', monospace";
+
 export function deliveryConfirmationTemplate(order: Order): string {
   return `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Order Has Been Delivered!</title>
+  <title>Your Order Has Been Delivered</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; padding: 16px !important; }
+      .email-body { padding: 28px 20px !important; }
+      .header-pad { padding: 32px 20px !important; }
+      .footer-pad { padding: 24px 20px !important; }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+<body style="margin: 0; padding: 0; background-color: ${C.blushDust}; font-family: ${fontBody}; -webkit-font-smoothing: antialiased;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.blushDust}; padding: 40px 16px;">
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table class="email-container" width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.warmIvory}; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 3px rgba(61,43,31,0.08);">
+
           <!-- Header -->
           <tr>
-            <td style="background: linear-gradient(135deg, #059669, #10B981); padding: 32px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px;">Prakash Duo</h1>
-              <p style="margin: 8px 0 0; color: #ffffff; opacity: 0.9;">Delivery Confirmation</p>
+            <td class="header-pad" style="background-color: ${C.rawUmber}; padding: 40px 40px 36px; text-align: center;">
+              <p style="margin: 0 0 16px; color: ${C.deepOchre}; font-family: ${fontMono}; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;">Delivered</p>
+              <h1 style="margin: 0; color: ${C.warmIvory}; font-family: ${fontDisplay}; font-size: 26px; font-weight: 600;">Your bangles have arrived</h1>
+              <p style="margin: 12px 0 0; color: ${C.blushDust}; font-family: ${fontBody}; font-size: 14px; opacity: 0.7;">We hope they bring you joy.</p>
             </td>
           </tr>
 
-          <!-- Content -->
+          <!-- Ornamental divider -->
           <tr>
-            <td style="padding: 32px;">
-              <div style="text-align: center; margin-bottom: 32px;">
-                <div style="width: 80px; height: 80px; background-color: #D1FAE5; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;">
-                  <span style="font-size: 40px;">🎉</span>
-                </div>
-                <h2 style="margin: 0; color: #111827; font-size: 24px;">Your order has been delivered!</h2>
-                <p style="margin: 12px 0 0; color: #6B7280; font-size: 16px;">
-                  We hope you love your new bangles!
+            <td style="padding: 0; text-align: center; background-color: ${C.warmIvory};">
+              <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top: 28px;">
+                <tr>
+                  <td style="width: 40px; height: 1px; background-color: ${C.border};"></td>
+                  <td style="padding: 0 12px; color: ${C.deepOchre}; font-size: 14px; line-height: 1;">✦</td>
+                  <td style="width: 40px; height: 1px; background-color: ${C.border};"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td class="email-body" style="padding: 24px 40px 40px;">
+
+              <!-- Order meta -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: ${C.blushDust}; border-radius: 4px; margin-bottom: 32px;">
+                <tr>
+                  <td style="padding: 18px 20px; border-bottom: 1px solid ${C.border};">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Order</td>
+                        <td style="text-align: right; font-weight: 600; font-family: ${fontMono}; color: ${C.rawUmber}; font-size: 14px;">${order.orderId}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 18px 20px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="color: ${C.textMuted}; font-size: 13px; font-family: ${fontMono}; letter-spacing: 0.05em; text-transform: uppercase;">Delivered</td>
+                        <td style="text-align: right; color: ${C.rawUmber}; font-size: 14px;">${new Date().toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Thank you card -->
+              <div style="text-align: center; padding: 28px 24px; border: 1px solid ${C.deepOchre}; border-radius: 4px; margin-bottom: 32px;">
+                <p style="margin: 0 0 8px; font-family: ${fontDisplay}; font-size: 22px; color: ${C.rawUmber}; font-weight: 600;">Thank you for choosing us</p>
+                <p style="margin: 0; color: ${C.textMuted}; font-size: 14px; line-height: 1.6;">
+                  Every piece from Prakash Duo is handcrafted in Thrissur with care.<br>
+                  Your support keeps this tradition alive.
                 </p>
               </div>
 
-              <!-- Order Details -->
-              <div style="background-color: #F9FAFB; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                  <span style="color: #6B7280;">Order ID</span>
-                  <span style="font-weight: 600; font-family: monospace;">${order.orderId}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #6B7280;">Delivered On</span>
-                  <span style="font-weight: 500;">${new Date().toLocaleDateString('en-IN', {
-                    weekday: 'long',
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}</span>
-                </div>
-              </div>
-
-              <!-- Thank You Message -->
-              <div style="text-align: center; padding: 24px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-radius: 12px; margin-bottom: 24px;">
-                <h3 style="margin: 0 0 12px; color: #92400E; font-size: 18px;">Thank You for Shopping with Us!</h3>
-                <p style="margin: 0; color: #92400E; font-size: 14px;">
-                  Your support means the world to us. We handcraft each piece with love and care.
-                </p>
-              </div>
-
-              <!-- Feedback Request -->
-              <div style="border: 2px solid #E5E7EB; border-radius: 12px; padding: 24px; text-align: center;">
-                <h3 style="margin: 0 0 12px; color: #111827; font-size: 16px;">How was your experience?</h3>
-                <p style="margin: 0 0 16px; color: #6B7280; font-size: 14px;">
-                  We'd love to hear your feedback! Share your thoughts and help other customers.
-                </p>
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/product/${order.items[0]?.productId}#reviews" style="display: inline-block; background-color: #D97706; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;">
-                  Write a Review
+              <!-- Review CTA -->
+              <div style="text-align: center; padding: 28px 24px; background-color: ${C.blushDust}; border-radius: 4px; margin-bottom: 32px;">
+                <p style="margin: 0 0 6px; font-family: ${fontDisplay}; font-size: 18px; color: ${C.rawUmber}; font-weight: 600;">Share your experience</p>
+                <p style="margin: 0 0 20px; color: ${C.textMuted}; font-size: 14px;">Your review helps other customers discover handcrafted beauty.</p>
+                <a href="${SITE_URL}/product/${order.items[0]?.productId}#reviews" style="display: inline-block; background-color: ${C.crimsonThread}; color: ${C.warmIvory}; text-decoration: none; padding: 14px 36px; border-radius: 50px; font-family: ${fontBody}; font-weight: 500; font-size: 14px;">
+                  Write a Review →
                 </a>
               </div>
 
-              <!-- Social Media -->
-              <div style="margin-top: 32px; text-align: center;">
-                <p style="margin: 0 0 12px; color: #6B7280; font-size: 14px;">
-                  Share your styling on social media and tag us!
-                </p>
-                <p style="margin: 0; color: #D97706; font-weight: 500;">
-                  @prakashduo
-                </p>
+              <!-- Social -->
+              <div style="text-align: center; margin-bottom: 8px;">
+                <p style="margin: 0 0 8px; color: ${C.textMuted}; font-size: 13px;">Share your styling — tag us on Instagram</p>
+                <p style="margin: 0; color: ${C.deepOchre}; font-family: ${fontMono}; font-size: 13px; letter-spacing: 0.03em;">@bangles_byprakashduo</p>
               </div>
 
-              <!-- Shop Again -->
-              <div style="text-align: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid #eee;">
-                <p style="margin: 0 0 16px; color: #6B7280;">
-                  Ready for more beautiful bangles?
-                </p>
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/categories" style="display: inline-block; border: 2px solid #D97706; color: #D97706; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;">
-                  Shop New Arrivals
+              <!-- Divider -->
+              <div style="height: 1px; background-color: ${C.border}; margin: 28px 0;"></div>
+
+              <!-- Shop again -->
+              <div style="text-align: center;">
+                <p style="margin: 0 0 16px; color: ${C.textMuted}; font-size: 14px;">Ready for more?</p>
+                <a href="${SITE_URL}/categories" style="display: inline-block; border: 2px solid ${C.rawUmber}; color: ${C.rawUmber}; text-decoration: none; padding: 12px 32px; border-radius: 50px; font-family: ${fontBody}; font-weight: 500; font-size: 14px;">
+                  Browse Collections
                 </a>
               </div>
             </td>
@@ -95,15 +129,16 @@ export function deliveryConfirmationTemplate(order: Order): string {
 
           <!-- Footer -->
           <tr>
-            <td style="background-color: #F9FAFB; padding: 24px; text-align: center; border-top: 1px solid #eee;">
-              <p style="margin: 0; color: #6B7280; font-size: 14px;">
-                Need help? <a href="mailto:support@prakashduo.com" style="color: #059669;">Contact our support team</a>
+            <td class="footer-pad" style="background-color: ${C.rawUmber}; padding: 28px 40px; text-align: center;">
+              <p style="margin: 0; color: ${C.blushDust}; font-family: ${fontBody}; font-size: 13px; opacity: 0.6;">
+                Need help? Write to <a href="mailto:support@banglesbyprakashduo.store" style="color: ${C.deepOchre}; text-decoration: none;">support@banglesbyprakashduo.store</a>
               </p>
-              <p style="margin: 12px 0 0; color: #9CA3AF; font-size: 12px;">
-                © ${new Date().getFullYear()} Prakash Duo. All rights reserved.
+              <p style="margin: 12px 0 0; color: ${C.blushDust}; font-family: ${fontMono}; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.4;">
+                © ${new Date().getFullYear()} Prakash Duo · Thrissur, Kerala
               </p>
             </td>
           </tr>
+
         </table>
       </td>
     </tr>
@@ -114,4 +149,4 @@ export function deliveryConfirmationTemplate(order: Order): string {
 }
 
 export const deliveryConfirmationSubject = (orderId: string) =>
-  `Order ${orderId} Delivered! We'd Love Your Feedback | Prakash Duo`;
+  `Order ${orderId} Delivered — Bangles by Prakash Duo`;

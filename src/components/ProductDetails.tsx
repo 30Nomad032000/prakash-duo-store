@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { Check, Heart, Share2 } from 'lucide-react';
+import { useHaptics } from '@/hooks/useHaptics';
 
 interface InventoryItem {
   size: string;
@@ -69,6 +70,7 @@ export default function ProductDetails({
   const router = useRouter();
   const { addItem, openCart } = useCart();
   const { toggleItem, isInWishlist } = useWishlist();
+  const { trigger: haptic } = useHaptics();
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(sizes[0] || '');
   const [addedToCart, setAddedToCart] = useState(false);
@@ -96,7 +98,7 @@ export default function ProductDetails({
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
+    if (quantity > 1) { haptic("nudge"); setQuantity(quantity - 1); }
   };
 
   const getStockForSize = (size: string): string => {
@@ -116,7 +118,7 @@ export default function ProductDetails({
   const maxQuantity = selectedSize ? getNumericStock(selectedSize) : 99;
 
   const handleIncrease = () => {
-    if (quantity < maxQuantity) setQuantity(quantity + 1);
+    if (quantity < maxQuantity) { haptic("nudge"); setQuantity(quantity + 1); }
   };
 
   const isEntirelyOutOfStock = inventory.length > 0 && inventory.every((item) => {
@@ -129,6 +131,7 @@ export default function ProductDetails({
       return;
     }
 
+    haptic("success");
     addItem({
       productId: id,
       name,
@@ -148,6 +151,7 @@ export default function ProductDetails({
       return;
     }
 
+    haptic("success");
     addItem({
       productId: id,
       name,
@@ -161,6 +165,7 @@ export default function ProductDetails({
   };
 
   const handleToggleFavorite = useCallback(() => {
+    haptic("nudge");
     const wasAdded = toggleItem({
       productId: id,
       name,
@@ -177,7 +182,7 @@ export default function ProductDetails({
         setParticles([]);
       }, 1200);
     }
-  }, [toggleItem, id, name, price, image, category]);
+  }, [toggleItem, id, name, price, image, category, haptic]);
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -222,7 +227,7 @@ export default function ProductDetails({
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleShare}
+            onClick={() => { haptic("nudge"); handleShare(); }}
             className="p-2.5 rounded-full border border-raw-umber/20 text-raw-umber/60 hover:bg-raw-umber/5 hover:text-raw-umber transition-colors"
             aria-label="Share product"
           >
@@ -298,7 +303,7 @@ export default function ProductDetails({
               return (
                 <button
                   key={size}
-                  onClick={() => { if (inStock) { setSelectedSize(size); setQuantity(1); } }}
+                  onClick={() => { if (inStock) { haptic("nudge"); setSelectedSize(size); setQuantity(1); } }}
                   disabled={!inStock}
                   className={`
                     relative px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all
@@ -418,7 +423,7 @@ export default function ProductDetails({
         className="pt-6 space-y-4 border-t border-raw-umber/10"
       >
         {[
-          { title: 'Free Shipping', subtitle: 'On orders above ₹999' },
+          { title: 'Free Shipping', subtitle: 'On orders above ₹599' },
           { title: 'Secure Payment', subtitle: '100% secure transactions' },
           { title: 'Easy Returns', subtitle: '7 days return policy' }
         ].map((item, i) => (

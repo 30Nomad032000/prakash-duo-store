@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import type { CartItem as CartItemType } from '@/lib/types';
+import { useHaptics } from '@/hooks/useHaptics';
 
 interface CartItemProps {
   item: CartItemType;
@@ -14,18 +15,22 @@ interface CartItemProps {
 
 export default function CartItem({ item, compact = false }: CartItemProps) {
   const { updateQuantity, removeItem } = useCart();
+  const { trigger: haptic } = useHaptics();
 
   const handleDecrease = () => {
     if (item.quantity > 1) {
+      haptic("nudge");
       updateQuantity(item.productId, item.size, item.quantity - 1);
     }
   };
 
   const handleIncrease = () => {
+    haptic("nudge");
     updateQuantity(item.productId, item.size, item.quantity + 1);
   };
 
   const handleRemove = () => {
+    haptic("error");
     removeItem(item.productId, item.size);
   };
 

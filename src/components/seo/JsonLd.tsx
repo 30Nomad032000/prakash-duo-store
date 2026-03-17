@@ -19,7 +19,7 @@ export function OrganizationJsonLd() {
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+91-79092-02091',
-      email: 'Prakashduo19@gmail.com',
+      email: 'support@banglesbyprakashduo.store',
       contactType: 'customer service',
     },
     sameAs: ['https://www.instagram.com/bangles_byprakashduo'],

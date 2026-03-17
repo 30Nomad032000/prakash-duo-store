@@ -335,8 +335,8 @@ function OrderConfirmationContent() {
             </p>
             <p className="mt-2">
               Questions? Contact us at{' '}
-              <a href="mailto:support@prakashduo.com" className="text-deep-ochre hover:underline">
-                support@prakashduo.com
+              <a href="mailto:support@banglesbyprakashduo.store" className="text-deep-ochre hover:underline">
+                support@banglesbyprakashduo.store
               </a>
             </p>
           </motion.div>
