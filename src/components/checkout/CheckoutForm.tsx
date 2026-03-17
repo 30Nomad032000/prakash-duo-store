@@ -221,6 +221,8 @@ export default function CheckoutForm() {
         },
         modal: {
           ondismiss: () => {
+            // Release reserved stock for this abandoned order
+            fetch(`/api/orders/${orderId}/release`, { method: 'POST' }).catch(() => {});
             setIsProcessing(false);
             setPaymentError('Payment was cancelled. Please try again.');
           },
