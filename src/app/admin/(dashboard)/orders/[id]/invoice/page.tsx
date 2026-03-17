@@ -62,7 +62,7 @@ export default function InvoicePage() {
   return (
     <>
       {/* Full-screen overlay so admin sidebar/header don't show */}
-      <div className="fixed inset-0 z-[100] bg-white overflow-auto print:static print:z-auto">
+      <div id="invoice-root" className="fixed inset-0 z-[100] bg-white overflow-auto print:static print:z-auto">
         {/* Toolbar — hidden when printing */}
         <div className="no-print sticky top-0 bg-warm-ivory border-b border-raw-umber/10 px-6 py-3 flex items-center justify-between z-10">
           <Link
@@ -245,14 +245,21 @@ export default function InvoicePage() {
             margin: 10mm;
           }
 
-          /* Hide everything outside the invoice */
-          body > *:not(.fixed) {
+          /* Hide everything except the invoice */
+          body * {
             visibility: hidden;
           }
 
-          /* But the fixed overlay becomes the page content */
-          .fixed {
-            position: static !important;
+          #invoice-root,
+          #invoice-root * {
+            visibility: visible;
+          }
+
+          #invoice-root {
+            position: absolute !important;
+            left: 0;
+            top: 0;
+            width: 100%;
             overflow: visible !important;
           }
 
