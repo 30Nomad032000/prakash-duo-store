@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { createOrderRequestSchema } from '@/lib/schemas';
 import { createRazorpayOrder, generateOrderId, validateAndCalculateOrderTotals } from '@/lib/razorpay';
 import { createOrder, getOrderByOrderId, reserveStock } from '@/lib/supabase-orders';
@@ -88,7 +89,14 @@ export async function POST(request: NextRequest) {
       paymentSessionId: razorpayOrder.id, // store razorpay_order_id
     });
 
-    return NextResponse.json<ApiResponse<CreateOrderResponse>>({
+    // Generate a release token (HMAC of orderId) so only the creating client can release stock
+    const releaseToken = crypto
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET || 'fallback')
+      .update(orderId)
+      .digest('hex')
+      .slice(0, 32);
+
+    return NextResponse.json<ApiResponse<CreateOrderResponse & { releaseToken: string }>>({
       success: true,
       data: {
         orderId,
@@ -101,6 +109,7 @@ export async function POST(request: NextRequest) {
           email: customer.email,
           contact: customer.phone,
         },
+        releaseToken,
       },
     });
   } catch (error) {

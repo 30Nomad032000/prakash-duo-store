@@ -539,6 +539,32 @@ export async function releaseStock(
   }
 }
 
+// Restore stock for cancelled paid orders (reverses commitStockSale)
+// Adds quantity back to the inventory since it was already deducted on payment
+export async function restoreStock(
+  items: { productId: string; size: string; quantity: number }[]
+): Promise<void> {
+  const supabase = getUntypedClient();
+
+  for (const item of items) {
+    // Add quantity back to inventory (commitStockSale deducted from both quantity and reserved_quantity)
+    const { data: inv } = await supabase
+      .from('product_inventory')
+      .select('quantity')
+      .eq('product_id', item.productId)
+      .eq('size', item.size)
+      .single();
+
+    if (inv) {
+      await supabase
+        .from('product_inventory')
+        .update({ quantity: inv.quantity + item.quantity })
+        .eq('product_id', item.productId)
+        .eq('size', item.size);
+    }
+  }
+}
+
 // Commit stock sale (payment successful)
 export async function commitStockSale(
   items: { productId: string; size: string; quantity: number }[]

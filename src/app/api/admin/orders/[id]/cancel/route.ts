@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { getOrderByOrderId, releaseStock } from '@/lib/supabase-orders';
+import { getOrderByOrderId, releaseStock, restoreStock } from '@/lib/supabase-orders';
 import { sendCancellationEmail } from '@/lib/email/send';
 
 function getUntypedClient() {
@@ -69,7 +69,7 @@ export async function POST(
       );
     }
 
-    // Release reserved stock back to inventory
+    // Restore stock: use different approach depending on whether payment was committed
     const stockItems = order.order_items.map((item: { product_id: string; size: string; quantity: number }) => ({
       productId: item.product_id,
       size: item.size,
@@ -77,10 +77,16 @@ export async function POST(
     }));
 
     try {
-      await releaseStock(stockItems);
+      if (order.payment_status === 'paid') {
+        // Paid orders: commitStockSale already deducted from quantity, so add it back
+        await restoreStock(stockItems);
+      } else {
+        // Unpaid orders: stock is still in reserved_quantity, release it
+        await releaseStock(stockItems);
+      }
     } catch (stockErr) {
-      console.error('Failed to release stock for cancelled order:', stockErr);
-      // Don't fail the cancellation if stock release fails — can fix manually
+      console.error('Failed to restore stock for cancelled order:', stockErr);
+      // Don't fail the cancellation if stock restore fails — can fix manually
     }
 
     // Send cancellation email to customer

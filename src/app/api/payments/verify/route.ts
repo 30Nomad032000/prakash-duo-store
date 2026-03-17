@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyPaymentSignature, fetchPayment } from '@/lib/razorpay';
-import { getOrderByOrderId, updatePaymentStatus } from '@/lib/supabase-orders';
+import { getOrderByOrderId } from '@/lib/supabase-orders';
 import type { ApiResponse, VerifyPaymentResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -86,9 +86,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 4: Mark as paid — stock deduction and emails are handled
-    // exclusively by the webhook to prevent double processing.
-    await updatePaymentStatus(order_id, 'paid');
+    // Signature + amount verified. The webhook is the sole authority for
+    // updating payment status, committing stock, and sending emails.
+    // This endpoint only confirms to the client that the payment is legit.
 
     return NextResponse.json<ApiResponse<VerifyPaymentResponse>>({
       success: true,

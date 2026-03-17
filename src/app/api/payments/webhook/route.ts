@@ -98,9 +98,16 @@ export async function POST(request: NextRequest) {
         console.error(
           `Amount mismatch for order ${order.orderId}: expected ${expectedAmountInPaise}, got ${paymentEntity.amount}`
         );
-        // Still update but flag for manual review
-        await updateOrderStatus(order.orderId, 'pending');
-        return NextResponse.json({ error: 'Amount mismatch — flagged for review' }, { status: 400 });
+        // Release stock and mark as failed
+        await updatePaymentStatus(order.orderId, 'failed');
+        await updateOrderStatus(order.orderId, 'cancelled');
+        const mismatchItems = order.items.map((item) => ({
+          productId: item.productId,
+          size: item.size,
+          quantity: item.quantity,
+        }));
+        await releaseStock(mismatchItems).catch(() => {});
+        return NextResponse.json({ error: 'Amount mismatch — order cancelled' }, { status: 400 });
       }
 
       // Double-check with Razorpay API (belt and suspenders)

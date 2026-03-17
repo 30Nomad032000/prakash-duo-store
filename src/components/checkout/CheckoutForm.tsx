@@ -175,7 +175,7 @@ export default function CheckoutForm() {
         throw new Error(orderData.error || 'Failed to create order');
       }
 
-      const { orderId, razorpayOrderId, keyId, amount, currency, prefill } = orderData.data;
+      const { orderId, razorpayOrderId, keyId, amount, currency, prefill, releaseToken } = orderData.data;
 
       // Open Razorpay checkout modal
       const razorpayOptions: RazorpayOptions = {
@@ -222,7 +222,11 @@ export default function CheckoutForm() {
         modal: {
           ondismiss: () => {
             // Release reserved stock for this abandoned order
-            fetch(`/api/orders/${orderId}/release`, { method: 'POST' }).catch(() => {});
+            fetch(`/api/orders/${orderId}/release`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ releaseToken }),
+            }).catch(() => {});
             setIsProcessing(false);
             setPaymentError('Payment was cancelled. Please try again.');
           },
