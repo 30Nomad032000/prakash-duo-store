@@ -7,6 +7,7 @@ export interface CartItem {
   image: string;
   size: string;
   quantity: number;
+  maxQuantity?: number;
 }
 
 // Customer Types

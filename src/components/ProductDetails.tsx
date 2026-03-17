@@ -139,6 +139,7 @@ export default function ProductDetails({
       image,
       size: selectedSize || 'One Size',
       quantity,
+      maxQuantity,
     });
 
     setAddedToCart(true);
@@ -159,6 +160,7 @@ export default function ProductDetails({
       image,
       size: selectedSize || 'One Size',
       quantity,
+      maxQuantity,
     });
 
     router.push('/checkout');

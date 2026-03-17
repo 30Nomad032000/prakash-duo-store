@@ -37,11 +37,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       );
 
       if (existingIndex > -1) {
-        // Update quantity if item exists (cap at 10)
+        // Update quantity if item exists (cap at maxQuantity or 10)
         const updatedItems = [...state.items];
+        const existing = updatedItems[existingIndex];
+        const cap = action.payload.maxQuantity || existing.maxQuantity || 10;
         updatedItems[existingIndex] = {
-          ...updatedItems[existingIndex],
-          quantity: Math.min(updatedItems[existingIndex].quantity + action.payload.quantity, 10),
+          ...existing,
+          quantity: Math.min(existing.quantity + action.payload.quantity, cap),
+          maxQuantity: action.payload.maxQuantity || existing.maxQuantity,
         };
         return { ...state, items: updatedItems };
       }
@@ -69,16 +72,15 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         };
       }
 
-      // Cap quantity at 10
-      const cappedQuantity = Math.min(action.payload.quantity, 10);
-
       return {
         ...state,
-        items: state.items.map(item =>
-          item.productId === action.payload.productId && item.size === action.payload.size
-            ? { ...item, quantity: cappedQuantity }
-            : item
-        ),
+        items: state.items.map(item => {
+          if (item.productId === action.payload.productId && item.size === action.payload.size) {
+            const cap = item.maxQuantity || 10;
+            return { ...item, quantity: Math.min(action.payload.quantity, cap) };
+          }
+          return item;
+        }),
       };
     }
 

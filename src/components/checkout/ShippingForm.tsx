@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { indianStates } from '@/lib/schemas';
 
 interface ShippingFormProps {
@@ -133,18 +134,22 @@ export default function ShippingForm({ formData, errors, onChange }: ShippingFor
             </div>
             <div>
               <label className={labelClass}>State</label>
-              <select
-                value={formData.state}
-                onChange={(e) => onChange('state', e.target.value)}
-                className={inputClass('state')}
-              >
-                <option value="">Select State</option>
-                {indianStates.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
+              <Select value={formData.state} onValueChange={(value) => onChange('state', value)}>
+                <SelectTrigger className={`w-full px-4 py-3 h-auto border rounded-lg bg-white focus:outline-none focus:ring-2 transition-colors ${
+                  errors.state
+                    ? 'border-red-300 focus:ring-red-200 focus:border-red-400'
+                    : 'border-stone-200 focus:ring-gold/20 focus:border-gold'
+                }`}>
+                  <SelectValue placeholder="Select State" />
+                </SelectTrigger>
+                <SelectContent className="max-h-60">
+                  {indianStates.map((state) => (
+                    <SelectItem key={state} value={state}>
+                      {state}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {errors.state && <p className={errorClass}>{errors.state}</p>}
             </div>
             <div>

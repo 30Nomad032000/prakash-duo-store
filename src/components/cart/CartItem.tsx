@@ -24,7 +24,10 @@ export default function CartItem({ item, compact = false }: CartItemProps) {
     }
   };
 
+  const maxQty = item.maxQuantity || 10;
+
   const handleIncrease = () => {
+    if (item.quantity >= maxQty) return;
     haptic("nudge");
     updateQuantity(item.productId, item.size, item.quantity + 1);
   };
@@ -80,7 +83,8 @@ export default function CartItem({ item, compact = false }: CartItemProps) {
               <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
               <button
                 onClick={handleIncrease}
-                className="w-7 h-7 flex items-center justify-center rounded-full border border-stone-200 hover:border-gold hover:bg-gold/5 transition-colors"
+                disabled={item.quantity >= maxQty}
+                className="w-7 h-7 flex items-center justify-center rounded-full border border-stone-200 hover:border-gold hover:bg-gold/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <Plus className="w-3 h-3" />
               </button>
@@ -150,7 +154,8 @@ export default function CartItem({ item, compact = false }: CartItemProps) {
             <span className="w-10 text-center text-base font-medium">{item.quantity}</span>
             <button
               onClick={handleIncrease}
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 hover:border-gold hover:bg-gold/5 transition-colors"
+              disabled={item.quantity >= maxQty}
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 hover:border-gold hover:bg-gold/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <Plus className="w-4 h-4" />
             </button>
