@@ -6,6 +6,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Phone, MessageCircle } from "lucide-react";
+import { PageLoader } from "@/components/ui/Loader";
 import PageSeo from '@/components/seo/PageSeo';
 
 if (typeof window !== "undefined") {
@@ -91,12 +92,7 @@ export default function CategoriesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
-        <div className="text-center animate-pulse">
-          <div className="w-12 h-12 border-2 border-deep-ochre/30 border-t-deep-ochre rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-raw-umber/60 font-display text-xl">Loading collections...</p>
-        </div>
-      </div>
+      <PageLoader label="Discovering collections..." />
     );
   }
 

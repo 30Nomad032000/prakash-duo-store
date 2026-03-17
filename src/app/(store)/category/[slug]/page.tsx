@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PageLoader } from "@/components/ui/Loader";
 import ProductCard from "@/components/ProductCard";
 import { ArrowRight, ArrowLeft, SlidersHorizontal, ChevronDown, Check } from "lucide-react";
 import PageSeo from '@/components/seo/PageSeo';
@@ -150,12 +151,7 @@ export default function CategoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
-        <div className="text-center animate-pulse">
-          <div className="w-12 h-12 border-2 border-deep-ochre/30 border-t-deep-ochre rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-raw-umber/60 font-display text-xl">Loading collection...</p>
-        </div>
-      </div>
+      <PageLoader label="Curating your collection..." />
     );
   }
 

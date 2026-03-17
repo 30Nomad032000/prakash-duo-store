@@ -3,11 +3,10 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingBag, Sparkles, Phone } from 'lucide-react';
+import { X, ShoppingBag, ArrowRight, Lock } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
-import { Button } from '@/components/ui/button';
 import { useHaptics } from '@/hooks/useHaptics';
 
 export default function CartDrawer() {
@@ -45,7 +44,7 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeCart}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-raw-umber/40 backdrop-blur-sm z-50"
           />
 
           {/* Drawer */}
@@ -54,48 +53,48 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-warm-ivory shadow-2xl z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-raw-umber/10">
               <div className="flex items-center gap-3">
-                <ShoppingBag className="w-5 h-5 text-gold" />
-                <h2 className="text-lg font-serif font-semibold text-charcoal">
-                  Shopping Bag
-                </h2>
+                <span className="font-display text-xl font-bold text-raw-umber tracking-tight">
+                  Your Bag
+                </span>
                 {itemCount > 0 && (
-                  <span className="px-2 py-0.5 text-xs font-medium bg-gold/10 text-gold rounded-full">
+                  <span className="px-2.5 py-0.5 text-xs font-mono font-medium bg-deep-ochre/10 text-deep-ochre rounded-full tracking-wide">
                     {itemCount}
                   </span>
                 )}
               </div>
               <button
                 onClick={() => { haptic("nudge"); closeCart(); }}
-                className="p-2 rounded-full hover:bg-stone-100 transition-colors"
+                className="p-2 rounded-full hover:bg-raw-umber/5 transition-colors"
               >
-                <X className="w-5 h-5 text-charcoal/60" />
+                <X className="w-5 h-5 text-raw-umber/40" />
               </button>
             </div>
 
             {/* Content */}
             {state.items.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-                <div className="w-20 h-20 rounded-full bg-stone-100 flex items-center justify-center mb-4">
-                  <ShoppingBag className="w-10 h-10 text-stone-400" />
+              <div className="flex-1 flex flex-col items-center justify-center px-8 text-center">
+                <div className="w-20 h-20 rounded-full bg-blush-dust flex items-center justify-center mb-6">
+                  <ShoppingBag className="w-9 h-9 text-raw-umber/25" />
                 </div>
-                <h3 className="text-lg font-medium text-charcoal mb-2">
-                  Your bag is empty
+                <h3 className="font-display text-xl text-raw-umber mb-2">
+                  Nothing here yet
                 </h3>
-                <p className="text-sm text-charcoal/60 mb-6">
-                  Discover our exquisite collection of handcrafted bangles
+                <p className="text-sm text-raw-umber/50 font-body mb-8 max-w-xs">
+                  Discover handcrafted bangles from Thrissur, made with love by the Prakash sisters.
                 </p>
-                <Button
+                <Link
+                  href="/categories"
                   onClick={closeCart}
-                  asChild
-                  className="bg-gold hover:bg-rose-gold text-white rounded-full px-8"
+                  className="group inline-flex items-center gap-2 bg-crimson-thread text-warm-ivory px-7 py-3 rounded-full font-body font-medium text-sm hover:bg-crimson-thread/90 transition-colors"
                 >
-                  <Link href="/categories">Start Shopping</Link>
-                </Button>
+                  Start Shopping
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
               </div>
             ) : (
               <>
@@ -109,46 +108,43 @@ export default function CartDrawer() {
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-stone-200 px-6 py-4 bg-white">
+                <div className="border-t border-raw-umber/10 px-6 py-5 bg-warm-ivory">
                   <CartSummary showShipping={true} />
 
-                  {/* Coming Soon Notice */}
-                  <div className="mt-4 bg-gradient-to-br from-gold/10 to-rose-gold/10 border border-gold/20 rounded-xl p-4 text-center">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <Sparkles className="w-4 h-4 text-burgundy" />
-                      <span className="text-burgundy text-sm font-medium">Online Ordering Opens Soon!</span>
-                    </div>
-                    <p className="text-charcoal/60 text-xs mb-3">
-                      Contact us directly to place your order
-                    </p>
-                    <a
-                      href="tel:+917909202091"
-                      className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-charcoal text-white text-sm rounded-full hover:bg-burgundy transition-colors"
+                  <div className="mt-5 space-y-2.5">
+                    {/* Primary CTA — Checkout */}
+                    <Link
+                      href="/checkout"
+                      onClick={closeCart}
+                      className="group flex items-center justify-center gap-2.5 w-full py-3.5 bg-crimson-thread text-warm-ivory rounded-full font-body font-medium text-sm hover:bg-crimson-thread/90 transition-all duration-300 shadow-lg shadow-crimson-thread/20 hover:shadow-xl hover:shadow-crimson-thread/25"
                     >
-                      <Phone className="w-3.5 h-3.5" />
-                      Call: +91 79092 02091
-                    </a>
+                      <Lock className="w-3.5 h-3.5 opacity-70" />
+                      Proceed to Checkout
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+
+                    {/* Secondary — View full cart */}
+                    <Link
+                      href="/cart"
+                      onClick={closeCart}
+                      className="flex items-center justify-center w-full py-3 border border-raw-umber/15 text-raw-umber rounded-full font-body font-medium text-sm hover:border-deep-ochre/40 hover:bg-deep-ochre/5 transition-all duration-300"
+                    >
+                      View Full Cart
+                    </Link>
+
+                    {/* Tertiary — Continue shopping */}
+                    <button
+                      onClick={closeCart}
+                      className="w-full py-2 text-raw-umber/40 font-body text-sm hover:text-deep-ochre transition-colors text-center"
+                    >
+                      Continue Shopping
+                    </button>
                   </div>
 
-                  <div className="mt-3 space-y-2">
-                    <Button
-                      onClick={closeCart}
-                      asChild
-                      variant="outline"
-                      className="w-full py-3 rounded-full border-charcoal/20 hover:border-gold hover:bg-gold/5"
-                    >
-                      <Link href="/cart">View Full Cart</Link>
-                    </Button>
-
-                    <Button
-                      onClick={closeCart}
-                      asChild
-                      variant="ghost"
-                      className="w-full py-2 text-charcoal/60 hover:text-gold"
-                    >
-                      <Link href="/categories">Continue Shopping</Link>
-                    </Button>
-                  </div>
+                  {/* Trust line */}
+                  <p className="mt-4 text-center text-[11px] font-mono text-raw-umber/30 tracking-wide uppercase">
+                    Secure checkout &nbsp;·&nbsp; Free shipping above ₹599
+                  </p>
                 </div>
               </>
             )}

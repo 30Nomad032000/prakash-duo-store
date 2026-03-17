@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyWebhookSignature, fetchPayment } from '@/lib/razorpay';
-import { getOrderByOrderId, updatePaymentStatus, updateOrderStatus, commitStockSale } from '@/lib/supabase-orders';
+import { getOrderByOrderId, updatePaymentStatus, updateOrderStatus, commitStockSale, releaseStock } from '@/lib/supabase-orders';
 import { sendOrderConfirmation, sendNewOrderNotification } from '@/lib/email/send';
 
 interface RazorpayWebhookPayload {
@@ -141,6 +141,17 @@ export async function POST(request: NextRequest) {
     } else if (event === 'payment.failed') {
       await updatePaymentStatus(order.orderId, 'failed');
       await updateOrderStatus(order.orderId, 'cancelled');
+
+      // Release reserved stock back to inventory
+      const stockItems = order.items.map((item) => ({
+        productId: item.productId,
+        size: item.size,
+        quantity: item.quantity,
+      }));
+      await releaseStock(stockItems).catch((err) => {
+        console.error('Failed to release stock on payment failure:', err);
+      });
+
       console.log(`Order ${order.orderId} payment failed: ${paymentEntity.error_description}`);
     }
 

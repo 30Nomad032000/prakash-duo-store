@@ -6,6 +6,7 @@ import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Package, Clock, MapPin, Truck, Sparkles, CheckCircle, ArrowRight, XCircle, Loader2 } from 'lucide-react';
+import { PageLoader } from '@/components/ui/Loader';
 import PageSeo from '@/components/seo/PageSeo';
 import type { Order } from '@/lib/types';
 
@@ -513,9 +514,7 @@ export default function TrackOrderPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
-          <Loader2 className="w-12 h-12 text-deep-ochre animate-spin" />
-        </div>
+        <PageLoader />
       }
     >
       <TrackOrderContent />

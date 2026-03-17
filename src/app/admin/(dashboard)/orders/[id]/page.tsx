@@ -19,6 +19,8 @@ import {
   X,
   Send,
   Printer,
+  Ban,
+  AlertTriangle,
 } from 'lucide-react';
 import type { Order } from '@/lib/types';
 
@@ -65,6 +67,8 @@ export default function OrderDetailPage() {
   const [trackingId, setTrackingId] = useState('');
   const [estimatedDelivery, setEstimatedDelivery] = useState('');
   const [trackingNotes, setTrackingNotes] = useState('');
+  const [cancelModal, setCancelModal] = useState(false);
+  const [cancelReason, setCancelReason] = useState('');
 
   useEffect(() => {
     fetchOrder();
@@ -147,6 +151,30 @@ export default function OrderDetailPage() {
       }
     } catch (error) {
       console.error('Failed to mark as delivered:', error);
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const cancelOrder = async () => {
+    if (!order || !cancelReason.trim()) return;
+    setUpdating(true);
+    try {
+      const res = await fetch(`/api/admin/orders/${id}/cancel`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason: cancelReason.trim() }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setOrder(data.order);
+        setCancelModal(false);
+        setCancelReason('');
+      } else {
+        alert(data.error || 'Failed to cancel order');
+      }
+    } catch (error) {
+      console.error('Failed to cancel order:', error);
     } finally {
       setUpdating(false);
     }
@@ -313,6 +341,16 @@ export default function OrderDetailPage() {
               >
                 <CheckCircle className="w-4 h-4" />
                 Mark as Delivered
+              </button>
+            )}
+            {['pending', 'confirmed', 'processing'].includes(order.status) && (
+              <button
+                onClick={() => setCancelModal(true)}
+                disabled={updating}
+                className="ml-auto px-4 py-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-50 hover:border-red-300 disabled:opacity-50 flex items-center gap-2 text-sm transition-all"
+              >
+                <Ban className="w-3.5 h-3.5" />
+                Cancel Order
               </button>
             )}
           </div>
@@ -534,6 +572,90 @@ export default function OrderDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Cancel Modal */}
+      {cancelModal && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div
+            className="fixed inset-0 bg-raw-umber/60 backdrop-blur-sm"
+            onClick={() => setCancelModal(false)}
+          />
+          <div className="relative min-h-screen flex items-center justify-center p-4">
+            <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+              {/* Red accent bar */}
+              <div className="h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500" />
+
+              <div className="p-7">
+                <div className="flex items-start justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                      <AlertTriangle className="w-5 h-5 text-red-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-charcoal">Cancel Order</h3>
+                      <p className="text-xs text-charcoal/40 font-mono mt-0.5">{order?.orderId}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setCancelModal(false)}
+                    className="p-1.5 hover:bg-charcoal/5 rounded-full transition-colors"
+                  >
+                    <X className="w-4 h-4 text-charcoal/40" />
+                  </button>
+                </div>
+
+                <p className="text-sm text-charcoal/60 mb-5 leading-relaxed">
+                  This will cancel the order and notify the customer via email.
+                  {order?.paymentStatus === 'paid' && (
+                    <span className="block mt-1.5 text-amber-700 font-medium text-xs bg-amber-50 rounded px-2 py-1.5 border border-amber-200">
+                      This is a paid order — payment will be marked as refunded.
+                    </span>
+                  )}
+                </p>
+
+                <div className="mb-5">
+                  <label className="block text-xs font-medium text-charcoal/50 uppercase tracking-wider mb-2">
+                    Reason for cancellation
+                  </label>
+                  <textarea
+                    value={cancelReason}
+                    onChange={(e) => setCancelReason(e.target.value)}
+                    rows={3}
+                    required
+                    placeholder="Item out of stock, customer requested, unable to fulfil..."
+                    className="w-full px-4 py-3 border border-charcoal/10 rounded-xl text-sm focus:ring-2 focus:ring-red-200 focus:border-red-300 outline-none resize-none bg-charcoal/[0.02] placeholder:text-charcoal/25 transition-all"
+                  />
+                </div>
+
+                <div className="flex items-start gap-2.5 p-3.5 bg-red-50/70 rounded-xl mb-6 border border-red-100">
+                  <Mail className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-red-600/80 leading-relaxed">
+                    A cancellation email with this reason will be sent to <span className="font-medium">{order?.customer.email}</span>
+                  </p>
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setCancelModal(false)}
+                    className="flex-1 px-4 py-3 border border-charcoal/10 rounded-xl text-sm font-medium text-charcoal/60 hover:bg-charcoal/[0.03] hover:border-charcoal/20 transition-all"
+                  >
+                    Go Back
+                  </button>
+                  <button
+                    onClick={cancelOrder}
+                    disabled={updating || !cancelReason.trim()}
+                    className="flex-1 px-4 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all shadow-sm shadow-red-600/20"
+                  >
+                    <Ban className="w-3.5 h-3.5" />
+                    {updating ? 'Cancelling...' : 'Confirm Cancellation'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tracking Modal */}
       {trackingModal && (

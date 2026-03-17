@@ -15,6 +15,10 @@ import {
   newOrderNotificationTemplate,
   newOrderNotificationSubject,
 } from './templates/new-order-notification';
+import {
+  cancellationTemplate,
+  cancellationSubject,
+} from './templates/cancellation';
 import { createClient } from '@supabase/supabase-js';
 import type { Order } from '@/lib/types';
 import type { EmailType, EmailStatus } from '@/lib/supabase/types';
@@ -245,6 +249,44 @@ export async function sendNewOrderNotification(
   }
 }
 
+export async function sendCancellationEmail(
+  order: Order,
+  reason: string
+): Promise<SendEmailResult> {
+  const subject = cancellationSubject(order.orderId);
+  const html = cancellationTemplate(order, reason);
+  const recipientEmail = order.customer.email;
+
+  try {
+    const result = await sendEmail(recipientEmail, subject, html);
+
+    await logEmail(
+      order.orderId,
+      'cancellation',
+      recipientEmail,
+      subject,
+      'sent'
+    );
+
+    return { success: true, messageId: result.id };
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    console.error('Failed to send cancellation email:', error);
+
+    await logEmail(
+      order.orderId,
+      'cancellation',
+      recipientEmail,
+      subject,
+      'failed',
+      errorMessage
+    );
+
+    return { success: false, error: errorMessage };
+  }
+}
+
 // Resend a failed email
 export async function resendEmail(emailLogId: string): Promise<SendEmailResult> {
   try {
@@ -338,6 +380,13 @@ export async function resendEmail(emailLogId: string): Promise<SendEmailResult> 
 
       case 'delivery_confirmation':
         return sendDeliveryConfirmation(orderData);
+
+      case 'new_order_notification':
+        return sendNewOrderNotification(orderData);
+
+      case 'cancellation':
+        // Cancellation emails cannot be resent — the reason is not stored in email_logs
+        return { success: false, error: 'Cancellation emails cannot be resent from logs' };
 
       default:
         return { success: false, error: 'Unknown email type' };

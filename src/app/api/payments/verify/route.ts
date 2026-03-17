@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyPaymentSignature, fetchPayment } from '@/lib/razorpay';
-import { getOrderByOrderId, updatePaymentStatus, commitStockSale } from '@/lib/supabase-orders';
-import { sendOrderConfirmation, sendNewOrderNotification } from '@/lib/email/send';
+import { getOrderByOrderId, updatePaymentStatus } from '@/lib/supabase-orders';
 import type { ApiResponse, VerifyPaymentResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -61,7 +60,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 2: Server-side verification — fetch payment from Razorpay API
-    // This ensures the payment actually exists and the amount matches
     const payment = await fetchPayment(razorpay_payment_id);
 
     if (payment.status !== 'captured') {
@@ -88,30 +86,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 4: Update order status
+    // Step 4: Mark as paid — stock deduction and emails are handled
+    // exclusively by the webhook to prevent double processing.
     await updatePaymentStatus(order_id, 'paid');
-
-    // Step 5: Commit stock sale (deduct from inventory)
-    const stockItems = order.items.map((item) => ({
-      productId: item.productId,
-      size: item.size,
-      quantity: item.quantity,
-    }));
-    await commitStockSale(stockItems);
-
-    // Step 6: Send order confirmation email + notify store owner
-    const updatedOrder = await getOrderByOrderId(order_id);
-    if (updatedOrder) {
-      await sendOrderConfirmation(updatedOrder).catch((emailErr) => {
-        console.error('Failed to send confirmation email:', emailErr);
-        // Don't fail the payment verification if email fails
-      });
-
-      // Step 7: Notify store owner of new order
-      await sendNewOrderNotification(updatedOrder).catch((emailErr) => {
-        console.error('Failed to send owner notification:', emailErr);
-      });
-    }
 
     return NextResponse.json<ApiResponse<VerifyPaymentResponse>>({
       success: true,

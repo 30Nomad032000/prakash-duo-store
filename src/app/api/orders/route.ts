@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createOrderRequestSchema } from '@/lib/schemas';
 import { createRazorpayOrder, generateOrderId, validateAndCalculateOrderTotals } from '@/lib/razorpay';
-import { createOrder, getOrderByOrderId } from '@/lib/supabase-orders';
+import { createOrder, getOrderByOrderId, reserveStock } from '@/lib/supabase-orders';
 import type { Order, CreateOrderResponse, ApiResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -43,6 +43,24 @@ export async function POST(request: NextRequest) {
     }
 
     const { subtotal, shipping, tax, total, validatedItems } = totals;
+
+    // Check live inventory and reserve stock
+    const stockItems = validatedItems.map((item) => ({
+      productId: item.productId,
+      size: item.size,
+      quantity: item.quantity,
+    }));
+
+    const stockReserved = await reserveStock(stockItems);
+    if (!stockReserved) {
+      return NextResponse.json<ApiResponse<null>>(
+        {
+          success: false,
+          error: 'One or more items are out of stock. Please update your cart and try again.',
+        },
+        { status: 409 }
+      );
+    }
 
     // Generate cryptographically random order ID
     const orderId = generateOrderId();

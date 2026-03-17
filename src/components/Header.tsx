@@ -68,7 +68,7 @@ export default function Header() {
         className={`
           w-full max-w-5xl rounded-full px-6 py-3 flex items-center justify-between transition-all duration-700
           ${isTransparent
-            ? "bg-transparent border border-transparent"
+            ? "bg-raw-umber/40 backdrop-blur-lg border border-warm-ivory/10 shadow-[0_2px_20px_rgba(61,43,31,0.15)]"
             : "bg-warm-ivory/80 backdrop-blur-xl border border-raw-umber/10 shadow-luxury"
           }
         `}

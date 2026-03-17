@@ -106,7 +106,37 @@ export async function PATCH(
     const body = await request.json();
     const { status } = body;
 
+    // Validate allowed transitions
+    const allowedTransitions: Record<string, string[]> = {
+      pending: ['confirmed'],
+      confirmed: ['processing'],
+      processing: [], // processing → shipped goes through /tracking endpoint
+      shipped: ['delivered'],
+    };
+
     const supabase = getUntypedClient();
+
+    // Get current order status
+    const { data: currentOrder, error: fetchErr } = await supabase
+      .from('orders')
+      .select('status')
+      .eq('order_id', id)
+      .single();
+
+    if (fetchErr || !currentOrder) {
+      return NextResponse.json(
+        { success: false, error: 'Order not found' },
+        { status: 404 }
+      );
+    }
+
+    const allowed = allowedTransitions[currentOrder.status] || [];
+    if (!allowed.includes(status)) {
+      return NextResponse.json(
+        { success: false, error: `Cannot transition from "${currentOrder.status}" to "${status}"` },
+        { status: 400 }
+      );
+    }
 
     const { error } = await supabase
       .from('orders')

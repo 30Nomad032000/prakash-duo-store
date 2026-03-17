@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { PageLoader } from '@/components/ui/Loader';
 import {
   CheckCircle,
   Package,
@@ -60,16 +61,7 @@ function OrderConfirmationContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
-        <motion.div
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-center"
-        >
-          <Loader2 className="w-12 h-12 text-deep-ochre mx-auto mb-4 animate-spin" />
-          <p className="text-raw-umber/60 font-display text-xl">Loading your order...</p>
-        </motion.div>
-      </div>
+      <PageLoader label="Fetching your order details..." />
     );
   }
 
@@ -350,9 +342,7 @@ export default function OrderConfirmationPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-warm-ivory flex items-center justify-center">
-          <Loader2 className="w-12 h-12 text-deep-ochre animate-spin" />
-        </div>
+        <PageLoader />
       }
     >
       <OrderConfirmationContent />
