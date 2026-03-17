@@ -814,7 +814,7 @@ function BrandStory() {
         </div>
 
         {/* Right — Ivory with text */}
-        <div className="bg-warm-ivory flex items-center p-10 lg:p-16 xl:p-20">
+        <div className="bg-warm-ivory flex items-center p-10 pb-16 lg:p-16 xl:p-20">
           <div className="story-text max-w-lg">
             <p className="font-mono text-deep-ochre text-xs uppercase tracking-[0.2em] mb-4">Our Story</p>
 
