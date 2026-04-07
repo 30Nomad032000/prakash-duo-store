@@ -47,7 +47,7 @@ const faqs: FAQ[] = [
   {
     id: '5',
     question: 'What if the bangle size doesn\'t fit?',
-    answer: 'We offer easy returns and exchanges within 7 days of delivery. You can return or exchange the bangles if they don\'t fit, provided they are in their original condition with all tags intact. Contact our support team at support@banglesbyprakashduo.store to initiate a return.',
+    answer: 'We do not offer returns or exchanges for size issues. Please refer to our size guide before purchasing. Returns are only accepted if the product arrives fully damaged. If you receive a damaged product, contact our support team at support@banglesbyprakashduo.store within 24 hours of delivery with photos.',
     category: 'Returns'
   },
   {

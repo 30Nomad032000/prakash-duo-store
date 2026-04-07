@@ -9,7 +9,9 @@
     "migrate-to-supabase": "ts-node scripts/migrate-to-supabase.ts",
     "build": "npm run generate-data && next build",
     "start": "npm run generate-data && next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:inventory": "ts-node scripts/test-inventory.ts",
+    "test:dashboard": "ts-node scripts/test-dashboard.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -43,6 +45,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
+    "puppeteer": "^24.40.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",

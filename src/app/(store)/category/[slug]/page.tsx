@@ -368,7 +368,7 @@ export default function CategoryPage() {
                     "100% authentic handcrafted bangles",
                     "Premium quality at affordable prices",
                     "Secure packaging and fast delivery",
-                    "Easy returns and exchanges",
+                    "No returns (except damaged products)",
                     "Dedicated customer support",
                   ].map((item, i) => (
                     <p key={i} className="font-mono text-raw-umber/60 text-sm flex items-center gap-3">

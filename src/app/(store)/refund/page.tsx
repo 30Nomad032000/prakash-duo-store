@@ -59,7 +59,7 @@ export default function RefundPolicyPage() {
     <div className="bg-warm-ivory noise-overlay">
       <PageSeo
         title="Refund & Return Policy"
-        description="Easy returns within 7 days. Learn about our refund policy for handcrafted bangles."
+        description="Learn about our refund policy for handcrafted bangles. Returns accepted only for fully damaged products."
         canonical="https://banglesbyprakashduo.store/refund"
       />
       {/* Hero Section */}

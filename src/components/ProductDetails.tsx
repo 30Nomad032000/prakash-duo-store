@@ -427,7 +427,7 @@ export default function ProductDetails({
         {[
           { title: 'Free Shipping', subtitle: 'On orders above ₹599' },
           { title: 'Secure Payment', subtitle: '100% secure transactions' },
-          { title: 'Easy Returns', subtitle: '7 days return policy' }
+          { title: 'No Returns', subtitle: 'Only for damaged products' }
         ].map((item, i) => (
           <motion.div
             key={i}

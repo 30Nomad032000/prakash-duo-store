@@ -18,20 +18,19 @@ import {
   CardContent,
 } from '@/components/ui/card';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 async function getStats() {
   const supabase = getAdminClient();
 
-  // Get date ranges
-  const today = new Date();
-  const startOfToday = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-  const startOfWeek = new Date(
-    today.setDate(today.getDate() - today.getDay())
-  ).toISOString();
-  const startOfMonth = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    1
-  ).toISOString();
+  // Get date ranges — use separate Date objects to avoid mutation bugs
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+  const startOfWeekDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  startOfWeekDate.setDate(startOfWeekDate.getDate() - startOfWeekDate.getDay());
+  const startOfWeek = startOfWeekDate.toISOString();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
 
   // Orders today
   const { count: todayOrders } = await supabase

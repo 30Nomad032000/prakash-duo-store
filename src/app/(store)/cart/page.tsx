@@ -161,7 +161,7 @@ export default function CartPage() {
                     {[
                       { title: 'Free Shipping', desc: 'On orders above ₹599' },
                       { title: 'Secure Payment', desc: '100% secure transactions' },
-                      { title: 'Easy Returns', desc: '7 days return policy' },
+                      { title: 'No Returns', desc: 'Only for damaged products' },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <span className="text-deep-ochre text-sm">✓</span>
